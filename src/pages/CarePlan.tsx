@@ -14,7 +14,7 @@ export default function CarePlan() {
           <h1 className="text-3xl font-bold text-gray-900">Care Plan Management</h1>
           <p className="text-gray-600">Personalized goals • Progress tracking • AI recommendations</p>
         </div>
-        <Button>
+        <Button variant='outline'>
           <Plus className="w-5 h-5 mr-2" />
           New Care Plan
         </Button>

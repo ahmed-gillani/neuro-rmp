@@ -15,12 +15,12 @@ export default function Button({
     const base = 'font-medium rounded-xl transition-all active:scale-[0.98] flex items-center justify-center focus:outline-none focus:ring-2 focus:ring-offset-2 disabled:opacity-50';
 
     const variants = {
-        primary: 'bg-primary-600 text-white hover:bg-primary-700 focus:ring-primary-500 shadow-sm',
-        secondary: 'bg-gray-200 text-gray-800 hover:bg-gray-300 focus:ring-gray-500',
-        outline: 'border border-gray-300 bg-white text-gray-700 hover:bg-gray-50 hover:border-gray-400 focus:ring-gray-500',
-        success: 'bg-green-600 text-white hover:bg-green-700 focus:ring-green-500',
-        danger: 'bg-red-600 text-white hover:bg-red-700 focus:ring-red-500',
-        ghost: 'bg-transparent text-gray-600 hover:bg-gray-100 focus:ring-gray-500',
+        primary: 'bg-primary-600 hover:bg-primary-700 text-white focus:ring-primary-500 shadow-sm',
+        secondary: 'bg-gray-200 text-gray-800 hover:bg-gray-300',
+        outline: 'border-2 border-gray-300 bg-white text-gray-700 hover:bg-gray-50 hover:border-gray-400',
+        success: 'bg-green-600 hover:bg-green-700 text-white focus:ring-green-500',
+        danger: 'bg-red-600 hover:bg-red-700 text-white focus:ring-red-500',
+        ghost: 'bg-transparent hover:bg-gray-100 text-gray-700',
     };
 
     const sizes = {
