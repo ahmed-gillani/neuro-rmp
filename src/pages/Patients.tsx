@@ -18,6 +18,7 @@ import NotesTab from '../components/patients/tabs/NotesTab';
 import DevicesTab from '../components/patients/tabs/DevicesTab';
 import BillingTab from '../components/patients/tabs/BillingTab';
 import DocumentsTab from '../components/patients/tabs/DocumentsTab';
+import { useNavigate } from 'react-router-dom';
 
 const tabComponents = {
   overview: OverviewTab,
@@ -42,6 +43,7 @@ export default function Patients() {
   );
 
   const ActiveTabComponent = tabComponents[activeTab];
+  const navigate = useNavigate();
 
   return (
     <div className="space-y-6">
@@ -53,7 +55,10 @@ export default function Patients() {
               <h1 className="text-3xl font-bold">Patients</h1>
               <p className="text-gray-600">Manage all enrolled patients</p>
             </div>
-            <Button>New Patient Onboarding</Button>
+            {/* <Button onClick={() => {}}>New Patient Onboarding</Button> */}
+           <Button onClick={() => {
+    window.location.href = '/onboarding';
+}}>New Patient Onboarding</Button>
           </div>
 
           <Card>
@@ -62,7 +67,7 @@ export default function Patients() {
               <input
                 type="text"
                 placeholder="Search patients or providers..."
-                className="w-full pl-11 py-3 bg-gray-50 border border-gray-200 rounded-2xl focus:border-primary-500"
+                className="w-full pl-11 py-3 bg-black-50 border border-black-200 rounded-2xl focus:border-primary-500"
                 value={searchTerm}
                 onChange={(e) => setSearchTerm(e.target.value)}
               />

@@ -8,7 +8,7 @@ type OnboardingStep = 'demographics' | 'insurance' | 'assignment' | 'review';
 
 export default function PatientOnboarding() {
   const navigate = useNavigate();
-  
+
   const [step, setStep] = useState<OnboardingStep>('demographics');
   const [formData, setFormData] = useState<Partial<Patient>>({
     status: 'New',
@@ -110,13 +110,13 @@ export default function PatientOnboarding() {
       {/* Navigation */}
       <div className="flex justify-between mt-8">
         <Button
-          variant="outline"
-            onClick={() => window.location.href = '/patients'}
-        
+          // variant="outline"
+          onClick={() => window.location.href = '/patients'}
+
         >
           ← Previous
         </Button>
-        
+
 
         {step === 'review' ? (
           <Button variant="outline" onClick={handleSubmit}>

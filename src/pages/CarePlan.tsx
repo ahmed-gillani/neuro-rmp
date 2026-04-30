@@ -1,23 +1,81 @@
 import { useState } from 'react';
-import Card from '../components/common/Card';
 import Button from '../components/common/Button';
+import { Edit3, Save, X } from 'lucide-react';
 
-import { Plus,  Bot } from 'lucide-react';
+// Import Tab Components
+import CurrentPlanTab from '../components/careplan/CurrentPlanTab';
+import GoalsTab from '../components/careplan/GoalsTab';
+import HistoryTab from '../components/careplan/HistoryTab';
 
 export default function CarePlan() {
   const [activeTab, setActiveTab] = useState<'current' | 'goals' | 'history'>('current');
+  const [isEditing, setIsEditing] = useState(false);
+
+  const [carePlan, setCarePlan] = useState({
+    patientName: "Muhammad Ahmed",
+    careGoal: "Maintain Blood Pressure below 130/80 mmHg",
+    interventions: "Daily BP monitoring, medication adherence, low sodium diet",
+    startDate: "2026-03-15",
+    nextReview: "2026-05-15",
+  });
+
+  const [goals, setGoals] = useState([
+    { id: 'g1', title: 'Blood Pressure Control', target: '< 130/80 mmHg', progress: 78, status: 'On Track' as const },
+    { id: 'g2', title: 'Daily Glucose Monitoring', target: '80-130 mg/dL', progress: 45, status: 'Needs Attention' as const },
+  ]);
+
+  const [newGoal, setNewGoal] = useState({ title: '', target: '' });
+
+  const toggleEdit = () => setIsEditing(!isEditing);
+
+  const saveChanges = () => {
+    setIsEditing(false);
+    alert('✅ Care Plan saved successfully!');
+  };
+
+  const addGoal = () => {
+    if (!newGoal.title) return;
+    setGoals([...goals, {
+      id: Date.now().toString(),
+      title: newGoal.title,
+      target: newGoal.target,
+      progress: 0,
+      status: 'On Track'
+    }]);
+    setNewGoal({ title: '', target: '' });
+  };
+
+  const deleteGoal = (id: string) => {
+    setGoals(goals.filter(g => g.id !== id));
+  };
 
   return (
     <div className="space-y-8">
-      <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
+      <div className="flex justify-between items-center">
         <div>
-          <h1 className="text-3xl font-bold text-gray-900">Care Plan Management</h1>
+          <h1 className="text-3xl font-bold">Care Plan Management</h1>
           <p className="text-gray-600">Personalized goals • Progress tracking • AI recommendations</p>
         </div>
-        <Button variant='outline'>
-          <Plus className="w-5 h-5 mr-2" />
-          New Care Plan
-        </Button>
+
+        <div className="flex gap-3">
+          {!isEditing ? (
+            <Button onClick={toggleEdit}>
+              <Edit3 className="w-5 h-5 mr-2" />
+              Edit Plan
+            </Button>
+          ) : (
+            <>
+              <Button variant="outline" onClick={toggleEdit}>
+                <X className="w-5 h-5 mr-2" />
+                Cancel
+              </Button>
+              <Button onClick={saveChanges}>
+                <Save className="w-5 h-5 mr-2" />
+                Save Changes
+              </Button>
+            </>
+          )}
+        </div>
       </div>
 
       {/* Tabs */}
@@ -26,71 +84,33 @@ export default function CarePlan() {
           <button
             key={tab}
             onClick={() => setActiveTab(tab as any)}
-            className={`px-6 py-4 font-medium capitalize border-b-2 transition-colors ${
-              activeTab === tab 
-                ? 'border-primary-600 text-primary-600' 
-                : 'border-transparent text-gray-500 hover:text-gray-700'
+            className={`px-8 py-4 font-medium capitalize border-b-2 transition-colors ${
+              activeTab === tab ? 'border-primary-600 text-primary-600' : 'border-transparent text-gray-500 hover:text-gray-700'
             }`}
           >
-            {tab === 'current' ? 'Current Plan' : tab}
+            {tab === 'current' ? 'Current Plan' : tab.charAt(0).toUpperCase() + tab.slice(1)}
           </button>
         ))}
       </div>
 
+      {/* Dynamic Tab Content */}
       {activeTab === 'current' && (
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-          {/* Active Care Plan */}
-          <div className="lg:col-span-2">
-            <Card title="Muhammad Ahmed - Current Care Plan">
-              <div className="space-y-6">
-                <div className="flex items-center justify-between p-4 bg-green-50 rounded-2xl">
-                  <div>
-                    <p className="font-semibold">Blood Pressure Control</p>
-                    <p className="text-sm text-gray-600">Target: &lt; 130/80 mmHg</p>
-                  </div>
-                  <div className="text-right">
-                    <p className="text-2xl font-bold text-green-600">78%</p>
-                    <p className="text-xs text-green-600">On Track</p>
-                  </div>
-                </div>
-
-                <div className="flex items-center justify-between p-4 bg-amber-50 rounded-2xl">
-                  <div>
-                    <p className="font-semibold">Daily Glucose Monitoring</p>
-                    <p className="text-sm text-gray-600">Target: 80-130 mg/dL</p>
-                  </div>
-                  <div className="text-right">
-                    <p className="text-2xl font-bold text-amber-600">45%</p>
-                    <p className="text-xs text-amber-600">Needs Attention</p>
-                  </div>
-                </div>
-              </div>
-            </Card>
-          </div>
-
-          {/* AI Assistant */}
-          <Card title="AI Care Assistant">
-            <div className="h-80 flex flex-col items-center justify-center text-center border-2 border-dashed border-gray-200 rounded-2xl">
-              <Bot className="w-16 h-16 text-primary-500 mb-4" />
-              <p className="font-medium">Ask AI for recommendations</p>
-              <p className="text-sm text-gray-500 mt-2">e.g. "Suggest interventions for high BP"</p>
-              <Button className="mt-6">Open Chat Assistant</Button>
-            </div>
-          </Card>
-        </div>
+        <CurrentPlanTab isEditing={isEditing} carePlan={carePlan} setCarePlan={setCarePlan} />
       )}
 
       {activeTab === 'goals' && (
-        <Card title="Active Goals & Interventions">
-          <p className="text-gray-500 py-12 text-center">Goal tracking with progress indicators will go here.</p>
-        </Card>
+        <GoalsTab 
+          goals={goals} 
+          setGoals={setGoals} 
+          isEditing={isEditing} 
+          newGoal={newGoal} 
+          setNewGoal={setNewGoal} 
+          addGoal={addGoal} 
+          deleteGoal={deleteGoal} 
+        />
       )}
 
-      {activeTab === 'history' && (
-        <Card title="Previous Care Plans">
-          <p className="text-gray-500 py-12 text-center">Previous plans with diff view & AI gap analysis coming soon.</p>
-        </Card>
-      )}
+      {activeTab === 'history' && <HistoryTab />}
     </div>
   );
 }

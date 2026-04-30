@@ -1,74 +1,14 @@
-// import { useState } from 'react';
-// import { NavLink } from 'react-router-dom';
-// import { Home, Users, UserCheck, Monitor, FileText, Bell, MessageSquare, DollarSign } from 'lucide-react';
-
-// const menuItems = [
-//   { icon: Home, label: 'Dashboard', path: '/' },
-//   { icon: Users, label: 'Patients', path: '/patients' },
-//   { icon: UserCheck, label: 'Staff', path: '/staff' },
-//   { icon: Monitor, label: 'Devices', path: '/devices' },
-//   { icon: FileText, label: 'Readings', path: '/readings' },
-//   { icon: Bell, label: 'Alerts', path: '/alerts' },
-//   { icon: FileText, label: 'Care Plan', path: '/careplan' },
-//   { icon: MessageSquare, label: 'Communication', path: '/communication' },
-//   { icon: DollarSign, label: 'Billing', path: '/billing' },
-// ];
-
-// export default function Sidebar() {
-//   const [isOpen, setIsOpen] = useState(false);
-
-//   return (
-//     <>
-//       <button
-//         onClick={() => setIsOpen(!isOpen)}
-//         className="lg:hidden fixed top-4 left-4 z-50 p-2 bg-white rounded-lg shadow-md"
-//       >
-//         <svg xmlns="http://www.w3.org/2000/svg" className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-//           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
-//         </svg>
-//       </button>
-
-//       <div className={`fixed inset-y-0 left-0 w-64 bg-white border-r border-gray-200 transform transition-transform duration-300 lg:translate-x-0 z-40 ${isOpen ? 'translate-x-0' : '-translate-x-full lg:translate-x-0'}`}>
-//         <div className="p-6">
-//           <h1 className="text-2xl font-bold text-primary-600">RPM Platform</h1>
-//           <p className="text-xs text-gray-500 mt-1">Remote Patient Monitoring</p>
-//         </div>
-
-//         <nav className="mt-8 px-3">
-//           {menuItems.map((item) => (
-//             <NavLink
-//               key={item.path}
-//               to={item.path}
-//               onClick={() => setIsOpen(false)}
-//               className={({ isActive }) =>
-//                 `flex items-center gap-3 px-4 py-3 rounded-xl mb-1 transition-colors ${
-//                   isActive 
-//                     ? 'bg-primary-50 text-primary-600 font-medium' 
-//                     : 'text-gray-700 hover:bg-gray-100'
-//                 }`
-//               }
-//             >
-//               <item.icon className="w-5 h-5" />
-//               <span>{item.label}</span>
-//             </NavLink>
-//           ))}
-//         </nav>
-//       </div>
-//     </>
-//   );
-// }
-
-
+// //src/components/layout/Sidebar.tsx
 import { useState } from 'react';
 import { NavLink } from 'react-router-dom';
-import { Home, Users, UserCheck, MessageSquare, DollarSign, Target } from 'lucide-react';
+import { Home, Users, UserCheck, MessageSquare, Target, Settings } from 'lucide-react';
 
 const menuItems = [
   { icon: Home, label: 'Dashboard', path: '/' },
+  { icon: Settings, label: 'User Settings', path: '/settings' },
   { icon: Users, label: 'Patients', path: '/patients' },
   { icon: UserCheck, label: 'Staff', path: '/staff' },
   { icon: MessageSquare, label: 'Communication', path: '/communication' },
-  { icon: DollarSign, label: 'Billing', path: '/billing' },
   { icon: Target, label: 'Care Plan', path: '/careplan' },
 ];
 
@@ -77,39 +17,43 @@ export default function Sidebar() {
 
   return (
     <>
-      {/* Mobile Hamburger */}
       <button
         onClick={() => setIsOpen(!isOpen)}
-        className="lg:hidden fixed top-4 left-4 z-50 p-2 bg-white rounded-lg shadow-md"
+        className="lg:hidden fixed top-4 left-4 z-[60] p-3 bg-[#13395e] rounded-2xl shadow-lg border border-[#1e4a7a]"
       >
-        <svg xmlns="http://www.w3.org/2000/svg" className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
-        </svg>
+        <span className="text-2xl text-[#b6c8d9]">☰</span>
       </button>
 
-      {/* Sidebar */}
-      <div className={`fixed inset-y-0 left-0 w-64 bg-white border-r border-gray-200 transform transition-transform duration-300 lg:translate-x-0 z-40 ${isOpen ? 'translate-x-0' : '-translate-x-full lg:translate-x-0'}`}>
-        <div className="p-6">
-          <h1 className="text-2xl font-bold text-primary-600">RPM Platform</h1>
-          <p className="text-xs text-gray-500 mt-1">Remote Patient Monitoring</p>
+      {/* <div
+        className={`fixed inset-y-0 left-0 w-64 bg-[#13395e] border-r border-[#1e4a7a] 
+          transform transition-transform duration-300 z-[70]
+          ${isOpen ? 'translate-x-0' : '-translate-x-full lg:translate-x-0'}`}
+      > */}
+      <div
+        className={`fixed inset-y-0 left-0 lg:relative lg:translate-x-0 w-64 bg-[#0f172a] border-r border-slate-800 
+    transform transition-transform duration-300 z-[70] h-full
+    ${isOpen ? 'translate-x-0' : '-translate-x-full'}`}
+      >
+        <div className="p-6 border-b border-[#1e4a7a]">
+          <h1 className="text-3xl font-bold text-[#b6c8d9]">RPM</h1>
+          <p className="text-xs text-[#b6c8d9] mt-1">Remote Patient Monitoring</p>
         </div>
 
-        <nav className="mt-8 px-3">
+        <nav className="mt-6 px-3">
           {menuItems.map((item) => (
             <NavLink
               key={item.path}
               to={item.path}
               onClick={() => setIsOpen(false)}
               className={({ isActive }) =>
-                `flex items-center gap-3 px-4 py-3 rounded-xl mb-1 transition-colors ${
-                  isActive 
-                    ? 'bg-primary-50 text-primary-600 font-medium' 
-                    : 'text-gray-700 hover:bg-gray-100'
+                `flex items-center gap-3.5 px-5 py-3.5 rounded-2xl mb-1 transition-all text-[15px] text-[#b6c8d9] hover:text-white ${isActive
+                  ? 'bg-[#1e4a7a] text-white font-semibold'
+                  : 'hover:bg-[#1e4a7a]/70'
                 }`
               }
             >
               <item.icon className="w-5 h-5" />
-              <span>{item.label}</span>
+              {item.label}
             </NavLink>
           ))}
         </nav>
