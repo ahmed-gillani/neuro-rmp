@@ -5,6 +5,7 @@ import { Home, Users, UserCheck, MessageSquare, Target, Settings } from 'lucide-
 
 const menuItems = [
   { icon: Home, label: 'Dashboard', path: '/' },
+  { icon: Users, label: 'Locations', path: '/locations' },
   { icon: Settings, label: 'User Settings', path: '/settings' },
   { icon: Users, label: 'Patients', path: '/patients' },
   { icon: UserCheck, label: 'Staff', path: '/staff' },
