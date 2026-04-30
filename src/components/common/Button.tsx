@@ -1,40 +1,40 @@
-// src/components/common/Button.tsx
+// // src/components/common/Button.tsx
+import React from 'react';
+
 interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
-    variant?: 'primary' | 'secondary' | 'outline' | 'success' | 'danger' | 'ghost';
-    size?: 'sm' | 'md' | 'lg';
-    children: React.ReactNode;
+  variant?: 'primary' | 'secondary' | 'outline';
+  size?: 'sm' | 'md' | 'lg';
 }
 
-export default function Button({
-    variant = 'primary',
-    size = 'md',
-    className = '',
-    children,
-    ...props
-}: ButtonProps) {
-    const base = 'font-medium rounded-xl transition-all active:scale-[0.98] flex items-center justify-center focus:outline-none focus:ring-2 focus:ring-offset-2 disabled:opacity-50';
+const Button: React.FC<ButtonProps> = ({ 
+  children, 
+  variant = 'primary', 
+  size = 'md', 
+  className = "", 
+  ...props 
+}) => {
+  const baseStyles = "inline-flex items-center justify-center font-medium transition-all duration-200 active:scale-95 disabled:opacity-50 disabled:pointer-events-none";
+  
+  const variants = {
+    primary: "bg-[rgb(var(--primary))] text-white hover:bg-opacity-90 shadow-sm",
+    secondary: "bg-[rgb(var(--muted))] text-[rgb(var(--foreground))] hover:bg-gray-200",
+    outline: "border border-[rgb(var(--border))] bg-transparent hover:bg-[rgb(var(--muted))] text-[rgb(var(--foreground))]"
+  };
 
-    const variants = {
-        primary: 'bg-[#13395e] hover:bg-[#1e4a7a] text-[#b6c8d9] focus:ring-[#1e4a7a] shadow-sm',
-        secondary: 'bg-gray-200 text-gray-800 hover:bg-gray-300',
-        outline: 'border-2 border-gray-300 bg-white text-gray-700 hover:bg-gray-50 hover:border-gray-400',
-        success: 'bg-green-600 hover:bg-green-700 text-white focus:ring-green-500',
-        danger: 'bg-red-600 hover:bg-red-700 text-white focus:ring-red-500',
-        ghost: 'bg-transparent hover:bg-gray-100 text-gray-700',
-    };
+  const sizes = {
+    sm: "px-3 py-1.5 text-sm rounded-[6px]",
+    md: "px-5 py-2.5 rounded-[var(--radius-btn)]",
+    lg: "px-8 py-3 text-lg rounded-[10px]"
+  };
 
-    const sizes = {
-        sm: 'px-4 py-2 text-sm',
-        md: 'px-5 py-2.5 text-base',
-        lg: 'px-6 py-3 text-lg',
-    };
+  return (
+    <button 
+      className={`${baseStyles} ${variants[variant]} ${sizes[size]} ${className}`}
+      {...props}
+    >
+      {children}
+    </button>
+  );
+};
 
-    return (
-        <button
-            className={`${base} ${variants[variant]} ${sizes[size]} ${className}`}
-            {...props}
-        >
-            {children}
-        </button>
-    );
-}
+export default Button;

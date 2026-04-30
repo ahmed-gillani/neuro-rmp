@@ -1,13 +1,12 @@
-// src/pages/Staff.tsx
+// // src/pages/Staff.tsx
 import { useState } from 'react';
 import { mockStaff } from '../data/mockData';
 import type { User } from '../types';
 import Card from '../components/common/Card';
 import Button from '../components/common/Button';
 import Badge from '../components/common/Badge';
-import { Search, Plus, UserCheck, Clock, Users } from 'lucide-react';
+import { Search, Plus, UserCircle, Clock, Users, TrendingUp } from 'lucide-react';
 
-// Import Modals
 import AddStaffModal from '../components/staff/AddStaffModal';
 import EditStaffModal from '../components/staff/EditStaffModal';
 import PermissionsModal from '../components/staff/PermissionsModal';
@@ -15,8 +14,6 @@ import PermissionsModal from '../components/staff/PermissionsModal';
 export default function Staff() {
   const [staff, setStaff] = useState<User[]>(mockStaff);
   const [searchTerm, setSearchTerm] = useState('');
-
-  // Modal States
   const [isAddModalOpen, setIsAddModalOpen] = useState(false);
   const [isEditModalOpen, setIsEditModalOpen] = useState(false);
   const [isPermissionsModalOpen, setIsPermissionsModalOpen] = useState(false);
@@ -27,91 +24,50 @@ export default function Staff() {
     member.role.toLowerCase().includes(searchTerm.toLowerCase())
   );
 
-  const handleAddStaff = (newStaff: User) => {
-    setStaff([...staff, newStaff]);
-  };
-
-  const handleEditStaff = (updatedStaff: User) => {
-    setStaff(staff.map(s => s.id === updatedStaff.id ? updatedStaff : s));
-  };
-
   const openEditModal = (member: User) => {
     setSelectedStaff(member);
     setIsEditModalOpen(true);
   };
 
-  const openPermissionsModal = (member: User) => {
-    setSelectedStaff(member);
-    setIsPermissionsModalOpen(true);
-  };
-
   return (
     <div className="space-y-8">
-      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+      <div className="flex flex-col md:flex-row md:items-end justify-between gap-4">
         <div>
-          <h1 className="text-3xl font-bold text-gray-900">Staff Management</h1>
-          <p className="text-gray-600 mt-1">Team • Performance • Assignments</p>
+          <h1 className="text-2xl font-bold text-[rgb(var(--text-h))]">Staff Management</h1>
+          <p className="text-sm text-[rgb(var(--muted-foreground))]">Team performance and assignments</p>
         </div>
-        
         <Button onClick={() => setIsAddModalOpen(true)}>
-          <Plus className="w-5 h-5 mr-2" />
-          Add Staff Member
+          <Plus className="w-4 h-4 mr-2" /> Add Staff Member
         </Button>
       </div>
 
-      {/* Performance Overview Cards */}
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-        <Card>
-          <div className="flex items-center gap-4">
-            <div className="w-12 h-12 bg-blue-100 rounded-2xl flex items-center justify-center">
-              <Users className="w-7 h-7 text-blue-600" />
+        {[
+          { label: 'Assigned Patients', val: staff.reduce((sum, s) => sum + (s.patientsAssigned || 0), 0), icon: Users, color: 'blue' },
+          { label: 'Logged Minutes', val: staff.reduce((sum, s) => sum + (s.minutesLogged || 0), 0), icon: Clock, color: 'amber' },
+          { label: 'Avg Contact Rate', val: `${Math.round(staff.reduce((sum, s) => sum + (s.contactRate || 0), 0) / staff.length)}%`, icon: TrendingUp, color: 'emerald' },
+        ].map((stat, i) => (
+          <Card key={i} className="border-none shadow-sm p-5">
+            <div className="flex items-center gap-4">
+              <div className={`p-3 rounded-2xl bg-${stat.color}-100 text-${stat.color}-600`}>
+                <stat.icon className="w-6 h-6" />
+              </div>
+              <div>
+                <p className="text-2xl font-bold text-[rgb(var(--text-h))]">{stat.val}</p>
+                <p className="text-xs text-[rgb(var(--muted-foreground))] uppercase tracking-wider">{stat.label}</p>
+              </div>
             </div>
-            <div>
-              <p className="text-3xl font-bold">
-                {staff.reduce((sum, s) => sum + (s.patientsAssigned || 0), 0)}
-              </p>
-              <p className="text-sm text-gray-500">Total Patients Assigned</p>
-            </div>
-          </div>
-        </Card>
-
-        <Card>
-          <div className="flex items-center gap-4">
-            <div className="w-12 h-12 bg-amber-100 rounded-2xl flex items-center justify-center">
-              <Clock className="w-7 h-7 text-amber-600" />
-            </div>
-            <div>
-              <p className="text-3xl font-bold">
-                {staff.reduce((sum, s) => sum + (s.minutesLogged || 0), 0)}
-              </p>
-              <p className="text-sm text-gray-500">Minutes Logged (This Month)</p>
-            </div>
-          </div>
-        </Card>
-
-        <Card>
-          <div className="flex items-center gap-4">
-            <div className="w-12 h-12 bg-emerald-100 rounded-2xl flex items-center justify-center">
-              <span className="text-2xl">📈</span>
-            </div>
-            <div>
-              <p className="text-3xl font-bold">
-                {Math.round(staff.reduce((sum, s) => sum + (s.contactRate || 0), 0) / staff.length) || 0}%
-              </p>
-              <p className="text-sm text-gray-500">Avg Contact Rate</p>
-            </div>
-          </div>
-        </Card>
+          </Card>
+        ))}
       </div>
 
-      {/* Staff List */}
-      <Card>
-        <div className="relative mb-6">
-          <Search className="absolute left-4 top-3.5 w-5 h-5 text-gray-400" />
+      <Card className="border-none shadow-sm overflow-visible">
+        <div className="relative mb-8">
+          <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-[rgb(var(--muted-foreground))]" />
           <input
             type="text"
-            placeholder="Search staff by name or role..."
-            className="w-full pl-11 py-3 bg-gray-50 border border-gray-200 rounded-xl focus:border-primary-500"
+            placeholder="Search by name, role or email..."
+            className="w-full pl-12 py-3 bg-[rgb(var(--muted))] border-none rounded-[var(--radius-btn)] outline-none focus:ring-2 focus:ring-[rgb(var(--primary)/0.2)]"
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
           />
@@ -119,82 +75,45 @@ export default function Staff() {
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {filteredStaff.map((member) => (
-            <div key={member.id} className="border border-gray-200 rounded-2xl p-6 hover:shadow-md transition-all">
-              <div className="flex items-center gap-4">
-                <div className="w-14 h-14 bg-primary-100 rounded-full flex items-center justify-center">
-                  <UserCheck className="w-8 h-8 text-primary-600" />
+            <div key={member.id} className="bg-white border border-[rgb(var(--border))] rounded-[var(--radius-card)] p-5 hover:shadow-md transition-all group">
+              <div className="flex items-center gap-4 border-b border-[rgb(var(--border))] pb-4">
+                <div className="w-12 h-12 bg-[rgb(var(--primary)/0.1)] rounded-full flex items-center justify-center text-[rgb(var(--primary))]">
+                  <UserCircle className="w-8 h-8" />
                 </div>
-                <div className="flex-1">
-                  <p className="font-semibold text-lg">{member.name}</p>
-                  <p className="text-sm text-gray-500">{member.email}</p>
-                </div>
-              </div>
-
-              <div className="mt-6 flex justify-between items-center">
-                <div>
-                  <p className="text-xs text-gray-500">ROLE</p>
-                  <p className="font-medium">{member.role}</p>
+                <div className="flex-1 min-w-0">
+                  <p className="font-bold text-[rgb(var(--text-h))] truncate">{member.name}</p>
+                  <p className="text-xs text-[rgb(var(--muted-foreground))] truncate">{member.role}</p>
                 </div>
                 <Badge status="Active" />
               </div>
 
-              <div className="mt-6 grid grid-cols-3 gap-4 text-center border-t pt-6">
+              <div className="grid grid-cols-3 gap-2 py-4 text-center">
                 <div>
-                  <p className="text-2xl font-bold text-primary-600">{member.patientsAssigned}</p>
-                  <p className="text-xs text-gray-500">Patients</p>
+                  <p className="text-lg font-bold text-[rgb(var(--primary))]">{member.patientsAssigned}</p>
+                  <p className="text-[10px] uppercase text-[rgb(var(--muted-foreground))]">Patients</p>
+                </div>
+                <div className="border-x border-[rgb(var(--border))]">
+                  <p className="text-lg font-bold text-[rgb(var(--text-h))]">{member.minutesLogged}</p>
+                  <p className="text-[10px] uppercase text-[rgb(var(--muted-foreground))]">Mins</p>
                 </div>
                 <div>
-                  <p className="text-2xl font-bold">{member.minutesLogged}</p>
-                  <p className="text-xs text-gray-500">Minutes</p>
-                </div>
-                <div>
-                  <p className="text-2xl font-bold text-emerald-600">{member.contactRate}%</p>
-                  <p className="text-xs text-gray-500">Contact</p>
+                  <p className="text-lg font-bold text-emerald-600">{member.contactRate}%</p>
+                  <p className="text-[10px] uppercase text-[rgb(var(--muted-foreground))]">Reach</p>
                 </div>
               </div>
 
-              <div className="mt-6 flex gap-3">
-                <Button 
-                  variant="outline" 
-                  size="sm" 
-                  className="flex-1"
-                  onClick={() => openEditModal(member)}
-                >
-                  Edit
-                </Button>
-                <Button 
-                  variant="outline" 
-                  size="sm" 
-                  className="flex-1"
-                  onClick={() => openPermissionsModal(member)}
-                >
-                  Permissions
-                </Button>
+              <div className="flex gap-2 mt-2">
+                <Button variant="outline" size="sm" className="flex-1 text-xs" onClick={() => openEditModal(member)}>Edit</Button>
+                <Button variant="outline" size="sm" className="flex-1 text-xs" onClick={() => {setSelectedStaff(member); setIsPermissionsModalOpen(true);}}>Permissions</Button>
               </div>
             </div>
           ))}
         </div>
       </Card>
 
-      {/* Modals */}
-      <AddStaffModal 
-        isOpen={isAddModalOpen} 
-        onClose={() => setIsAddModalOpen(false)} 
-        onAdd={handleAddStaff} 
-      />
-
-      <EditStaffModal 
-        isOpen={isEditModalOpen} 
-        onClose={() => setIsEditModalOpen(false)} 
-        staff={selectedStaff} 
-        onSave={handleEditStaff} 
-      />
-
-      <PermissionsModal 
-        isOpen={isPermissionsModalOpen} 
-        onClose={() => setIsPermissionsModalOpen(false)} 
-        staff={selectedStaff} 
-      />
+      <AddStaffModal isOpen={isAddModalOpen} onClose={() => setIsAddModalOpen(false)} onAdd={(s) => setStaff([...staff, s])} />
+      <EditStaffModal isOpen={isEditModalOpen} onClose={() => setIsEditModalOpen(false)} staff={selectedStaff} onSave={(updated) => setStaff(staff.map(s => s.id === updated.id ? updated : s))} />
+      <PermissionsModal isOpen={isPermissionsModalOpen} onClose={() => setIsPermissionsModalOpen(false)} staff={selectedStaff} />
     </div>
   );
 }

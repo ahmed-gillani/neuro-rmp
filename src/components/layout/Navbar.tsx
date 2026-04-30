@@ -1,31 +1,35 @@
-//src/components/layout/Navbar.tsx
-import { Bell, User } from 'lucide-react';
+// //src/components/layout/Navbar.tsx
+import { Bell, User, Search } from 'lucide-react';
 
 export default function Navbar() {
   return (
-    <header
-      className="h-16 px-6 flex items-center justify-between border-b border-[#1e4a7a]"
-      style={{ backgroundColor: '#13395e' }}
-    >
-      <div className="flex items-center gap-4">
-        <h2 className="text-lg font-semibold text-[#b6c8d9]">Dashboard</h2>
+    <header className="h-16 px-8 flex items-center justify-between border-b border-[rgb(var(--border))] bg-white sticky top-0 z-10">
+      <div className="flex items-center gap-4 flex-1">
+        <div className="relative max-w-md w-full hidden md:block">
+          <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-[rgb(var(--muted-foreground))]" />
+          <input 
+            type="text" 
+            placeholder="Search patients or reports..." 
+            className="w-full bg-[rgb(var(--muted))] border-none rounded-[var(--radius-btn)] pl-10 pr-4 py-2 text-sm focus:ring-2 focus:ring-[rgb(var(--primary)/0.2)] outline-none transition-all"
+          />
+        </div>
       </div>
 
-      <div className="flex items-center gap-6">
-        <button className="relative p-2.5 hover:bg-[#1e4a7a] rounded-xl transition-colors">
-          <Bell className="w-5 h-5 text-[#b6c8d9]" />
-          <span className="absolute top-1 right-1 w-4 h-4 bg-red-500 text-white text-[10px] rounded-full flex items-center justify-center">
-            3
-          </span>
+      <div className="flex items-center gap-4">
+        <button className="relative p-2 hover:bg-[rgb(var(--muted))] rounded-lg transition-colors">
+          <Bell className="w-5 h-5 text-[rgb(var(--muted-foreground))]" />
+          <span className="absolute top-1.5 right-1.5 w-2 h-2 bg-red-500 rounded-full border-2 border-white"></span>
         </button>
 
+        <div className="h-8 w-[1px] bg-[rgb(var(--border))] mx-2"></div>
+
         <div className="flex items-center gap-3">
-          <div className="text-right">
-            <p className="text-sm font-medium text-white">Dr. Ahmed</p>
-            <p className="text-xs text-[#b6c8d9]">Admin</p>
+          <div className="text-right hidden sm:block">
+            <p className="text-sm font-semibold text-[rgb(var(--text-h))]">Dr. Ahmed</p>
+            <p className="text-xs text-[rgb(var(--muted-foreground))]">Medical Director</p>
           </div>
-          <div className="w-9 h-9 bg-[#1e4a7a] rounded-full flex items-center justify-center border border-[#b6c8d9]/30">
-            <User className="w-5 h-5 text-[#b6c8d9]" />
+          <div className="w-10 h-10 bg-[rgb(var(--primary)/0.1)] rounded-full flex items-center justify-center border border-[rgb(var(--primary)/0.2)]">
+            <User className="w-5 h-5 text-[rgb(var(--primary))]" />
           </div>
         </div>
       </div>

@@ -1,84 +1,74 @@
-//src/pages/Dashboard.tsx
-import { mockPatients, mockStats, mockReadings } from '../data/mockData';
+// //src/pages/Dashboard.tsx
+import React from 'react';
+import { Users, Activity, AlertCircle, Calendar } from 'lucide-react';
 import StatCard from '../components/common/StatCard';
 import Card from '../components/common/Card';
-import Badge from '../components/common/Badge';
-import { AlertTriangle,  } from 'lucide-react';
+import ReadingChart from '../components/common/ReadingChart'; // As seen in your src.zip
 
-export default function Dashboard() {
-  const oorReadings = mockReadings.filter(r => r.isOOR);
-
+const Dashboard: React.FC = () => {
   return (
-    <div className="space-y-8 px-4 sm:px-6 lg:px-8">
-      {/* Welcome Header */}
+    <div className="space-y-8">
+      {/* Page Header */}
       <div>
-        <h1 className="text-3xl sm:text-4xl font-bold text-[#b6c8d9]">Good morning, Dr. Ahmed 👋</h1>
-        <p className="text-[#b6c8d9] mt-1">Here's what's happening with your RPM program today</p>
+        <h1 className="text-2xl font-bold text-[rgb(var(--text-h))]">Overview</h1>
+        <p className="text-[rgb(var(--muted-foreground))] text-sm">Welcome back, Dr. Ahmed. Here is what's happening today.</p>
       </div>
 
-      {/* Stats Row */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-        {mockStats.map((stat, index) => (
-          <StatCard
-            key={index}
-            title={stat.title}
-            value={stat.value}
-            change={stat.change}
-            className="bg-[#13395e] text-[#b6c8d9]"
-          />
-        ))}
+      {/* Stats Grid */}
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+        <StatCard 
+          title="Total Patients" 
+          value="1,284" 
+          icon={Users} 
+          trend={{ value: 12, isUp: true }} 
+        />
+        <StatCard 
+          title="Active Monitoring" 
+          value="842" 
+          icon={Activity} 
+          color="#10b981" // Green
+        />
+        <StatCard 
+          title="Critical Alerts" 
+          value="12" 
+          icon={AlertCircle} 
+          trend={{ value: 3, isUp: false }}
+          color="#ef4444" // Red
+        />
+        <StatCard 
+          title="Appointments" 
+          value="48" 
+          icon={Calendar} 
+          color="#f59e0b" // Amber
+        />
       </div>
 
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-        {/* OOR Readings */}
-        <Card title="Out of Range Readings (Today)" className="bg-[#13395e] text-[#b6c8d9]">
-          <div className="space-y-4">
-            {oorReadings.length > 0 ? (
-              oorReadings.map((reading, idx) => (
-                <div key={idx} className="flex items-center justify-between p-4 bg-red-50 border border-red-100 rounded-2xl">
-                  <div className="flex items-center gap-4">
-                    <AlertTriangle className="w-6 h-6 text-red-600" />
-                    <div>
-                      <p className="font-medium text-[#b6c8d9]">Muhammad Ahmed</p>
-                      <p className="text-sm text-gray-400">
-                        {reading.type}: <span className="font-medium text-[#b6c8d9]">{reading.value}</span>
-                      </p>
-                    </div>
-                  </div>
-                  <Badge status="OOR" className="bg-red-600 text-white" />
-                </div>
-              ))
-            ) : (
-              <p className="text-[#b6c8d9]">No out-of-range readings for today.</p>
-            )}
+      {/* Main Charts Section */}
+      <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+        <Card title="Patient Health Trends" className="lg:col-span-2">
+          <div className="h-[350px] flex items-center justify-center bg-slate-50 rounded-lg border border-dashed border-slate-200">
+             {/* Yahan aapka ReadingChart component aayega */}
+             <ReadingChart />
           </div>
         </Card>
 
-        {/* Other Section */}
-        <Card title="Other Insights" className="bg-[#13395e] text-[#b6c8d9]">
-          <p className="text-[#b6c8d9]">Additional content goes here...</p>
+        <Card title="Recent Activity">
+          <div className="space-y-6">
+            {[1, 2, 3, 4].map((i) => (
+              <div key={i} className="flex gap-4">
+                <div className="w-2 h-2 mt-2 rounded-full bg-[rgb(var(--primary))]" />
+                <div>
+                  <p className="text-sm font-semibold text-[rgb(var(--text-h))]">Patient Update</p>
+                  <p className="text-xs text-[rgb(var(--muted-foreground))]">John Doe's heart rate stabilized.</p>
+                  <p className="text-[10px] text-slate-400 mt-1">2 hours ago</p>
+                </div>
+              </div>
+            ))}
+          </div>
         </Card>
       </div>
-
-      {/* Recent Patients */}
-      <Card title="Recent Patients">
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-          {mockPatients.slice(0, 4).map((patient) => (
-            <div key={patient.id} className="p-5 border border-gray-200 rounded-2xl hover:border-primary-200 transition-all">
-              <div className="flex justify-between items-start">
-                <div>
-                  <p className="font-semibold">{patient.name}</p>
-                  <p className="text-sm text-gray-500">{patient.primaryProvider}</p>
-                </div>
-                <Badge status={patient.status} />
-              </div>
-              <p className="text-xs text-gray-500 mt-4">
-                Last Reading: {patient.lastReadingDate || 'No readings yet'}
-              </p>
-            </div>
-          ))}
-        </div>
-      </Card>
     </div>
   );
-}
+};
+
+export default Dashboard;

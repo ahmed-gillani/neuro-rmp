@@ -1,23 +1,33 @@
+//src/components/common/Table.tsx
+import React from 'react';
+
 interface TableProps {
   headers: string[];
   children: React.ReactNode;
 }
 
-export default function Table({ headers, children }: TableProps) {
+const Table: React.FC<TableProps> = ({ headers, children }) => {
   return (
-    <div className="overflow-x-auto rounded-xl border border-gray-200">
-      <table className="w-full text-sm text-left">
-        <thead className="bg-gray-50 border-b">
-          <tr>
-            {headers.map((header, i) => (
-              <th key={i} className="px-6 py-4 font-medium text-gray-600">{header}</th>
+    <div className="w-full overflow-x-auto rounded-[var(--radius-card)] border border-[rgb(var(--border))] shadow-sm">
+      <table className="w-full text-left border-collapse bg-white">
+        <thead>
+          <tr className="bg-[rgb(var(--muted))] border-b border-[rgb(var(--border))]">
+            {headers.map((header, index) => (
+              <th 
+                key={index} 
+                className="px-6 py-4 text-xs font-semibold uppercase tracking-wider text-[rgb(var(--muted-foreground))]"
+              >
+                {header}
+              </th>
             ))}
           </tr>
         </thead>
-        <tbody className="divide-y">
+        <tbody className="divide-y divide-[rgb(var(--border))]">
           {children}
         </tbody>
       </table>
     </div>
   );
-}
+};
+
+export default Table;

@@ -1,27 +1,57 @@
 @import "tailwindcss";
 
-
 @layer base {
     :root {
-        /* Light Mode */
-        --background: 255 255 255;
-        --foreground: 17 24 39;
+        /* Duralux Inspired Light Mode */
+        --background: 248 250 252;    /* Soft Light Grey background */
+        --foreground: 31 41 55;      /* Dark Slate for better readability */
+        
         --card: 255 255 255;
-        --card-foreground: 17 24 39;
-        --border: 229 231 235;
-        --muted: 243 244 246;
-        --muted-foreground: 107 114 128;
-        --primary: 2 132 199;
-        --accent: #7c3aed;
-        --accent-bg: #f5f3ff;
-        --accent-border: #e9d5ff;
-        --text-h: #111827;
-        --social-bg: #f8fafc;
-        --shadow: 0 8px 24px rgba(2, 6, 23, 0.08);
+        --card-foreground: 31 41 55;
+        
+        /* Spacing & Radius Standards */
+        --radius-card: 12px;         /* Smooth rounded corners for Cards */
+        --radius-btn: 8px;           /* Professional button radius */
+        
+        --border: 226 232 240;       /* Lighter border for clean UI */
+        
+        --muted: 241 245 249;
+        --muted-foreground: 100 116 139; /* Muted Blue-Grey for secondary text */
+        
+        /* Duralux Primary Colors */
+        --primary: 52 84 209;        /* Clean Professional Blue (#3454D1) */
+        --primary-foreground: 255 255 255;
+        
+        --accent: 79 70 229;         /* Indigo accent */
+        --accent-bg: 245 243 255;
+        
+        --text-h: 31 41 55;          /* Heading color (#1F2937) */
+        
+        /* Modern Soft Shadow */
+        --shadow: 0 4px 12px rgba(0, 0, 0, 0.05), 0 1px 3px rgba(0, 0, 0, 0.03);
     }
 }
 
 body {
     background-color: rgb(var(--background));
     color: rgb(var(--foreground));
+    font-family: 'Inter', 'Public Sans', sans-serif; /* Recommended Fonts */
+}
+
+/* Global Component Overrides */
+@layer components {
+    .card-style {
+        background-color: rgb(var(--card));
+        border-radius: var(--radius-card);
+        border: 1px solid rgb(var(--border));
+        box-shadow: var(--shadow);
+        padding: 1.5rem; /* Clean Spacing */
+    }
+
+    .btn-style {
+        border-radius: var(--radius-btn);
+        background-color: rgb(var(--primary));
+        color: white;
+        transition: all 0.2s ease;
+    }
 }

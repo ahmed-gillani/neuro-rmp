@@ -1,11 +1,12 @@
-//src/pages/Patients.tsx
+// //src/pages/Patients.tsx
 import { useState } from 'react';
-import { mockPatients, mockReadings, mockDevices } from '../data/mockData';
+import { mockPatients } from '../data/mockData';
 import type { Patient } from '../types';
 import Card from '../components/common/Card';
 import Button from '../components/common/Button';
 import Badge from '../components/common/Badge';
-import { Search, ArrowLeft } from 'lucide-react';
+import { Search, ArrowLeft, Plus } from 'lucide-react';
+import { useNavigate } from 'react-router-dom';
 
 // Import Tab Components
 import PatientHeader from '../components/patients/PatientHeader';
@@ -18,9 +19,8 @@ import NotesTab from '../components/patients/tabs/NotesTab';
 import DevicesTab from '../components/patients/tabs/DevicesTab';
 import BillingTab from '../components/patients/tabs/BillingTab';
 import DocumentsTab from '../components/patients/tabs/DocumentsTab';
-import { useNavigate } from 'react-router-dom';
 
-const tabComponents = {
+const tabComponents: any = {
   overview: OverviewTab,
   readings: ReadingsTab,
   monitoring: MonitoringTab,
@@ -35,7 +35,8 @@ export default function Patients() {
   const [patients] = useState<Patient[]>(mockPatients);
   const [searchTerm, setSearchTerm] = useState('');
   const [selectedPatient, setSelectedPatient] = useState<Patient | null>(null);
-  const [activeTab, setActiveTab] = useState<'overview' | 'readings' | 'monitoring' | 'alerts' | 'notes' | 'devices' | 'billing' | 'documents'>('overview');
+  const [activeTab, setActiveTab] = useState<string>('overview');
+  const navigate = useNavigate();
 
   const filteredPatients = patients.filter(p =>
     p.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
@@ -43,50 +44,47 @@ export default function Patients() {
   );
 
   const ActiveTabComponent = tabComponents[activeTab];
-  const navigate = useNavigate();
 
   return (
     <div className="space-y-6">
       {!selectedPatient ? (
-        /* === Patient List View === */
         <>
-          <div className="flex justify-between items-center">
+          <div className="flex justify-between items-end">
             <div>
-              <h1 className="text-3xl font-bold">Patients</h1>
-              <p className="text-gray-600">Manage all enrolled patients</p>
+              <h1 className="text-2xl font-bold text-[rgb(var(--text-h))]">Patients</h1>
+              <p className="text-[rgb(var(--muted-foreground))] text-sm">Manage and monitor all enrolled patients</p>
             </div>
-            {/* <Button onClick={() => {}}>New Patient Onboarding</Button> */}
-           <Button onClick={() => {
-    window.location.href = '/onboarding';
-}}>New Patient Onboarding</Button>
+            <Button onClick={() => navigate('/onboarding')}>
+              <Plus className="w-4 h-4 mr-2" /> New Patient Onboarding
+            </Button>
           </div>
 
-          <Card>
+          <Card className="border-none shadow-sm">
             <div className="relative mb-6">
-              <Search className="absolute left-4 top-3.5 w-5 h-5 text-gray-400" />
+              <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-[rgb(var(--muted-foreground))]" />
               <input
                 type="text"
                 placeholder="Search patients or providers..."
-                className="w-full pl-11 py-3 bg-black-50 border border-black-200 rounded-2xl focus:border-primary-500"
+                className="w-full pl-12 py-3 bg-[rgb(var(--muted))] border-none rounded-[var(--radius-btn)] focus:ring-2 focus:ring-[rgb(var(--primary)/0.2)] outline-none transition-all"
                 value={searchTerm}
                 onChange={(e) => setSearchTerm(e.target.value)}
               />
             </div>
 
-            <div className="space-y-4">
+            <div className="grid grid-cols-1 gap-3">
               {filteredPatients.map((patient) => (
                 <div
                   key={patient.id}
                   onClick={() => setSelectedPatient(patient)}
-                  className="p-6 border border-gray-200 rounded-2xl hover:border-primary-300 cursor-pointer transition-all flex items-center justify-between group"
+                  className="p-4 border border-[rgb(var(--border))] rounded-[var(--radius-btn)] hover:border-[rgb(var(--primary))] hover:bg-[rgb(var(--primary)/0.02)] cursor-pointer transition-all flex items-center justify-between group"
                 >
-                  <div className="flex items-center gap-5">
-                    <div className="w-14 h-14 bg-primary-100 rounded-2xl flex items-center justify-center text-2xl font-semibold text-primary-600">
+                  <div className="flex items-center gap-4">
+                    <div className="w-12 h-12 bg-[rgb(var(--primary)/0.1)] rounded-xl flex items-center justify-center text-lg font-bold text-[rgb(var(--primary))]">
                       {patient.name.split(' ').map(n => n[0]).join('')}
                     </div>
                     <div>
-                      <p className="font-semibold text-xl group-hover:text-primary-600">{patient.name}</p>
-                      <p className="text-gray-500">{patient.primaryProvider}</p>
+                      <p className="font-semibold text-[rgb(var(--text-h))] group-hover:text-[rgb(var(--primary))]">{patient.name}</p>
+                      <p className="text-xs text-[rgb(var(--muted-foreground))]">{patient.primaryProvider}</p>
                     </div>
                   </div>
                   <Badge status={patient.status} />
@@ -96,22 +94,23 @@ export default function Patients() {
           </Card>
         </>
       ) : (
-        /* === Patient Detail View with Tabs === */
-        <div>
+        <div className="animate-in fade-in slide-in-from-bottom-4 duration-300">
           <button
             onClick={() => setSelectedPatient(null)}
-            className="mb-6 flex items-center gap-2 text-primary-600 hover:text-primary-700 font-medium"
+            className="mb-6 flex items-center gap-2 text-[rgb(var(--primary))] hover:underline font-medium text-sm"
           >
-            <ArrowLeft className="w-5 h-5" /> Back to Patients
+            <ArrowLeft className="w-4 h-4" /> Back to Patients
           </button>
 
-          <Card className="p-8">
-            <PatientHeader patient={selectedPatient} />
-
-            <PatientTabs activeTab={activeTab} setActiveTab={setActiveTab} />
-
-            <div className="mt-8">
-              <ActiveTabComponent patient={selectedPatient} />
+          <Card className="p-0 overflow-hidden border-none shadow-sm">
+            <div className="p-8">
+              <PatientHeader patient={selectedPatient} />
+              <div className="mt-8 border-b border-[rgb(var(--border))]">
+                <PatientTabs activeTab={activeTab} setActiveTab={setActiveTab} />
+              </div>
+              <div className="mt-8">
+                {ActiveTabComponent && <ActiveTabComponent patient={selectedPatient} />}
+              </div>
             </div>
           </Card>
         </div>
