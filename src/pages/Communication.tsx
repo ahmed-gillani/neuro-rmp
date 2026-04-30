@@ -80,11 +80,10 @@ export default function Communication() {
           <button
             key={tab}
             onClick={() => setActiveTab(tab as any)}
-            className={`px-8 py-4 font-bold text-sm tracking-wide uppercase border-b-4 transition-all ${
-              activeTab === tab 
-                ? 'border-primary-600 text-primary-600 bg-primary-50/30' 
-                : 'border-transparent text-gray-400 hover:text-gray-600'
-            }`}
+            className={`px-8 py-4 font-bold text-sm tracking-wide uppercase border-b-4 transition-all ${activeTab === tab
+                ? 'border-primary-600 text-primary-600 bg-primary-50/30'
+                : 'border-transparent text-gray-600 hover:text-gray-800'
+              }`}
           >
             {tab === 'all' ? 'All Messages' : tab}
           </button>
@@ -97,9 +96,8 @@ export default function Communication() {
           <Card key={msg.id} className="bg-[#1e3a8a] text-white border-0 p-6 shadow-xl hover:bg-[#1e3a8a]/95 transition-all group">
             <div className="flex gap-5">
               {/* Icon Container */}
-              <div className={`w-14 h-14 rounded-2xl flex-shrink-0 flex items-center justify-center transition-transform group-hover:scale-105 ${
-                msg.type === 'sms' ? 'bg-blue-500/20 text-blue-300' : 'bg-purple-500/20 text-purple-300'
-              }`}>
+              <div className={`w-14 h-14 rounded-2xl flex-shrink-0 flex items-center justify-center transition-transform group-hover:scale-105 ${msg.type === 'sms' ? 'bg-blue-500/20 text-blue-300' : 'bg-purple-500/20 text-purple-300'
+                }`}>
                 {msg.type === 'sms' ? <MessageSquare size={28} /> : <Phone size={28} />}
               </div>
 
@@ -115,8 +113,8 @@ export default function Communication() {
                 </p>
 
                 <div className="flex items-center gap-4 mt-5 pt-4 border-t border-white/10">
-                  <Badge 
-                    status={msg.status === 'answered' || msg.status === 'delivered' ? "Active" : "New"} 
+                  <Badge
+                    status={msg.status === 'answered' || msg.status === 'delivered' ? "Active" : "New"}
                     className="bg-white/20 text-white border-0 px-3 py-1 text-[11px] font-bold uppercase tracking-widest"
                   />
                   <div className="flex items-center gap-1.5">
@@ -139,7 +137,7 @@ export default function Communication() {
         ].map((stat, i) => (
           <Card key={i} className="p-8 border-gray-100 shadow-sm hover:shadow-md transition-shadow">
             <p className={`text-5xl font-black tracking-tight ${stat.color}`}>{stat.value}</p>
-            <p className="text-xs font-bold text-gray-400 mt-3 uppercase tracking-widest">{stat.label}</p>
+            <p className="text-xs font-bold text-gray-700 mt-3 uppercase tracking-widest">{stat.label}</p>
           </Card>
         ))}
       </div>

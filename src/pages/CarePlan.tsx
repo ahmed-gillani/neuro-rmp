@@ -92,11 +92,10 @@ export default function CarePlan() {
           <button
             key={tab}
             onClick={() => setActiveTab(tab as any)}
-            className={`px-10 py-5 font-bold text-sm tracking-wide uppercase border-b-4 transition-all whitespace-nowrap ${
-              activeTab === tab 
-                ? 'border-primary-600 text-primary-600 bg-primary-50/30' 
-                : 'border-transparent text-gray-400 hover:text-gray-600 hover:bg-gray-50'
-            }`}
+            className={`px-10 py-5 font-bold text-sm tracking-wide uppercase border-b-4 transition-all whitespace-nowrap ${activeTab === tab
+                ? 'border-primary-600 text-primary-600 bg-primary-50/30'
+                : 'border-transparent text-gray-600 hover:text-gray-800 hover:bg-gray-100'
+              }`}
           >
             {tab === 'current' ? 'Current Plan' : tab}
           </button>
@@ -106,22 +105,22 @@ export default function CarePlan() {
       {/* Dynamic Content Area */}
       <div className="transition-all duration-300 ease-in-out">
         {activeTab === 'current' && (
-          <CurrentPlanTab 
-            isEditing={isEditing} 
-            carePlan={carePlan} 
-            setCarePlan={setCarePlan} 
+          <CurrentPlanTab
+            isEditing={isEditing}
+            carePlan={carePlan}
+            setCarePlan={setCarePlan}
           />
         )}
 
         {activeTab === 'goals' && (
-          <GoalsTab 
-            goals={goals} 
-            setGoals={setGoals} 
-            isEditing={isEditing} 
-            newGoal={newGoal} 
-            setNewGoal={setNewGoal} 
-            addGoal={addGoal} 
-            deleteGoal={deleteGoal} 
+          <GoalsTab
+            goals={goals}
+            setGoals={setGoals}
+            isEditing={isEditing}
+            newGoal={newGoal}
+            setNewGoal={setNewGoal}
+            addGoal={addGoal}
+            deleteGoal={deleteGoal}
           />
         )}
 

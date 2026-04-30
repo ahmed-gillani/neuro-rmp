@@ -7,16 +7,16 @@ export default function MonitoringTab() {
       <Card title="Log Monitoring Time">
         <div className="grid grid-cols-3 gap-4 mb-6">
           <div>
-            <p className="text-xs text-gray-500">Hours</p>
-            <input type="text" defaultValue="15" className="w-full text-3xl font-bold text-center border rounded-xl p-3" />
+            <p className="text-xs text-gray-600">Hours</p>
+            <input type="text" defaultValue="15" className="w-full text-3xl font-bold text-gray-900 text-center border border-gray-300 rounded-xl p-3" />
           </div>
           <div>
-            <p className="text-xs text-gray-500">Minutes</p>
-            <input type="text" defaultValue="18" className="w-full text-3xl font-bold text-center border rounded-xl p-3" />
+            <p className="text-xs text-gray-600">Minutes</p>
+            <input type="text" defaultValue="18" className="w-full text-3xl font-bold text-gray-900 text-center border border-gray-300 rounded-xl p-3" />
           </div>
           <div>
-            <p className="text-xs text-gray-500">Seconds</p>
-            <input type="text" defaultValue="47" className="w-full text-3xl font-bold text-center border rounded-xl p-3" />
+            <p className="text-xs text-gray-600">Seconds</p>
+            <input type="text" defaultValue="47" className="w-full text-3xl font-bold text-gray-900 text-center border border-gray-300 rounded-xl p-3" />
           </div>
         </div>
         <Button className="w-full">Save Monitoring Entry</Button>

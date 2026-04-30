@@ -58,11 +58,11 @@ export default function HistoryTab() {
           <div className="flex flex-col md:flex-row justify-between gap-4">
             <div className="flex gap-4">
               <div className="mt-1">
-                <div className="w-10 h-10 bg-gray-50 rounded-xl flex items-center justify-center text-gray-400 group-hover:bg-primary-50 group-hover:text-primary-600 transition-colors">
+                <div className="w-10 h-10 bg-gray-50 rounded-xl flex items-center justify-center text-gray-600 group-hover:bg-primary-50 group-hover:text-primary-600 transition-colors">
                   <CheckCircle2 size={20} />
                 </div>
               </div>
-              
+
               <div className="space-y-1">
                 <div className="flex items-center gap-3">
                   <h4 className="font-black text-gray-900 tracking-tight">{item.action}</h4>
@@ -78,11 +78,11 @@ export default function HistoryTab() {
             </div>
 
             <div className="flex flex-row md:flex-col items-center md:items-end justify-between md:justify-center gap-2 border-t md:border-t-0 pt-3 md:pt-0 border-gray-50">
-              <div className="flex items-center gap-2 text-gray-400">
+              <div className="flex items-center gap-2 text-gray-600">
                 <Calendar size={14} />
                 <span className="text-[11px] font-black uppercase tracking-widest">{item.date}</span>
               </div>
-              <div className="flex items-center gap-2 text-gray-400">
+              <div className="flex items-center gap-2 text-gray-600">
                 <Clock size={14} />
                 <span className="text-[11px] font-black uppercase tracking-widest">{item.time}</span>
               </div>

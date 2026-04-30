@@ -37,7 +37,7 @@ const OrganizationSettings: React.FC = () => {
               <img src={preview} alt="Logo" className="w-full h-full object-cover" />
             ) : (
               <div className="w-full h-full flex items-center justify-center bg-gray-50">
-                <Camera className="w-12 h-12 text-gray-400" />
+                <Camera className="w-12 h-12 text-gray-600" />
               </div>
             )}
           </div>
@@ -56,7 +56,7 @@ const OrganizationSettings: React.FC = () => {
               type="text"
               value={orgData.name}
               onChange={(e) => setOrgData({ ...orgData, name: e.target.value })}
-              className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:border-blue-500"
+              className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:border-blue-500"
               required
             />
           </div>
@@ -67,7 +67,7 @@ const OrganizationSettings: React.FC = () => {
               type="email"
               value={orgData.email}
               onChange={(e) => setOrgData({ ...orgData, email: e.target.value })}
-              className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:border-blue-500"
+              className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:border-blue-500"
               required
             />
           </div>
@@ -78,7 +78,7 @@ const OrganizationSettings: React.FC = () => {
               type="tel"
               value={orgData.contact}
               onChange={(e) => setOrgData({ ...orgData, contact: e.target.value })}
-              className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:border-blue-500"
+              className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:border-blue-500"
               required
             />
           </div>

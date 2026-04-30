@@ -87,11 +87,11 @@ export default function CurrentPlanTab({ isEditing, carePlan, setCarePlan }: Cur
       {/* Stats Cards - Matching the Dashboard Look */}
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
         <Card className="border-gray-100 shadow-sm">
-          <p className="text-[11px] font-black text-gray-400 uppercase tracking-[0.2em] mb-2">Start Date</p>
+          <p className="text-[11px] font-black text-gray-700 uppercase tracking-[0.2em] mb-2">Start Date</p>
           <p className="text-2xl font-black text-gray-900">{carePlan.startDate}</p>
         </Card>
         <Card className="border-gray-100 shadow-sm">
-          <p className="text-[11px] font-black text-gray-400 uppercase tracking-[0.2em] mb-2">Next Review</p>
+          <p className="text-[11px] font-black text-gray-700 uppercase tracking-[0.2em] mb-2">Next Review</p>
           <p className="text-2xl font-black text-gray-900">{carePlan.nextReview}</p>
         </Card>
       </div>

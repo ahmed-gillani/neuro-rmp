@@ -5,13 +5,13 @@ export default function NotesTab() {
   return (
     <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
       <Card title="Create New Note">
-        <select className="w-full border border-gray-200 rounded-xl p-3 mb-4">
+        <select className="w-full border border-gray-300 rounded-xl p-3 mb-4 text-gray-900">
           <option>Clinical Note</option>
           <option>Medication Review</option>
           <option>Patient Update</option>
         </select>
-        <textarea 
-          className="w-full h-48 border border-gray-200 rounded-2xl p-4 resize-y" 
+        <textarea
+          className="w-full h-48 border border-gray-300 rounded-2xl p-4 resize-y text-gray-900"
           placeholder="Enter note details..."
         />
         <Button className="mt-4 w-full">Save Note</Button>

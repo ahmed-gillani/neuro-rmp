@@ -17,7 +17,7 @@ export default function ReadingsTab() {
       </Card>
 
       <Card title="Trends (Last 7 Days)">
-        <div className="h-64 bg-gray-100 rounded-2xl flex items-center justify-center text-gray-400">
+        <div className="h-64 bg-gray-100 rounded-2xl flex items-center justify-center text-gray-600">
           Chart will be added here (Recharts)
         </div>
       </Card>
