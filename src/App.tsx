@@ -7,9 +7,9 @@ import PatientOnboarding from './pages/PatientOnboarding';
 import CarePlan from './pages/CarePlan';
 import Communication from './pages/Communication';
 import UserSettings from './pages/OrganizationSettings';
-import AdminControlPanel from './pages/AdminControlPanel';
 import LocationManagement from './pages/Locations'; 
-
+import Devices from './pages/Devices';
+import Admin from './pages/Admin';
 
 function App() {
   return (
@@ -18,7 +18,8 @@ function App() {
         <Routes>
           <Route element={<Layout />}> {/* Layout wraps all pages */}
             <Route path="/communication" element={<Communication />} />
-            <Route path="/admin" element={<AdminControlPanel />} />
+            <Route path="/devices" element={<Devices />} />
+            <Route path="/admin" element={<Admin />} />
             <Route path="/locations" element={<LocationManagement />} />
             <Route path="/settings" element={<UserSettings />} />
             <Route path="/" element={<Dashboard />} />

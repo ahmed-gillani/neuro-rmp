@@ -15,13 +15,13 @@ export default function PatientHeader({ patient }: PatientHeaderProps) {
 
       <div className="flex-1 min-w-0">
         <h1 className="text-4xl font-bold text-gray-900 tracking-tight">{patient.name}</h1>
-        <p className="text-lg text-gray-600 mt-1">{patient.phone}</p>
-        <p className="text-gray-500">{patient.primaryProvider}</p>
+        <p className="text-lg text-slate-800 mt-1">{patient.phone}</p>
+        <p className="text-slate-800">{patient.primaryProvider}</p>
       </div>
 
       <div className="self-start md:self-center">
-        <Badge 
-          variant={patient.status === 'OOR' ? 'error' : 'success'} 
+        <Badge
+          variant={patient.status === 'OOR' ? 'error' : 'success'}
           className="text-lg px-8 py-3"
         >
           {patient.status}

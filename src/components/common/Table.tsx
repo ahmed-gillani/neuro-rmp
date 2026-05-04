@@ -1,4 +1,4 @@
-//src/components/common/Table.tsx
+// src/components/common/Table.tsx
 import React from 'react';
 
 interface TableProps {
@@ -8,21 +8,21 @@ interface TableProps {
 
 const Table: React.FC<TableProps> = ({ headers, children }) => {
   return (
-    <div className="w-full overflow-x-auto rounded-[var(--radius-card)] border border-[rgb(var(--border))] shadow-sm">
-      <table className="w-full text-left border-collapse bg-white">
+    <div className="w-full overflow-x-auto rounded-2xl border border-gray-200">
+      <table className="w-full text-sm">
         <thead>
-          <tr className="bg-[rgb(var(--muted))] border-b border-[rgb(var(--border))]">
+          <tr className="bg-gray-50 border-b">
             {headers.map((header, index) => (
               <th 
                 key={index} 
-                className="px-6 py-4 text-xs font-semibold uppercase tracking-wider text-[rgb(var(--muted-foreground))]"
+                className="px-5 py-4 text-left text-xs font-bold uppercase tracking-widest text-black"
               >
                 {header}
               </th>
             ))}
           </tr>
         </thead>
-        <tbody className="divide-y divide-[rgb(var(--border))]">
+        <tbody className="divide-y divide-gray-100">
           {children}
         </tbody>
       </table>

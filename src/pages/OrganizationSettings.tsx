@@ -1,3 +1,4 @@
+//Src/pages/OrganizationSettings.tsx
 import React, { useState } from 'react';
 import Card from '../components/common/Card';
 import { Upload, Camera } from 'lucide-react';
@@ -51,34 +52,33 @@ const OrganizationSettings: React.FC = () => {
         {/* Form Fields */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           <div>
-            <label className="block text-sm font-medium mb-1">Organization Name</label>
+            <label className="block text-sm font-medium mb-1 text-black">Organization Name</label>
             <input
               type="text"
               value={orgData.name}
               onChange={(e) => setOrgData({ ...orgData, name: e.target.value })}
-              className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:border-blue-500"
+              className="w-full px-4 py-2 border border-black rounded-lg focus:outline-none focus:border-blue-500 text-black"
               required
             />
           </div>
-
           <div>
-            <label className="block text-sm font-medium mb-1">Email</label>
+            <label className="block text-sm font-medium mb-1 text-black">Email</label>
             <input
               type="email"
               value={orgData.email}
               onChange={(e) => setOrgData({ ...orgData, email: e.target.value })}
-              className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:border-blue-500"
+              className="w-full px-4 py-2 border border-black rounded-lg focus:outline-none focus:border-blue-500"
               required
             />
           </div>
 
           <div className="md:col-span-2">
-            <label className="block text-sm font-medium mb-1">Contact Number</label>
+            <label className="block text-sm font-medium mb-1 text-black">Contact Number</label>
             <input
               type="tel"
               value={orgData.contact}
               onChange={(e) => setOrgData({ ...orgData, contact: e.target.value })}
-              className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:border-blue-500"
+              className="w-full px-4 py-2 border border-black rounded-lg focus:outline-none focus:border-blue-500"
               required
             />
           </div>

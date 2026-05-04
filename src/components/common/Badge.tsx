@@ -3,12 +3,17 @@ import React from 'react';
 
 interface BadgeProps {
   children?: React.ReactNode;
-  status?: 'New' | 'Active' | 'OOR' | 'Off Track' | 'Discharged' | string;
+  status?: string;                    // ← Made it more flexible
   variant?: 'success' | 'warning' | 'error' | 'info';
   className?: string;
 }
 
-const Badge: React.FC<BadgeProps> = ({ children, status, variant = 'info', className = '' }) => {
+const Badge: React.FC<BadgeProps> = ({ 
+  children, 
+  status, 
+  variant = 'info', 
+  className = '' 
+}) => {
   const variants = {
     success: "bg-green-100 text-green-700 border-green-200",
     warning: "bg-yellow-100 text-yellow-700 border-yellow-200",
@@ -16,8 +21,16 @@ const Badge: React.FC<BadgeProps> = ({ children, status, variant = 'info', class
     info: "bg-blue-100 text-blue-700 border-blue-200"
   };
 
+  // Auto variant logic based on status
+  const getVariant = (status?: string) => {
+    if (!status) return variant;
+    if (status === 'OOR' || status === 'Off Track') return 'error';
+    if (status === 'Active' || status === 'New') return 'success';
+    return variant;
+  };
+
   return (
-    <span className={`px-3 py-1 rounded-full text-[10px] font-black uppercase tracking-[0.15em] border ${variants[variant]} ${className}`}>
+    <span className={`inline-flex items-center px-3.5 py-1 rounded-full text-xs font-black uppercase tracking-widest border ${variants[getVariant(status)]} ${className}`}>
       {children ?? status}
     </span>
   );

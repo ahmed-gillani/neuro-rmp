@@ -1,27 +1,40 @@
-// //src/components/common/Card.tsx
+// src/components/common/Card.tsx
 import React from 'react';
 
 interface CardProps {
   children: React.ReactNode;
   className?: string;
   title?: string;
-  noPadding?: boolean; // Add this to control inner padding
+  noPadding?: boolean;
 }
 
-const Card: React.FC<CardProps> = ({ children, className = "", title, noPadding = false }) => {
+const Card: React.FC<CardProps> = ({ 
+  children, 
+  className = "", 
+  title, 
+  noPadding = false 
+}) => {
   return (
-    <div className={`shadow-[var(--shadow)] rounded-[var(--radius-card)] overflow-hidden ${className}`}>
-      {/* If no background class is passed, use the default variable */}
-      {!className.includes('bg-') && <div className="absolute inset-0 bg-[rgb(var(--card))] -z-10" />}
-      
+    <div className={`
+      bg-white 
+      border border-gray-200 
+      rounded-3xl 
+      shadow-sm 
+      hover:shadow-md 
+      transition-all 
+      duration-200
+      overflow-hidden
+      ${className}
+    `}>
       {title && (
-        <div className="px-6 py-4 border-b border-[rgb(var(--border))]">
-          <h3 className="text-lg font-semibold text-[rgb(var(--text-h))]">
+        <div className="px-6 py-4 border-b border-gray-100 bg-gray-50">
+          <h3 className="text-lg font-semibold text-black">
             {title}
           </h3>
         </div>
       )}
-      <div className={noPadding ? "" : "p-6"}>
+      
+      <div className={noPadding ? "" : "p-5"}>   {/* Reduced from p-8 to p-5 */}
         {children}
       </div>
     </div>

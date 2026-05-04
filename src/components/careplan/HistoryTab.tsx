@@ -1,8 +1,8 @@
+// src/components/careplan/HistoryTab.tsx
 import Card from '../common/Card';
 import Badge from '../common/Badge';
 import { Calendar, Clock, CheckCircle2 } from 'lucide-react';
 
-// Define the structure for history items
 type HistoryItem = {
   id: string;
   action: string;
@@ -13,7 +13,6 @@ type HistoryItem = {
 };
 
 export default function HistoryTab() {
-  // Mock data - in a real app, this would come from props or an API
   const historyData: HistoryItem[] = [
     {
       id: 'h1',
@@ -41,7 +40,6 @@ export default function HistoryTab() {
     }
   ];
 
-  // Helper function to map your log status to Badge variants
   const getStatusVariant = (status: HistoryItem['status']) => {
     switch (status) {
       case 'Completed': return 'success';
@@ -54,37 +52,36 @@ export default function HistoryTab() {
   return (
     <div className="space-y-4">
       {historyData.map((item) => (
-        <Card key={item.id} className="border-gray-100 hover:border-primary-100 transition-colors">
+        <Card key={item.id} className="border-gray-100 hover:border-gray-200 transition-colors">
           <div className="flex flex-col md:flex-row justify-between gap-4">
             <div className="flex gap-4">
               <div className="mt-1">
-                <div className="w-10 h-10 bg-gray-50 rounded-xl flex items-center justify-center text-gray-600 group-hover:bg-primary-50 group-hover:text-primary-600 transition-colors">
+                <div className="w-10 h-10 bg-gray-50 rounded-xl flex items-center justify-center text-gray-600">
                   <CheckCircle2 size={20} />
                 </div>
               </div>
 
               <div className="space-y-1">
                 <div className="flex items-center gap-3">
-                  <h4 className="font-black text-gray-900 tracking-tight">{item.action}</h4>
-                  {/* FIXED: Passing the mapped variant instead of status */}
+                  <h4 className="font-semibold text-gray-900 tracking-tight">{item.action}</h4>   {/* font-black → font-semibold */}
                   <Badge variant={getStatusVariant(item.status)}>
                     {item.status}
                   </Badge>
                 </div>
-                <p className="text-sm text-gray-500 font-medium leading-relaxed">
+                <p className="text-sm text-gray-600 leading-relaxed">   {/* font-medium → text-gray-600 */}
                   {item.details}
                 </p>
               </div>
             </div>
 
-            <div className="flex flex-row md:flex-col items-center md:items-end justify-between md:justify-center gap-2 border-t md:border-t-0 pt-3 md:pt-0 border-gray-50">
-              <div className="flex items-center gap-2 text-gray-600">
+            <div className="flex flex-row md:flex-col items-center md:items-end justify-between md:justify-center gap-2 border-t md:border-t-0 pt-3 md:pt-0 border-gray-100">
+              <div className="flex items-center gap-2 text-gray-500">
                 <Calendar size={14} />
-                <span className="text-[11px] font-black uppercase tracking-widest">{item.date}</span>
+                <span className="text-xs font-medium">{item.date}</span>
               </div>
-              <div className="flex items-center gap-2 text-gray-600">
+              <div className="flex items-center gap-2 text-gray-500">
                 <Clock size={14} />
-                <span className="text-[11px] font-black uppercase tracking-widest">{item.time}</span>
+                <span className="text-xs font-medium">{item.time}</span>
               </div>
             </div>
           </div>

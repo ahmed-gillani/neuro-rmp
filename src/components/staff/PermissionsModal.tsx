@@ -15,7 +15,7 @@ export default function PermissionsModal({ isOpen, onClose, staff }: Permissions
   return (
     <Modal isOpen={isOpen} onClose={onClose} title={`Permissions - ${staff.name}`}>
       <div className="space-y-6">
-        <p className="text-gray-600">Manage access rights for <strong>{staff.name}</strong></p>
+        <p className="text-slate-800">Manage access rights for <strong>{staff.name}</strong></p>
 
         <div className="bg-gray-50 p-6 rounded-2xl space-y-4">
           <div className="flex justify-between items-center">

@@ -1,50 +1,49 @@
-//src/components/common/StatCard.tsx
+// src/components/common/StatCard.tsx
 import React from 'react';
-import Card from './Card';
+import type { LucideIcon } from 'lucide-react';
 
 interface StatCardProps {
   title: string;
   value: string | number;
-  icon: React.ElementType; // Lucide icon component
-  trend?: {
-    value: number;
-    isUp: boolean;
-  };
-  color?: string; // Optional custom color for icon bg
+  icon: LucideIcon;
+  trend?: { value: number; isUp: boolean };
+  color?: string;
+  className?: string;     // ← Added this
 }
 
-const StatCard: React.FC<StatCardProps> = ({ title, value, icon: Icon, trend, color = "rgb(var(--primary))" }) => {
+const StatCard: React.FC<StatCardProps> = ({
+  title,
+  value,
+  icon: Icon,
+  trend,
+  color = "#3b82f6",
+  className = ""
+}) => {
   return (
-    <Card className="border-none shadow-sm hover:shadow-md transition-all duration-300">
-      <div className="flex items-center justify-between">
-        <div className="space-y-1">
-          <p className="text-[13px] font-medium text-[rgb(var(--muted-foreground))] uppercase tracking-wider">
-            {title}
-          </p>
-          <h3 className="text-2xl font-bold text-[rgb(var(--text-h))] tracking-tight">
-            {value}
-          </h3>
-          {trend && (
-            <div className="flex items-center gap-1.5 mt-2">
-              <span className={`text-xs font-bold px-1.5 py-0.5 rounded-md ${
-                trend.isUp ? 'bg-green-100 text-green-600' : 'bg-red-100 text-red-600'
-              }`}>
-                {trend.isUp ? '↑' : '↓'} {trend.value}%
-              </span>
-              <span className="text-[11px] text-[rgb(var(--muted-foreground))] font-medium">vs last month</span>
-            </div>
-          )}
+    <div className={`bg-white border border-gray-100 rounded-3xl p-6 shadow-sm hover:shadow-md transition-all ${className}`}>
+      <div className="flex items-start justify-between">
+        <div>
+          <p className="text-sm font-bold tracking-widest text-gray-500 uppercase">{title}</p>
+          <p className="text-4xl font-bold text-black mt-3 tracking-tight">{value}</p>
         </div>
         
-        {/* Duralux Style Icon Container */}
         <div 
-          className="w-12 h-12 rounded-2xl flex items-center justify-center transition-transform group-hover:scale-110"
-          style={{ backgroundColor: `${color}15`, color: color }}
+          className="w-12 h-12 rounded-2xl flex items-center justify-center flex-shrink-0"
+          style={{ backgroundColor: `${color}15` }}
         >
-          <Icon className="w-6 h-6" />
+          <Icon className="w-7 h-7" style={{ color }} />
         </div>
       </div>
-    </Card>
+
+      {trend && (
+        <div className="flex items-center gap-2 mt-6">
+          <span className={`text-sm font-bold flex items-center gap-1 ${trend.isUp ? 'text-emerald-600' : 'text-red-600'}`}>
+            {trend.isUp ? '↑' : '↓'} {trend.value}%
+          </span>
+          <span className="text-xs text-gray-500">vs last month</span>
+        </div>
+      )}
+    </div>
   );
 };
 

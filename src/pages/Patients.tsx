@@ -1,4 +1,4 @@
-// //src/pages/Patients.tsx
+// src/pages/Patients.tsx
 import { useState } from 'react';
 import { mockPatients } from '../data/mockData';
 import type { Patient } from '../types';
@@ -105,9 +105,14 @@ export default function Patients() {
           <Card className="p-0 overflow-hidden border-none shadow-sm">
             <div className="p-8">
               <PatientHeader patient={selectedPatient} />
+              
               <div className="mt-8 border-b border-[rgb(var(--border))]">
-                <PatientTabs activeTab={activeTab} setActiveTab={setActiveTab} />
+                <PatientTabs 
+                  activeTab={activeTab} 
+                  setActiveTab={setActiveTab} 
+                />
               </div>
+
               <div className="mt-8">
                 {ActiveTabComponent && <ActiveTabComponent patient={selectedPatient} />}
               </div>

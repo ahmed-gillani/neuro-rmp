@@ -1,82 +1,33 @@
-// // // //src/components/layout/Sidebar.tsx
-// import { useState } from 'react';
-// import { NavLink } from 'react-router-dom';
-// import { Home, Users, UserCheck, MessageSquare, Target, Settings, MapPin } from 'lucide-react';
-
-// const menuItems = [
-//   { icon: Home, label: 'Dashboard', path: '/' },
-//   { icon: MapPin, label: 'Locations', path: '/locations' },
-//   { icon: Settings, label: 'User Settings', path: '/settings' },
-//   { icon: Users, label: 'Patients', path: '/patients' },
-//   { icon: UserCheck, label: 'Staff', path: '/staff' },
-//   { icon: MessageSquare, label: 'Communication', path: '/communication' },
-//   { icon: Target, label: 'Care Plan', path: '/careplan' },
-// ];
-
-// export default function Sidebar() {
-//   const [isOpen, setIsOpen] = useState(false);
-
-//   return (
-//     <>
-//       {/* Mobile Toggle */}
-//       <button
-//         onClick={() => setIsOpen(!isOpen)}
-//         className="lg:hidden fixed top-4 left-4 z-[60] p-3 bg-[rgb(var(--primary))] rounded-xl shadow-lg"
-//       >
-//         <span className="text-2xl text-white">☰</span>
-//       </button>
-
-//       <div
-//         className={`fixed inset-y-0 left-0 lg:relative lg:translate-x-0 w-64 bg-white border-r border-[rgb(var(--border))] 
-//         transform transition-transform duration-300 z-[70] h-full
-//         ${isOpen ? 'translate-x-0' : '-translate-x-full'}`}
-//       >
-//         <div className="p-6 border-b border-[rgb(var(--border))]">
-//           <h1 className="text-2xl font-bold text-[rgb(var(--primary))] tracking-tight">RPM Portal</h1>
-//           <p className="text-[10px] uppercase tracking-widest text-[rgb(var(--muted-foreground))] mt-1 font-semibold">Remote Monitoring</p>
-//         </div>
-
-//         <nav className="mt-6 px-3 space-y-1">
-//           {menuItems.map((item) => (
-//             <NavLink
-//               key={item.path}
-//               to={item.path}
-//               onClick={() => setIsOpen(false)}
-//               className={({ isActive }) =>
-//                 `flex items-center gap-3 px-4 py-3 rounded-[var(--radius-btn)] transition-all text-[14px] ${
-//                   isActive
-//                   ? 'bg-[rgb(var(--primary)/0.1)] text-[rgb(var(--primary))] font-semibold'
-//                   : 'text-[rgb(var(--muted-foreground))] hover:bg-[rgb(var(--muted))] hover:text-[rgb(var(--foreground))]'
-//                 }`
-//               }
-//             >
-//               <item.icon className="w-5 h-5" />
-//               {item.label}
-//             </NavLink>
-//           ))}
-//         </nav>
-//       </div>
-//     </>
-//   );
-// }
-
+// src/components/layout/Sidebar.tsx
 import { useState } from 'react';
 import { NavLink } from 'react-router-dom';
-import { Home, Users, UserCheck, MessageSquare, Target, Settings, MapPin } from 'lucide-react';
+import { 
+  Home, 
+  Users, 
+  UserCheck, 
+  MessageSquare, 
+  Target, 
+  Settings, 
+  MapPin, 
+  Monitor,
+  ChevronLeft,
+  ChevronRight
+} from 'lucide-react';
 
 const menuItems = [
   { icon: Home, label: 'Dashboard', path: '/' },
-  { icon: MapPin, label: 'Locations', path: '/locations' },
-  { icon: Settings, label: 'User Settings', path: '/settings' },
+  { icon: MapPin, label: 'Admin', path: '/admin' },
   { icon: Users, label: 'Patients', path: '/patients' },
   { icon: UserCheck, label: 'Staff', path: '/staff' },
-  { icon: MessageSquare, label: 'Communication', path: '/communication' },
+  { icon: Monitor, label: 'Devices', path: '/devices' },
   { icon: Target, label: 'Care Plan', path: '/careplan' },
- 
+  { icon: MessageSquare, label: 'Communication', path: '/communication' },
+  { icon: Settings, label: 'User Settings', path: '/settings' },
 ];
 
 export default function Sidebar() {
-  const [isOpen, setIsOpen] = useState(false);
+  const [isOpen, setIsOpen] = useState(false);           // Mobile
+  const [isCollapsed, setIsCollapsed] = useState(false); // Desktop Collapse
 
   return (
     <>
@@ -90,62 +41,66 @@ export default function Sidebar() {
 
       {/* Sidebar Container */}
       <div
-        className={`fixed inset-y-0 left-0 lg:relative lg:translate-x-0 w-64 
-        bg-[#0f172a] border-r border-white/5 
-        transform transition-transform duration-300 z-[70] h-full
-        ${isOpen ? 'translate-x-0' : '-translate-x-full'}`}
+        className={`fixed inset-y-0 left-0 lg:relative lg:translate-x-0 
+          ${isCollapsed ? 'w-20' : 'w-64'} 
+          bg-[#0f172a] border-r border-white/10 h-full z-[70]
+          transform transition-all duration-300 ${isOpen ? 'translate-x-0' : '-translate-x-full lg:translate-x-0'}`}
       >
-        {/* Logo Section */}
-        <div className="p-6 border-b border-white/5">
-          <h1 className="text-2xl font-black text-white tracking-tight">
-            RPM <span className="text-blue-500">Portal</span>
-          </h1>
-          <p className="text-[10px] uppercase tracking-[0.3em] text-gray-500 mt-1 font-bold">
-            Remote Monitoring
-          </p>
+        {/* Logo + Collapse Button */}
+        <div className="p-6 border-b border-white/10 flex items-center justify-between">
+          {!isCollapsed && (
+            <h1 className="text-2xl font-black text-white tracking-tight">
+              RPM <span className="text-blue-400">Portal</span>
+            </h1>
+          )}
+          
+          {/* Collapse Toggle Button (Desktop Only) */}
+          <button
+            onClick={() => setIsCollapsed(!isCollapsed)}
+            className="hidden lg:flex items-center justify-center w-8 h-8 rounded-xl hover:bg-white/10 text-gray-400 hover:text-white transition-colors"
+          >
+            {isCollapsed ? <ChevronRight size={20} /> : <ChevronLeft size={20} />}
+          </button>
         </div>
 
         {/* Navigation */}
-        <nav className="mt-6 px-4 space-y-1.5">
+        <nav className="mt-6 px-4 space-y-1">
           {menuItems.map((item) => (
             <NavLink
               key={item.path}
               to={item.path}
               onClick={() => setIsOpen(false)}
               className={({ isActive }) =>
-                `group flex items-center gap-3 px-4 py-3.5 rounded-2xl transition-all duration-300 text-[13.5px] relative ${isActive
-                  ? 'bg-blue-600 text-white shadow-lg shadow-blue-900/20 font-bold'
-                  : 'text-gray-600 hover:bg-white/5 hover:text-gray-900'
+                `group flex items-center gap-3 px-5 py-3.5 rounded-2xl text-[14.5px] font-medium transition-all duration-200 ${
+                  isActive
+                    ? 'bg-blue-600 text-white shadow-lg shadow-blue-900/30'
+                    : 'text-gray-300 hover:bg-white/5 hover:text-white'
                 }`
               }
             >
               {({ isActive }) => (
                 <>
-                  <item.icon className={`w-5 h-5 transition-transform duration-300 group-hover:scale-110 ${isActive ? 'text-white' : 'text-gray-600 group-hover:text-gray-800'
-                    }`} />
-
-                  <span className="tracking-wide">{item.label}</span>
-
-                  {/* Subtle Glow for Active Item */}
-                  {isActive && (
-                    <div className="absolute inset-0 bg-gradient-to-r from-blue-400/20 to-transparent rounded-2xl" />
-                  )}
+                  <item.icon 
+                    className={`w-5 h-5 transition-all flex-shrink-0 ${
+                      isActive ? 'text-white' : 'text-gray-400 group-hover:text-gray-200'
+                    }`} 
+                  />
+                  {!isCollapsed && <span className="tracking-wide">{item.label}</span>}
                 </>
               )}
             </NavLink>
           ))}
         </nav>
 
-        {/* Bottom Profile/Version (Optional) */}
-        <div className="absolute bottom-6 left-6 right-6">
-          <div className="p-4 bg-white/5 rounded-2xl border border-white/5">
-            <p className="text-[10px] font-black text-gray-500 uppercase tracking-widest">System Status</p>
-            <div className="flex items-center gap-2 mt-1">
-              <div className="w-2 h-2 bg-green-500 rounded-full animate-pulse" />
-              <span className="text-xs text-gray-600 font-medium">All systems live</span>
+        {/* Bottom Status */}
+        {!isCollapsed && (
+          <div className="absolute bottom-6 left-6 right-6">
+            <div className="p-4 bg-white/5 rounded-2xl border border-white/10">
+              <p className="text-[10px] font-black text-gray-400 uppercase tracking-widest">System Status</p>
+              <p className="text-green-400 text-sm font-bold">All Systems Operational</p>
             </div>
           </div>
-        </div>
+        )}
       </div>
     </>
   );

@@ -9,22 +9,22 @@ interface PatientCardProps {
 
 export default function PatientCard({ patient, onView }: PatientCardProps) {
   return (
-    <div className="bg-white rounded-2xl border border-gray-200 p-5 hover:shadow-md transition-all">
+    <div className="bg-white rounded-2xl border border-black p-5 hover:shadow-md transition-all">
       <div className="flex justify-between items-start">
         <div>
           <p className="font-semibold text-lg">{patient.name}</p>
-          <p className="text-sm text-gray-500">{patient.phone}</p>
+          <p className="text-sm text-black">{patient.phone}</p>
         </div>
         <Badge status={patient.status} />
       </div>
 
       <div className="mt-4 grid grid-cols-2 gap-3 text-sm">
         <div>
-          <p className="text-gray-500">Provider</p>
+          <p className="text-black">Provider</p>
           <p className="font-medium">{patient.primaryProvider}</p>
         </div>
         <div>
-          <p className="text-gray-500">Enrolled</p>
+          <p className="text-black">Enrolled</p>
           <p className="font-medium">{patient.enrollmentDate}</p>
         </div>
       </div>

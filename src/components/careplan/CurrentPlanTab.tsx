@@ -1,108 +1,5 @@
-// // //src/components/careplan/CurrentPlanTab.tsx
-// import Card from '../common/Card';
-// type CarePlanData = {
-//   patientName: string;
-//   careGoal: string;
-//   interventions: string;
-//   startDate: string;
-//   nextReview: string;
-// };
-
-// interface CurrentPlanTabProps {
-//   isEditing: boolean;
-//   carePlan: CarePlanData;
-//   setCarePlan: (data: CarePlanData) => void;
-// }
-
-// export default function CurrentPlanTab({ isEditing, carePlan, setCarePlan }: CurrentPlanTabProps) {
-//   return (
-//     <div className="space-y-6">
-//       {/* 
-//          Using 'noPadding' from our Card update to kill that white inner-box 
-//          and '!text-white' to ensure visibility on the blue background.
-//       */}
-//       <Card noPadding className="bg-[#1e3a8a] text-white border-0 shadow-2xl relative overflow-hidden">
-//         <div className="p-8 md:p-10 relative z-10">
-//           <div className="flex justify-between items-start mb-6">
-//             <div>
-//               <p className="text-[11px] font-black tracking-[0.2em] text-white/50 uppercase">
-//                 Current Care Plan
-//               </p>
-
-//               {isEditing ? (
-//                 <input
-//                   type="text"
-//                   className="w-full mt-4 bg-white/10 border border-white/20 rounded-2xl p-4 text-3xl font-black text-white outline-none focus:border-white/40"
-//                   value={carePlan.patientName}
-//                   onChange={(e) => setCarePlan({ ...carePlan, patientName: e.target.value })}
-//                 />
-//               ) : (
-//                 <h3 className="text-4xl font-black tracking-tight mt-2 text-white">
-//                   {carePlan.patientName}
-//                 </h3>
-//               )}
-//             </div>
-
-//             <span className="bg-green-500 text-white text-[10px] px-4 py-1.5 rounded-full font-black uppercase tracking-widest shadow-lg border border-white/10">
-//               On Track
-//             </span>
-//           </div>
-
-//           <div className="mt-10 pt-8 border-t border-white/10">
-//             <p className="text-[11px] font-black tracking-[0.2em] text-white/50 uppercase mb-4">
-//               Primary Care Goal
-//             </p>
-//             {isEditing ? (
-//               <textarea
-//                 className="w-full bg-white/10 border border-white/20 rounded-2xl p-4 text-white min-h-[100px] outline-none"
-//                 value={carePlan.careGoal}
-//                 onChange={(e) => setCarePlan({ ...carePlan, careGoal: e.target.value })}
-//               />
-//             ) : (
-//               <p className="text-white/90 text-xl leading-relaxed font-medium">
-//                 {carePlan.careGoal}
-//               </p>
-//             )}
-//           </div>
-
-//           <div className="mt-8">
-//             <p className="text-[11px] font-black tracking-[0.2em] text-white/50 uppercase mb-4">
-//               Key Interventions
-//             </p>
-//             {isEditing ? (
-//               <textarea
-//                 className="w-full bg-white/10 border border-white/20 rounded-2xl p-4 text-white min-h-[120px] outline-none"
-//                 value={carePlan.interventions}
-//                 onChange={(e) => setCarePlan({ ...carePlan, interventions: e.target.value })}
-//               />
-//             ) : (
-//               <p className="text-white/80 leading-relaxed font-medium text-lg">
-//                 {carePlan.interventions}
-//               </p>
-//             )}
-//           </div>
-//         </div>
-//       </Card>
-
-//       {/* Stats Cards - Matching the Dashboard Look */}
-//       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-//         <Card className="border-gray-100 shadow-sm">
-//           <p className="text-[11px] font-black text-gray-700 uppercase tracking-[0.2em] mb-2">Start Date</p>
-//           <p className="text-2xl font-black text-gray-900">{carePlan.startDate}</p>
-//         </Card>
-//         <Card className="border-gray-100 shadow-sm">
-//           <p className="text-[11px] font-black text-gray-700 uppercase tracking-[0.2em] mb-2">Next Review</p>
-//           <p className="text-2xl font-black text-gray-900">{carePlan.nextReview}</p>
-//         </Card>
-//       </div>
-//     </div>
-//   );
-// }
-
-
-// src/components/careplan/CurrentPlanTab.tsx
+//src/components/careplan/CurrentPlanTab.tsx
 import Card from '../common/Card';
-
 type CarePlanData = {
   patientName: string;
   careGoal: string;
@@ -114,7 +11,7 @@ type CarePlanData = {
 interface CurrentPlanTabProps {
   isEditing: boolean;
   carePlan: CarePlanData;
-  setCarePlan: (data: Partial<CarePlanData>) => void;   // Updated to accept partial
+  setCarePlan: (data: Partial<CarePlanData>) => void;
 }
 
 export default function CurrentPlanTab({ 
@@ -123,63 +20,57 @@ export default function CurrentPlanTab({
   setCarePlan 
 }: CurrentPlanTabProps) {
   return (
-    <div className="space-y-6">
-      <Card noPadding className="bg-[#1e3a8a] !text-white border-0 shadow-2xl relative overflow-hidden">
-        <div className="p-8 md:p-10 relative z-10">
-          <div className="flex justify-between items-start mb-6">
+    <div className="space-y-8">
+      {/* Main Care Plan Card */}
+      <Card className="border-0 shadow-xl bg-gradient-to-br from-[#1e3a8a] to-[#2563eb] text-white overflow-hidden">
+        <div className="p-10">
+          <div className="flex justify-between items-start mb-8">
             <div>
-              <p className="text-[11px] font-black tracking-[0.2em] text-white/50 uppercase">
-                Current Care Plan
-              </p>
-
+              <p className="text-blue-200 text-xs font-bold tracking-[0.15em] uppercase">CURRENT CARE PLAN</p>
               {isEditing ? (
                 <input
                   type="text"
-                  className="w-full mt-4 bg-white/10 border border-white/20 rounded-2xl p-4 text-3xl font-black text-white outline-none focus:border-white/40"
+                  className="mt-3 w-full bg-white/10 border border-white/30 rounded-2xl px-6 py-4 text-4xl font-bold text-white outline-none focus:border-white"
                   value={carePlan.patientName}
                   onChange={(e) => setCarePlan({ patientName: e.target.value })}
                 />
               ) : (
-                <h3 className="text-4xl font-black tracking-tight mt-2 text-white">
-                  {carePlan.patientName}
-                </h3>
+                <h2 className="text-5xl font-bold mt-2 tracking-tight">{carePlan.patientName}</h2>
               )}
             </div>
 
-            <span className="bg-green-500 text-white text-[10px] px-4 py-1.5 rounded-full font-black uppercase tracking-widest shadow-lg border border-white/10">
-              On Track
-            </span>
+            <div className="bg-emerald-500 text-white text-sm font-bold px-6 py-2.5 rounded-full shadow-lg">
+              ON TRACK
+            </div>
           </div>
 
-          <div className="mt-10 pt-8 border-t border-white/10">
-            <p className="text-[11px] font-black tracking-[0.2em] text-white/50 uppercase mb-4">
-              Primary Care Goal
-            </p>
+          {/* Primary Goal */}
+          <div className="mb-10">
+            <p className="text-blue-200 text-xs font-bold tracking-[0.15em] uppercase mb-3">PRIMARY CARE GOAL</p>
             {isEditing ? (
               <textarea
-                className="w-full bg-white/10 border border-white/20 rounded-2xl p-4 text-white min-h-[100px] outline-none"
+                className="w-full bg-white/10 border border-white/30 rounded-3xl p-6 text-lg text-white min-h-[110px] resize-y outline-none focus:border-white"
                 value={carePlan.careGoal}
                 onChange={(e) => setCarePlan({ careGoal: e.target.value })}
               />
             ) : (
-              <p className="text-white/90 text-xl leading-relaxed font-medium">
+              <p className="text-white text-2xl leading-tight font-medium">
                 {carePlan.careGoal}
               </p>
             )}
           </div>
 
-          <div className="mt-8">
-            <p className="text-[11px] font-black tracking-[0.2em] text-white/50 uppercase mb-4">
-              Key Interventions
-            </p>
+          {/* Key Interventions */}
+          <div>
+            <p className="text-blue-200 text-xs font-bold tracking-[0.15em] uppercase mb-3">KEY INTERVENTIONS</p>
             {isEditing ? (
               <textarea
-                className="w-full bg-white/10 border border-white/20 rounded-2xl p-4 text-white min-h-[120px] outline-none"
+                className="w-full bg-white/10 border border-white/30 rounded-3xl p-6 text-lg text-white min-h-[130px] resize-y outline-none focus:border-white"
                 value={carePlan.interventions}
                 onChange={(e) => setCarePlan({ interventions: e.target.value })}
               />
             ) : (
-              <p className="text-white/80 leading-relaxed font-medium text-lg">
+              <p className="text-blue-100 text-[17px] leading-relaxed">
                 {carePlan.interventions}
               </p>
             )}
@@ -187,15 +78,16 @@ export default function CurrentPlanTab({
         </div>
       </Card>
 
-      {/* Stats Cards */}
+      {/* Stats Row */}
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-        <Card className="border-gray-100 shadow-sm">
-          <p className="text-[11px] font-black text-gray-700 uppercase tracking-[0.2em] mb-2">Start Date</p>
-          <p className="text-2xl font-black text-gray-900">{carePlan.startDate}</p>
+        <Card className="p-8 border border-gray-100">
+          <p className="uppercase text-xs font-bold tracking-widest text-gray-500">Start Date</p>
+          <p className="text-3xl font-bold text-gray-900 mt-3">{carePlan.startDate}</p>
         </Card>
-        <Card className="border-gray-100 shadow-sm">
-          <p className="text-[11px] font-black text-gray-700 uppercase tracking-[0.2em] mb-2">Next Review</p>
-          <p className="text-2xl font-black text-gray-900">{carePlan.nextReview}</p>
+
+        <Card className="p-8 border border-gray-100">
+          <p className="uppercase text-xs font-bold tracking-widest text-gray-500">Next Review</p>
+          <p className="text-3xl font-bold text-gray-900 mt-3">{carePlan.nextReview}</p>
         </Card>
       </div>
     </div>
