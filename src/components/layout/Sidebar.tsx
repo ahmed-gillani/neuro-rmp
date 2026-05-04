@@ -72,6 +72,7 @@ const menuItems = [
   { icon: UserCheck, label: 'Staff', path: '/staff' },
   { icon: MessageSquare, label: 'Communication', path: '/communication' },
   { icon: Target, label: 'Care Plan', path: '/careplan' },
+ 
 ];
 
 export default function Sidebar() {

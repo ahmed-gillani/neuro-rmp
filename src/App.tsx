@@ -6,9 +6,10 @@ import Staff from './pages/Staff';
 import PatientOnboarding from './pages/PatientOnboarding';
 import CarePlan from './pages/CarePlan';
 import Communication from './pages/Communication';
-import UserSettings from './pages/OrganizationSettings.';
+import UserSettings from './pages/OrganizationSettings';
 import AdminControlPanel from './pages/AdminControlPanel';
 import LocationManagement from './pages/Locations'; 
+
 
 function App() {
   return (

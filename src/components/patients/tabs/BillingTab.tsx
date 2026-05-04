@@ -1,32 +1,57 @@
+// src/components/patients/tabs/BillingTab.tsx
 import Card from '../../common/Card';
+import Button from '../../common/Button';
+import Badge from '../../common/Badge';
+import type { Patient } from '../../../types';
 
-export default function BillingTab() {
+interface BillingTabProps {
+  patient: Patient;
+}
+
+export default function BillingTab({ patient }: BillingTabProps) {
   return (
-    <Card>
-      <div className="flex justify-between mb-6">
-        <h3 className="font-semibold">Billing Summary</h3>
-        <button className="text-primary-600">Download PDF</button>
-      </div>
-      <div className="overflow-x-auto">
-        <table className="w-full text-sm">
-          <thead>
-            <tr className="border-b">
-              <th className="text-left py-3">CPT Code</th>
-              <th className="text-left py-3">Description</th>
-              <th className="text-right py-3">Amount</th>
-              <th className="text-center py-3">Status</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr className="border-b">
-              <td className="py-3">99457</td>
-              <td>RPM Treatment Management</td>
-              <td className="text-right">$89.00</td>
-              <td className="text-center"><span className="bg-green-100 text-green-700 px-3 py-1 rounded-full text-xs">Billed</span></td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-    </Card>
+    <div className="space-y-6">
+      <Card>
+        <div className="flex justify-between items-center mb-6">
+          <h3 className="font-semibold text-lg">Billing Summary — {patient.name}</h3>
+          <Button variant="outline" size="sm">Download PDF</Button>
+        </div>
+
+        <div className="overflow-x-auto">
+          <table className="w-full text-sm">
+            <thead className="border-b">
+              <tr>
+                <th className="text-left py-4">CPT Code</th>
+                <th className="text-left py-4">Description</th>
+                <th className="text-right py-4">Amount</th>
+                <th className="text-center py-4">Status</th>
+              </tr>
+            </thead>
+            <tbody className="divide-y">
+              <tr>
+                <td className="py-4 font-medium">99457</td>
+                <td>RPM Treatment Management (20+ mins)</td>
+                <td className="text-right font-medium">$89.00</td>
+                <td className="text-center"><Badge variant="success">Billed</Badge></td>
+              </tr>
+              <tr>
+                <td className="py-4 font-medium">99454</td>
+                <td>Device Supply &amp; Data Transmission</td>
+                <td className="text-right font-medium">$62.00</td>
+                <td className="text-center"><Badge variant="success">Billed</Badge></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </Card>
+
+      <Card title="Monthly Monitoring Time">
+        <div className="text-center py-8">
+          <p className="text-5xl font-black text-green-600">1,248</p>
+          <p className="text-gray-500 mt-2">Minutes Logged This Month</p>
+          <p className="text-sm text-green-600 font-medium mt-1">Qualifies for CPT 99457</p>
+        </div>
+      </Card>
+    </div>
   );
 }
