@@ -2,7 +2,7 @@
 import { useState } from 'react';
 import Card from '../../common/Card';
 import Button from '../../common/Button';
-import { Download, Trash2, Upload, FileText } from 'lucide-react';
+import { Download, Trash2, Upload } from 'lucide-react';
 import type { Patient } from '../../../types';
 
 interface DocumentsTabProps {

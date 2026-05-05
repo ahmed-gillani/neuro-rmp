@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 import Card from '../components/common/Card';
 import Button from '../components/common/Button';
 import Modal from '../components/common/Modal';
-import { Edit3, Building2, Users, UserCheck, Bell } from 'lucide-react';
+import { Edit3, Users, UserCheck } from 'lucide-react';
 import LocationManagement from './Locations';
 import Staff from './Staff';
 

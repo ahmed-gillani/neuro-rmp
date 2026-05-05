@@ -12,7 +12,7 @@ interface AlertsTabProps {
 }
 
 export default function AlertsTab({ patient }: AlertsTabProps) {
-  const { oorReadings, markAsReviewed } = useReadingsStore();
+  const { markAsReviewed } = useReadingsStore();
   const [searchTerm, setSearchTerm] = useState('');
   const [activeFilter, setActiveFilter] = useState<'All' | 'Critical' | 'Warnings'>('All');
 

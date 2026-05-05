@@ -13,8 +13,11 @@ interface EditStaffModalProps {
 }
 
 export default function EditStaffModal({ isOpen, onClose, staff, onSave }: EditStaffModalProps) {
-  const [formData, setFormData] = useState(staff || {});
-
+const [formData, setFormData] = useState({
+  name: '',
+  email: '',
+  role: ''
+});
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     if (!formData) return;

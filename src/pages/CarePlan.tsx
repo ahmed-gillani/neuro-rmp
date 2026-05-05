@@ -1,7 +1,7 @@
 // src/pages/CarePlan.tsx
 import { useState } from 'react';
 import Button from '../components/common/Button';
-import {  X, Sparkles } from 'lucide-react';
+import {   Sparkles } from 'lucide-react';
 
 import CurrentPlanTab from '../components/careplan/CurrentPlanTab';
 import GoalsTab from '../components/careplan/GoalsTab';

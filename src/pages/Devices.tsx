@@ -8,7 +8,7 @@ import { Plus, Monitor, Trash2, Edit, Search } from 'lucide-react';
 import type { Device } from '../types';
 
 export default function Devices() {
-  const { devices, assignDevice, updateDeviceStatus, addDevice } = useDevicesStore();
+  const { devices,  updateDeviceStatus, addDevice } = useDevicesStore();
   
   const [searchTerm, setSearchTerm] = useState('');
   const [statusFilter, setStatusFilter] = useState<'all' | 'Available' | 'Assigned' | 'In Repair'>('all');
@@ -22,7 +22,7 @@ export default function Devices() {
       
       return matchesSearch && matchesStatus;
     })
-    .sort((a, b) => (a.status === 'Available' ? -1 : 1));
+    .sort((a) => (a.status === 'Available' ? -1 : 1));
 
   const availableCount = devices.filter(d => d.status === 'Available').length;
 
