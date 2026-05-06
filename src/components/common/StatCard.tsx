@@ -20,15 +20,15 @@ const StatCard: React.FC<StatCardProps> = ({
   className = ""
 }) => {
   return (
-    <div className={`bg-white border border-gray-100 rounded-3xl p-6 shadow-sm hover:shadow-md transition-all ${className}`}>
+    <div className={`bg-white border border-gray-100 rounded-3xl p-4 sm:p-6 shadow-sm hover:shadow-md transition-all ${className}`}>
       <div className="flex items-start justify-between">
         <div>
-          <p className="text-sm font-bold tracking-widest text-gray-500 uppercase">{title}</p>
-          <p className="text-4xl font-bold text-black mt-3 tracking-tight">{value}</p>
+          <p className="text-sm font-bold tracking-wide text-gray-500 uppercase">{title}</p>
+          <p className="text-2xl sm:text-4xl font-bold text-black mt-3 tracking-tight">{value}</p>
         </div>
-        
-        <div 
-          className="w-12 h-12 rounded-2xl flex items-center justify-center flex-shrink-0"
+
+        <div
+          className="w-10 h-10 sm:w-12 sm:h-12 rounded-2xl flex items-center justify-center flex-shrink-0"
           style={{ backgroundColor: `${color}15` }}
         >
           <Icon className="w-7 h-7" style={{ color }} />

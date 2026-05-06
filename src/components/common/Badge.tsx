@@ -8,11 +8,11 @@ interface BadgeProps {
   className?: string;
 }
 
-const Badge: React.FC<BadgeProps> = ({ 
-  children, 
-  status, 
-  variant = 'info', 
-  className = '' 
+const Badge: React.FC<BadgeProps> = ({
+  children,
+  status,
+  variant = 'info',
+  className = ''
 }) => {
   const variants = {
     success: "bg-green-100 text-green-700 border-green-200",
@@ -30,7 +30,7 @@ const Badge: React.FC<BadgeProps> = ({
   };
 
   return (
-    <span className={`inline-flex items-center px-3.5 py-1 rounded-full text-xs font-black uppercase tracking-widest border ${variants[getVariant(status)]} ${className}`}>
+    <span className={`inline-flex items-center px-2.5 py-0.5 sm:px-3.5 sm:py-1 rounded-full text-[10px] sm:text-xs font-black uppercase tracking-wide sm:tracking-widest border ${variants[getVariant(status)]} ${className}`}>
       {children ?? status}
     </span>
   );

@@ -1,14 +1,14 @@
 // src/components/layout/Sidebar.tsx
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { NavLink } from 'react-router-dom';
-import { 
-  Home, 
-  Users, 
-  UserCheck, 
-  MessageSquare, 
-  Target, 
-  Settings, 
-  MapPin, 
+import {
+  Home,
+  Users,
+  UserCheck,
+  MessageSquare,
+  Target,
+  Settings,
+  MapPin,
   Monitor,
   ChevronLeft,
   ChevronRight
@@ -25,19 +25,31 @@ const menuItems = [
   { icon: Settings, label: 'User Settings', path: '/settings' },
 ];
 
-export default function Sidebar() {
-  const [isOpen, setIsOpen] = useState(false);           // Mobile
+interface SidebarProps {
+  isOpen: boolean;
+  setIsOpen: (v: boolean) => void;
+}
+
+export default function Sidebar({ isOpen, setIsOpen }: SidebarProps) {
   const [isCollapsed, setIsCollapsed] = useState(false); // Desktop Collapse
 
+  useEffect(() => {
+    function onKey(e: KeyboardEvent) {
+      if (e.key === 'Escape') setIsOpen(false);
+    }
+    window.addEventListener('keydown', onKey);
+    return () => window.removeEventListener('keydown', onKey);
+  }, []);
   return (
     <>
-      {/* Mobile Toggle */}
-      <button
-        onClick={() => setIsOpen(!isOpen)}
-        className="lg:hidden fixed top-4 left-4 z-[60] p-3 bg-[#1e3a8a] rounded-xl shadow-lg"
-      >
-        <span className="text-2xl text-white">☰</span>
-      </button>
+      {/* Mobile overlay (closes sidebar when tapped) */}
+      {isOpen && (
+        <div
+          className="fixed inset-0 bg-black/40 z-60 lg:hidden"
+          onClick={() => setIsOpen(false)}
+          aria-hidden
+        />
+      )}
 
       {/* Sidebar Container */}
       <div
@@ -53,7 +65,7 @@ export default function Sidebar() {
               RPM <span className="text-blue-400">Portal</span>
             </h1>
           )}
-          
+
           {/* Collapse Toggle Button (Desktop Only) */}
           <button
             onClick={() => setIsCollapsed(!isCollapsed)}
@@ -71,19 +83,17 @@ export default function Sidebar() {
               to={item.path}
               onClick={() => setIsOpen(false)}
               className={({ isActive }) =>
-                `group flex items-center gap-3 px-5 py-3.5 rounded-2xl text-[14.5px] font-medium transition-all duration-200 ${
-                  isActive
-                    ? 'bg-blue-600 text-white shadow-lg shadow-blue-900/30'
-                    : 'text-gray-300 hover:bg-white/5 hover:text-white'
+                `group flex items-center gap-3 px-5 py-3.5 rounded-2xl text-[14.5px] font-medium transition-all duration-200 ${isActive
+                  ? 'bg-blue-600 text-white shadow-lg shadow-blue-900/30'
+                  : 'text-gray-300 hover:bg-white/5 hover:text-white'
                 }`
               }
             >
               {({ isActive }) => (
                 <>
-                  <item.icon 
-                    className={`w-5 h-5 transition-all flex-shrink-0 ${
-                      isActive ? 'text-white' : 'text-gray-400 group-hover:text-gray-200'
-                    }`} 
+                  <item.icon
+                    className={`w-5 h-5 transition-all flex-shrink-0 ${isActive ? 'text-white' : 'text-gray-400 group-hover:text-gray-200'
+                      }`}
                   />
                   {!isCollapsed && <span className="tracking-wide">{item.label}</span>}
                 </>

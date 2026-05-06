@@ -32,12 +32,13 @@ export default function Toast({ id, message, type, onClose }: ToastProps) {
     };
 
     return (
-        <div className={`flex items-center gap-3 p-4 rounded-2xl border shadow-lg ${colors[type]} min-w-[280px]`}>
+        <div className={`flex items-center gap-3 p-3 sm:p-4 rounded-2xl border shadow-lg ${colors[type]} w-full max-w-xs sm:max-w-md`}>
             {icons[type]}
-            <p className="text-sm font-medium text-gray-800 flex-1">{message}</p>
+            <p className="text-sm sm:text-base font-medium text-gray-800 flex-1">{message}</p>
             <button
                 onClick={() => onClose(id)}
-                className="text-slate-800 hover:text-slate-900 transition-colors"
+                className="text-slate-800 hover:text-slate-900 transition-colors ml-2"
+                aria-label="Close notification"
             >
                 ✕
             </button>

@@ -18,7 +18,7 @@ export default function PatientCard({ patient, onView }: PatientCardProps) {
         <Badge status={patient.status} />
       </div>
 
-      <div className="mt-4 grid grid-cols-2 gap-3 text-sm">
+      <div className="mt-4 grid grid-cols-1 sm:grid-cols-2 gap-3 text-sm">
         <div>
           <p className="text-black">Provider</p>
           <p className="font-medium">{patient.primaryProvider}</p>
@@ -29,9 +29,9 @@ export default function PatientCard({ patient, onView }: PatientCardProps) {
         </div>
       </div>
 
-      <Button 
-        variant="outline" 
-        size="sm" 
+      <Button
+        variant="outline"
+        size="sm"
         className="w-full mt-5"
         onClick={() => onView(patient)}
       >

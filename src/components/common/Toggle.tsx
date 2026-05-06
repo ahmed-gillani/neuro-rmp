@@ -30,7 +30,7 @@ const Toggle: React.FC<ToggleProps> = ({
   return (
     <label className="inline-flex items-center cursor-pointer gap-3">
       {label && <span className="text-sm font-medium text-gray-700">{label}</span>}
-      
+
       <div className="relative">
         <input
           type="checkbox"
@@ -39,33 +39,14 @@ const Toggle: React.FC<ToggleProps> = ({
           disabled={disabled}
           className="sr-only peer"
         />
-        
+
         <div
-          className={`
-            ${sizes[size]} 
-            bg-gray-300 
-            peer-focus:outline-none 
-            peer-focus:ring-2 
-            peer-focus:ring-blue-300 
-            rounded-full 
-            peer 
-            peer-checked:bg-blue-600 
-            transition-all duration-300
-            ${disabled ? 'opacity-50 cursor-not-allowed' : ''}
-          `}
+          className={`${sizes[size]} bg-gray-300 peer-focus:outline-none peer-focus:ring-2 peer-focus:ring-blue-300 rounded-full peer peer-checked:bg-blue-600 transition-colors duration-300 ${disabled ? 'opacity-50 cursor-not-allowed' : ''}`}
         />
-        
+
         <div
-          className={`
-            absolute top-0.5 left-0.5 
-            ${knobSizes[size]} 
-            bg-white 
-            rounded-full 
-            shadow-md 
-            transition-all duration-300
-            peer-checked:translate-x-full
-            ${disabled ? 'opacity-75' : ''}
-          `}
+          className={`absolute top-0.5 left-0.5 ${knobSizes[size]} bg-white rounded-full shadow-md transition-transform duration-300 ${disabled ? 'opacity-75' : ''} ${size === 'sm' ? 'peer-checked:translate-x-4' : size === 'md' ? 'peer-checked:translate-x-5' : 'peer-checked:translate-x-6'
+            }`}
         />
       </div>
     </label>
