@@ -14,10 +14,10 @@ interface CurrentPlanTabProps {
   setCarePlan: (data: Partial<CarePlanData>) => void;
 }
 
-export default function CurrentPlanTab({ 
-  isEditing, 
-  carePlan, 
-  setCarePlan 
+export default function CurrentPlanTab({
+  isEditing,
+  carePlan,
+  setCarePlan
 }: CurrentPlanTabProps) {
   return (
     <div className="space-y-8">
@@ -30,12 +30,12 @@ export default function CurrentPlanTab({
               {isEditing ? (
                 <input
                   type="text"
-                  className="mt-3 w-full bg-white/10 border border-white/30 rounded-2xl px-6 py-4 text-4xl font-bold text-white outline-none focus:border-white"
+                  className="mt-3 w-full bg-white/10 border border-white/30 rounded-2xl px-6 py-4 stat-input font-bold text-white outline-none focus:border-white"
                   value={carePlan.patientName}
                   onChange={(e) => setCarePlan({ patientName: e.target.value })}
                 />
               ) : (
-                <h2 className="text-5xl font-bold mt-2 tracking-tight">{carePlan.patientName}</h2>
+                <h2 className="hero-title font-bold mt-2 tracking-tight">{carePlan.patientName}</h2>
               )}
             </div>
 
@@ -82,12 +82,12 @@ export default function CurrentPlanTab({
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
         <Card className="p-8 border border-gray-100">
           <p className="uppercase text-xs font-bold tracking-widest text-gray-500">Start Date</p>
-          <p className="text-3xl font-bold text-gray-900 mt-3">{carePlan.startDate}</p>
+          <p className="stat-value font-bold text-gray-900 mt-3">{carePlan.startDate}</p>
         </Card>
 
         <Card className="p-8 border border-gray-100">
           <p className="uppercase text-xs font-bold tracking-widest text-gray-500">Next Review</p>
-          <p className="text-3xl font-bold text-gray-900 mt-3">{carePlan.nextReview}</p>
+          <p className="stat-value font-bold text-gray-900 mt-3">{carePlan.nextReview}</p>
         </Card>
       </div>
     </div>

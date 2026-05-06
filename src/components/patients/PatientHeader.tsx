@@ -1,6 +1,6 @@
 // src/components/patients/PatientHeader.tsx
-import type { Patient } from '../../types';
 import Badge from '../common/Badge';
+import type { Patient } from '../../types';
 
 interface PatientHeaderProps {
   patient: Patient;
@@ -8,24 +8,54 @@ interface PatientHeaderProps {
 
 export default function PatientHeader({ patient }: PatientHeaderProps) {
   return (
-    <div className="flex flex-col md:flex-row gap-6 mb-10">
-      <div className="w-24 h-24 bg-blue-100 rounded-3xl flex items-center justify-center text-5xl font-black text-blue-600 flex-shrink-0 shadow-inner">
-        {patient.name.split(' ').map(n => n[0]).join('')}
-      </div>
+    <div className="patient-hero px-6 sm:px-10 py-8 sm:py-12 bg-gradient-to-r from-slate-800 to-slate-900 text-white rounded-t-3xl">
+      <div className="flex flex-col lg:flex-row gap-6 lg:items-center">
 
-      <div className="flex-1 min-w-0">
-        <h1 className="text-4xl font-bold text-gray-900 tracking-tight">{patient.name}</h1>
-        <p className="text-lg text-slate-800 mt-1">{patient.phone}</p>
-        <p className="text-slate-800">{patient.primaryProvider}</p>
-      </div>
+        {/* Large Avatar */}
+        <div className="w-24 h-24 lg:w-32 lg:h-32 rounded-2xl bg-white/10 flex items-center justify-center hero-avatar-text font-bold border-2 border-white/30 shadow-lg flex-shrink-0">
+          {patient.name.split(' ').map(n => n[0]).join('')}
+        </div>
 
-      <div className="self-start md:self-center">
-        <Badge
-          variant={patient.status === 'OOR' ? 'error' : 'success'}
-          className="text-lg px-8 py-3"
-        >
-          {patient.status}
-        </Badge>
+        {/* Patient Info */}
+        <div className="flex-1">
+          <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-4">
+            <div>
+              <h1 className="hero-title font-bold tracking-tight text-white text-2xl sm:text-3xl md:text-4xl">
+                {patient.name}
+              </h1>
+              <p className="text-slate-200 text-lg sm:text-xl mt-2">{patient.phone}</p>
+            </div>
+
+            <Badge
+              status={patient.status}
+              className="text-base px-6 py-2 text-lg font-semibold bg-white/6"
+            />
+          </div>
+
+          <div className="mt-6 sm:mt-8 grid grid-cols-1 sm:grid-cols-3 gap-6 text-slate-200">
+            <div>
+              <p className="text-sm opacity-80">Primary Provider</p>
+              <p className="font-semibold text-lg mt-1 text-white">Dr. {patient.primaryProvider}</p>
+            </div>
+
+            <div>
+              <p className="text-sm opacity-80">Enrolled On</p>
+              <p className="font-semibold text-lg mt-1 text-white">
+                {new Date(patient.enrollmentDate).toLocaleDateString('en-US', {
+                  month: 'long',
+                  year: 'numeric'
+                })}
+              </p>
+            </div>
+
+            {patient.dob && (
+              <div>
+                <p className="text-sm opacity-80">Date of Birth</p>
+                <p className="font-semibold text-lg mt-1 text-white">{patient.dob}</p>
+              </div>
+            )}
+          </div>
+        </div>
       </div>
     </div>
   );

@@ -53,10 +53,11 @@ export default function Sidebar({ isOpen, setIsOpen }: SidebarProps) {
 
       {/* Sidebar Container */}
       <div
-        className={`fixed inset-y-0 left-0 lg:relative lg:translate-x-0 
+        className={`fixed inset-y-0 left-0 
           ${isCollapsed ? 'w-20' : 'w-64'} 
           bg-[#0f172a] border-r border-white/10 h-full z-[70]
           transform transition-all duration-300 ${isOpen ? 'translate-x-0' : '-translate-x-full lg:translate-x-0'}`}
+        aria-hidden={!isOpen}
       >
         {/* Logo + Collapse Button */}
         <div className="p-6 border-b border-white/10 flex items-center justify-between">
@@ -111,6 +112,23 @@ export default function Sidebar({ isOpen, setIsOpen }: SidebarProps) {
             </div>
           </div>
         )}
+      </div>
+
+      {/* Bottom navigation for mobile when sidebar is not open */}
+      <div className="lg:hidden">
+        <div className="fixed bottom-4 left-4 right-4 mx-auto max-w-md bg-white/95 border border-gray-200 rounded-2xl shadow-lg p-2 flex justify-around items-center z-40">
+          {menuItems.slice(0, 5).map((item) => (
+            <NavLink
+              to={item.path}
+              key={item.path}
+              onClick={() => setIsOpen(false)}
+              className={({ isActive }) => `flex flex-col items-center gap-1 text-xs text-gray-600 ${isActive ? 'text-blue-600' : 'hover:text-gray-900'}`}
+            >
+              <item.icon className="w-5 h-5" />
+              <span className="text-[11px]">{item.label}</span>
+            </NavLink>
+          ))}
+        </div>
       </div>
     </>
   );

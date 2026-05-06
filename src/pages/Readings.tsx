@@ -10,8 +10,8 @@ export default function Readings() {
   return (
     <div className="space-y-8">
       <div className="flex justify-between">
-        <h1 className="text-3xl font-bold">Patient Readings</h1>
-        <Button onClick={() => {/* Open manual entry modal */}}>
+        <h1 className="hero-title font-bold">Patient Readings</h1>
+        <Button onClick={() => {/* Open manual entry modal */ }}>
           + Manual Entry
         </Button>
       </div>
@@ -21,8 +21,8 @@ export default function Readings() {
       </Card>
 
       <Card title="Recent Readings">
-        <div className="overflow-x-auto">
-          <table className="w-full">
+        <div className="overflow-x-auto responsive-table">
+          <table className="w-full table-auto">
             <thead>
               <tr className="border-b">
                 <th className="text-left py-4">Date</th>

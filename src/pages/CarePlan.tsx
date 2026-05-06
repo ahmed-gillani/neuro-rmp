@@ -1,7 +1,7 @@
 // src/pages/CarePlan.tsx
 import { useState } from 'react';
 import Button from '../components/common/Button';
-import {   Sparkles } from 'lucide-react';
+import { Sparkles } from 'lucide-react';
 
 import CurrentPlanTab from '../components/careplan/CurrentPlanTab';
 import GoalsTab from '../components/careplan/GoalsTab';
@@ -57,7 +57,7 @@ export default function CarePlan() {
   return (
     <div className="max-w-7xl mx-auto space-y-8">
       <div>
-        <h1 className="text-4xl font-bold text-black">CarePlan</h1>
+        <h1 className="hero-title font-bold text-black">CarePlan</h1>
         <p className="text-gray-500 mt-1">Build and generate patient care plans using AI assistance</p>
       </div>
 
@@ -71,11 +71,10 @@ export default function CarePlan() {
                 <button
                   key={tab}
                   onClick={() => setActiveTab(tab as any)}
-                  className={`flex-1 py-4 font-semibold text-sm border-b-2 transition-all ${
-                    activeTab === tab 
-                      ? 'border-blue-600 text-blue-600' 
-                      : 'border-transparent text-gray-500 hover:text-black'
-                  }`}
+                  className={`flex-1 py-4 font-semibold text-sm border-b-2 transition-all ${activeTab === tab
+                    ? 'border-blue-600 text-blue-600'
+                    : 'border-transparent text-gray-500 hover:text-black'
+                    }`}
                 >
                   {tab === 'current' ? 'Current Plan' : tab.charAt(0).toUpperCase() + tab.slice(1)}
                 </button>
@@ -101,7 +100,7 @@ export default function CarePlan() {
 
         {/* AI Assistant Sidebar */}
         <div className="lg:col-span-5">
-          <div className="bg-white rounded-3xl shadow-sm border border-gray-100 p-8 sticky top-6">
+          <div className="bg-white rounded-3xl shadow-sm border border-gray-100 p-6 sm:p-8 lg:sticky lg:top-6">
             <div className="flex items-center gap-3 mb-6">
               <div className="w-10 h-10 bg-gradient-to-br from-blue-500 to-purple-600 rounded-2xl flex items-center justify-center text-white">
                 <Sparkles className="w-6 h-6" />
@@ -111,13 +110,13 @@ export default function CarePlan() {
 
             {/* Chatbot / Document Tabs */}
             <div className="flex bg-gray-100 rounded-2xl p-1 mb-8">
-              <button 
+              <button
                 onClick={() => setAiMode('chatbot')}
                 className={`flex-1 py-3 text-sm font-medium rounded-xl ${aiMode === 'chatbot' ? 'bg-white shadow' : 'text-gray-500'}`}
               >
                 Chatbot
               </button>
-              <button 
+              <button
                 onClick={() => setAiMode('document')}
                 className={`flex-1 py-3 text-sm font-medium rounded-xl ${aiMode === 'document' ? 'bg-white shadow' : 'text-gray-500'}`}
               >
@@ -127,14 +126,14 @@ export default function CarePlan() {
 
             {aiMode === 'chatbot' ? (
               <div className="h-80 flex flex-col items-center justify-center text-center">
-                <div className="text-6xl mb-6">💬</div>
+                <div className="hero-avatar-text mb-6">💬</div>
                 <p className="font-medium text-black">Start AI Conversation</p>
                 <p className="text-sm text-gray-500 mt-2">Ask anything about care plan</p>
                 <Button className="mt-8 px-10">Start Chat</Button>
               </div>
             ) : (
               <div className="h-80 border-2 border-dashed border-gray-300 rounded-3xl flex flex-col items-center justify-center text-center">
-                <div className="text-5xl mb-4">📄</div>
+                <div className="hero-avatar-text mb-4">📄</div>
                 <p className="font-medium">Upload Clinical Document</p>
                 <p className="text-xs text-gray-500 mt-1">PDF, DOCX, TXT supported</p>
                 <Button className="mt-8">Upload Document</Button>

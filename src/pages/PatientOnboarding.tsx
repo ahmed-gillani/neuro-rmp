@@ -72,8 +72,8 @@ export default function PatientOnboarding() {
   const currentIndex = steps.findIndex(s => s.id === step);
 
   return (
-    <div className="max-w-3xl mx-auto pb-12">
-      <h1 className="text-3xl font-black text-gray-900 mb-2 tracking-tight">Patient Onboarding</h1>
+    <div className="max-w-3xl mx-auto pb-12 px-4 sm:px-6">
+      <h1 className="hero-title font-black text-gray-900 mb-2 tracking-tight">Patient Onboarding</h1>
       <p className="text-sm font-bold text-gray-700 uppercase tracking-[0.2em] mb-8">
         Step {currentIndex + 1} of {steps.length}: {steps[currentIndex].label}
       </p>
@@ -146,18 +146,18 @@ export default function PatientOnboarding() {
       </Card>
 
       {/* Navigation Controls */}
-      <div className="flex justify-between mt-10">
+      <div className="flex justify-between mt-10 gap-4">
         <Button
           variant="outline"
           onClick={currentIndex === 0 ? () => navigate('/patients') : prevStep}
-          className="px-10 border-gray-300 text-gray-700 hover:text-gray-900 hover:bg-gray-100 transition-all rounded-2xl"
+          className="px-4 sm:px-6 border-gray-300 text-gray-700 hover:text-gray-900 hover:bg-gray-100 transition-all rounded-2xl"
         >
           {currentIndex === 0 ? 'Cancel' : '← Back'}
         </Button>
 
         <Button
           onClick={step === 'review' ? () => navigate('/patients') : nextStep}
-          className="px-10 bg-blue-600 hover:bg-blue-700 shadow-xl shadow-blue-600/20 rounded-2xl py-4"
+          className="px-4 sm:px-6 bg-blue-600 hover:bg-blue-700 shadow-xl shadow-blue-600/20 rounded-2xl py-3"
         >
           {step === 'review' ? 'Complete Enrollment' : 'Continue →'}
         </Button>

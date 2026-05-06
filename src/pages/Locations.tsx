@@ -120,7 +120,7 @@ const LocationManagement: React.FC = () => {
     <div className="space-y-6">
       <div className="flex justify-between items-center">
         <div>
-          <h1 className="text-3xl font-bold text-black">Locations</h1>
+          <h1 className="hero-title font-bold text-black">Locations</h1>
           <p className="text-black mt-1">{locations.length} locations registered</p>
         </div>
         <Button onClick={handleAddNew}>
@@ -130,7 +130,7 @@ const LocationManagement: React.FC = () => {
       </div>
 
       <Card className="p-5">
-        <div className="overflow-x-auto">
+        <div className="overflow-x-auto responsive-table">
           <table className="w-full">
             <thead>
               <tr className="border-b border-gray-200 text-xs uppercase tracking-widest text-black">

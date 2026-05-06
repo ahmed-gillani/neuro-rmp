@@ -8,18 +8,18 @@ import { Plus, Monitor, Trash2, Edit, Search } from 'lucide-react';
 import type { Device } from '../types';
 
 export default function Devices() {
-  const { devices,  updateDeviceStatus, addDevice } = useDevicesStore();
-  
+  const { devices, updateDeviceStatus, addDevice } = useDevicesStore();
+
   const [searchTerm, setSearchTerm] = useState('');
   const [statusFilter, setStatusFilter] = useState<'all' | 'Available' | 'Assigned' | 'In Repair'>('all');
 
   const filteredDevices = devices
     .filter(device => {
       const matchesSearch = device.type.toLowerCase().includes(searchTerm.toLowerCase()) ||
-                           device.serialNumber.toLowerCase().includes(searchTerm.toLowerCase());
-      
+        device.serialNumber.toLowerCase().includes(searchTerm.toLowerCase());
+
       const matchesStatus = statusFilter === 'all' || device.status === statusFilter;
-      
+
       return matchesSearch && matchesStatus;
     })
     .sort((a) => (a.status === 'Available' ? -1 : 1));
@@ -31,11 +31,11 @@ export default function Devices() {
   };
 
   return (
-    <div className="space-y-8">
+    <div className="max-w-7xl mx-auto px-4 sm:px-6 space-y-8">
       {/* Header */}
       <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
         <div>
-          <h1 className="text-3xl font-bold text-gray-900">Device Inventory</h1>
+          <h1 className="hero-title font-bold text-gray-900">Device Inventory</h1>
           <p className="text-gray-500">Manage all monitoring devices • {availableCount} Available</p>
         </div>
         <Button>
@@ -63,11 +63,10 @@ export default function Devices() {
               <button
                 key={status}
                 onClick={() => setStatusFilter(status as any)}
-                className={`px-6 py-3 rounded-2xl text-sm font-medium transition-all whitespace-nowrap ${
-                  statusFilter === status
-                    ? 'bg-blue-600 text-white'
-                    : 'bg-gray-100 hover:bg-gray-200 text-gray-700'
-                }`}
+                className={`px-6 py-3 rounded-2xl text-sm font-medium transition-all whitespace-nowrap ${statusFilter === status
+                  ? 'bg-blue-600 text-white'
+                  : 'bg-gray-100 hover:bg-gray-200 text-gray-700'
+                  }`}
               >
                 {status === 'all' ? 'All Devices' : status}
               </button>
@@ -91,10 +90,10 @@ export default function Devices() {
                 </div>
               </div>
 
-              <Badge 
+              <Badge
                 variant={
                   device.status === 'Available' ? 'success' :
-                  device.status === 'Assigned' ? 'info' : 'warning'
+                    device.status === 'Assigned' ? 'info' : 'warning'
                 }
               >
                 {device.status}
@@ -117,8 +116,8 @@ export default function Devices() {
             {/* Action Buttons */}
             <div className="mt-6 flex gap-3">
               {device.status === 'Available' && (
-                <Button 
-                  variant="outline" 
+                <Button
+                  variant="outline"
                   className="flex-1 text-blue-600"
                   onClick={() => {
                     // You can open assign modal here later
@@ -130,8 +129,8 @@ export default function Devices() {
               )}
 
               {device.status === 'Assigned' && (
-                <Button 
-                  variant="outline" 
+                <Button
+                  variant="outline"
                   className="flex-1 text-red-600 hover:bg-red-50"
                   onClick={() => handleStatusChange(device.id, 'Available')}
                 >
@@ -139,19 +138,19 @@ export default function Devices() {
                 </Button>
               )}
 
-              <Button 
-                variant="outline" 
+              <Button
+                variant="outline"
                 size="sm"
                 className="px-4"
-                onClick={() => handleStatusChange(device.id, 
+                onClick={() => handleStatusChange(device.id,
                   device.status === 'In Repair' ? 'Available' : 'In Repair'
                 )}
               >
                 <Edit className="w-4 h-4" />
               </Button>
 
-              <Button 
-                variant="outline" 
+              <Button
+                variant="outline"
                 size="sm"
                 className="px-4 text-red-600 hover:bg-red-50"
               >

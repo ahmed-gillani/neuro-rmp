@@ -7,16 +7,16 @@ import ReadingChart from '../components/common/ReadingChart';
 
 const Dashboard: React.FC = () => {
   return (
-    <div className="space-y-8 pb-12">
+    <div className="max-w-7xl mx-auto px-4 sm:px-6 space-y-8 pb-12">
       {/* Header */}
       <div className="flex flex-col md:flex-row md:items-end justify-between gap-4">
         <div>
-          <h1 className="text-4xl font-bold text-gray-900 tracking-tight">Dashboard</h1>
+          <h1 className="hero-title font-bold text-gray-900 tracking-tight">Dashboard</h1>
           <p className="text-gray-600 mt-1 text-lg">
             Welcome back, Dr. Ahmed • Here's what's happening today
           </p>
         </div>
-        
+
         <div className="text-sm text-gray-500 flex items-center gap-2">
           <div className="w-2 h-2 bg-emerald-500 rounded-full animate-pulse"></div>
           Live System • Updated just now
@@ -77,10 +77,9 @@ const Dashboard: React.FC = () => {
               { patient: "Imran Malik", action: "Missed morning reading", time: "Yesterday", type: "danger" },
             ].map((activity, i) => (
               <div key={i} className="flex gap-4">
-                <div className={`w-9 h-9 rounded-2xl flex-shrink-0 flex items-center justify-center ${
-                  activity.type === 'success' ? 'bg-emerald-100 text-emerald-600' :
+                <div className={`w-9 h-9 rounded-2xl flex-shrink-0 flex items-center justify-center ${activity.type === 'success' ? 'bg-emerald-100 text-emerald-600' :
                   activity.type === 'warning' ? 'bg-amber-100 text-amber-600' : 'bg-red-100 text-red-600'
-                }`}>
+                  }`}>
                   <Activity className="w-5 h-5" />
                 </div>
                 <div className="flex-1 min-w-0">

@@ -36,7 +36,7 @@ export default function GoalsTab({
         <Card className="border-dashed border-2 border-blue-200 bg-blue-50/30">
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4 items-end">
             <div className="space-y-2">
-              <label className="text-xs font-medium text-gray-600">Goal Title</label>
+              <label className="text-xs font-medium text-gray-800">Goal Title</label>
               <input
                 type="text"
                 className="w-full p-4 rounded-2xl border border-gray-300 focus:border-blue-500 outline-none"
@@ -46,7 +46,7 @@ export default function GoalsTab({
               />
             </div>
             <div className="space-y-2">
-              <label className="text-xs font-medium text-gray-600">Target</label>
+              <label className="text-xs font-medium text-gray-800">Target</label>
               <input
                 type="text"
                 className="w-full p-4 rounded-2xl border border-gray-300 focus:border-blue-500 outline-none"
@@ -73,14 +73,14 @@ export default function GoalsTab({
                     {goal.status}
                   </Badge>
                 </div>
-                <p className="text-sm text-gray-600 mt-1">
-                  Target: <span className="font-medium">{goal.target}</span>
+                <p className="text-sm text-gray-700 mt-1">
+                  Target: <span className="font-medium text-gray-900">{goal.target}</span>
                 </p>
               </div>
 
               <div className="w-full md:w-64">
                 <div className="flex justify-between text-sm mb-2">
-                  <span className="text-gray-500">Progress</span>
+                  <span className="text-gray-700">Progress</span>
                   <span className="font-semibold text-gray-900">{goal.progress}%</span>
                 </div>
                 <div className="h-2 bg-gray-100 rounded-full overflow-hidden">
@@ -94,7 +94,7 @@ export default function GoalsTab({
               {isEditing && (
                 <button
                   onClick={() => deleteGoal(goal.id)}
-                  className="p-3 text-gray-500 hover:text-red-500 hover:bg-red-50 rounded-xl"
+                  className="p-3 text-gray-700 hover:text-red-500 hover:bg-red-50 rounded-xl"
                 >
                   <Trash2 size={20} />
                 </button>

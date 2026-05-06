@@ -56,7 +56,7 @@ export default function HistoryTab() {
           <div className="flex flex-col md:flex-row justify-between gap-4">
             <div className="flex gap-4">
               <div className="mt-1">
-                <div className="w-10 h-10 bg-gray-50 rounded-xl flex items-center justify-center text-gray-600">
+                <div className="w-10 h-10 bg-gray-50 rounded-xl flex items-center justify-center text-gray-700">
                   <CheckCircle2 size={20} />
                 </div>
               </div>
@@ -68,18 +68,18 @@ export default function HistoryTab() {
                     {item.status}
                   </Badge>
                 </div>
-                <p className="text-sm text-gray-600 leading-relaxed">   {/* font-medium → text-gray-600 */}
+                <p className="text-sm text-gray-800 leading-relaxed">   {/* font-medium → text-gray-600 */}
                   {item.details}
                 </p>
               </div>
             </div>
 
             <div className="flex flex-row md:flex-col items-center md:items-end justify-between md:justify-center gap-2 border-t md:border-t-0 pt-3 md:pt-0 border-gray-100">
-              <div className="flex items-center gap-2 text-gray-500">
+              <div className="flex items-center gap-2 text-gray-700">
                 <Calendar size={14} />
                 <span className="text-xs font-medium">{item.date}</span>
               </div>
-              <div className="flex items-center gap-2 text-gray-500">
+              <div className="flex items-center gap-2 text-gray-700">
                 <Clock size={14} />
                 <span className="text-xs font-medium">{item.time}</span>
               </div>

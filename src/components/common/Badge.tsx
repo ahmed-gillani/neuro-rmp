@@ -14,13 +14,18 @@ const Badge: React.FC<BadgeProps> = ({
   variant = 'info',
   className = ''
 }) => {
+  // const variants = {
+  //   success: "bg-green-100 text-green-700 border-green-200",
+  //   warning: "bg-yellow-100 text-yellow-700 border-yellow-200",
+  //   error: "bg-red-100 text-red-700 border-red-200",
+  //   info: "bg-blue-100 text-blue-700 border-blue-200"
+  // };
   const variants = {
-    success: "bg-green-100 text-green-700 border-green-200",
-    warning: "bg-yellow-100 text-yellow-700 border-yellow-200",
-    error: "bg-red-100 text-red-700 border-red-200",
-    info: "bg-blue-100 text-blue-700 border-blue-200"
+    success: "badge badge-success",
+    warning: "badge badge-warning",
+    error: "badge badge-danger",
+    info: "badge badge-info",
   };
-
   // Auto variant logic based on status
   const getVariant = (status?: string) => {
     if (!status) return variant;
@@ -30,7 +35,7 @@ const Badge: React.FC<BadgeProps> = ({
   };
 
   return (
-    <span className={`inline-flex items-center px-2.5 py-0.5 sm:px-3.5 sm:py-1 rounded-full text-[10px] sm:text-xs font-black uppercase tracking-wide sm:tracking-widest border ${variants[getVariant(status)]} ${className}`}>
+    <span className={`${variants[getVariant(status)]} ${className}`}>
       {children ?? status}
     </span>
   );

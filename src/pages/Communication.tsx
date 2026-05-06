@@ -51,11 +51,11 @@ export default function Communication() {
   });
 
   return (
-    <div className="space-y-6">
+    <div className="max-w-7xl mx-auto px-4 sm:px-6 space-y-6">
       {/* Header */}
       <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
         <div>
-          <h1 className="text-3xl font-bold text-black">Communication</h1>
+          <h1 className="hero-title font-bold text-black">Communication</h1>
           <p className="text-gray-600">SMS • Calls • Patient Engagement</p>
         </div>
         <div className="flex gap-3">
@@ -70,11 +70,10 @@ export default function Communication() {
           <button
             key={tab}
             onClick={() => setActiveTab(tab as any)}
-            className={`px-8 py-3 font-bold text-sm uppercase tracking-widest border-b-4 transition-all ${
-              activeTab === tab 
-                ? 'border-blue-600 text-blue-600' 
+            className={`px-8 py-3 font-bold text-sm uppercase tracking-widest border-b-4 transition-all ${activeTab === tab
+                ? 'border-blue-600 text-blue-600'
                 : 'border-transparent text-gray-500 hover:text-gray-700'
-            }`}
+              }`}
           >
             {tab === 'all' ? 'ALL MESSAGES' : tab.toUpperCase()}
           </button>
@@ -86,9 +85,8 @@ export default function Communication() {
         {filteredMessages.map((msg) => (
           <Card key={msg.id} className="p-6 hover:shadow-lg transition-all border border-gray-200">
             <div className="flex gap-5">
-              <div className={`w-12 h-12 rounded-2xl flex items-center justify-center flex-shrink-0 ${
-                msg.type === 'sms' ? 'bg-blue-100 text-blue-600' : 'bg-purple-100 text-purple-600'
-              }`}>
+              <div className={`w-12 h-12 rounded-2xl flex items-center justify-center flex-shrink-0 ${msg.type === 'sms' ? 'bg-blue-100 text-blue-600' : 'bg-purple-100 text-purple-600'
+                }`}>
                 {msg.type === 'sms' ? <MessageSquare size={28} /> : <Phone size={28} />}
               </div>
 

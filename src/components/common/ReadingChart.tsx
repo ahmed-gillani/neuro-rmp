@@ -10,25 +10,27 @@ const sampleData = [
 
 export default function ReadingChart() {
   return (
-    <div className="h-64 sm:h-80 w-full">
+    <div className="chart-container w-full h-full">
       <ResponsiveContainer width="100%" height="100%">
         <LineChart data={sampleData}>
-          <CartesianGrid strokeDasharray="3 3" stroke="#f0f0f0" />
-          <XAxis dataKey="date" />
-          <YAxis />
-          <Tooltip />
+          <CartesianGrid strokeDasharray="3 3" stroke="#e6eef7" />
+          <XAxis dataKey="date" stroke="#64748b" tick={{ fill: '#475569' }} />
+          <YAxis stroke="#64748b" tick={{ fill: '#475569' }} />
+          <Tooltip wrapperStyle={{ borderRadius: 8 }} />
           <Line
             type="monotone"
             dataKey="bp"
             stroke="#ef4444"
             strokeWidth={3}
+            dot={false}
             name="Blood Pressure (Systolic)"
           />
           <Line
             type="monotone"
             dataKey="glucose"
-            stroke="#3b82f6"
+            stroke="#1e90ff"
             strokeWidth={3}
+            dot={false}
             name="Glucose (mg/dL)"
           />
         </LineChart>

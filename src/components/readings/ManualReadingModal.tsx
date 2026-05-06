@@ -10,13 +10,13 @@ interface ManualReadingModalProps {
   patient: Patient;
 }
 
-export default function ManualReadingModal({ 
-  isOpen, 
-  onClose, 
-  onSave, 
-  patient 
+export default function ManualReadingModal({
+  isOpen,
+  onClose,
+  onSave,
+  patient
 }: ManualReadingModalProps) {
-  
+
   const [formData, setFormData] = useState({
     type: 'Blood Pressure' as Reading['type'],
     value: '',
@@ -54,11 +54,11 @@ export default function ManualReadingModal({
       <div className="bg-white rounded-3xl w-full max-w-lg overflow-hidden">
         <div className="p-8">
           <h2 className="text-2xl font-bold text-gray-900">Add Manual Reading</h2>
-          <p className="text-gray-600 mt-1">for {patient.name}</p>
+          <p className="text-gray-700 mt-1">for {patient.name}</p>
 
           <form onSubmit={handleSubmit} className="mt-8 space-y-6">
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-2">Reading Type</label>
+              <label className="block text-sm font-medium text-gray-800 mb-2">Reading Type</label>
               <select
                 value={formData.type}
                 onChange={(e) => setFormData({ ...formData, type: e.target.value as Reading['type'] })}
@@ -73,7 +73,7 @@ export default function ManualReadingModal({
             </div>
 
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-2">Value</label>
+              <label className="block text-sm font-medium text-gray-800 mb-2">Value</label>
               <input
                 type="text"
                 value={formData.value}
@@ -82,11 +82,11 @@ export default function ManualReadingModal({
                 className="w-full border border-gray-300 rounded-2xl p-4 text-xl font-medium focus:border-blue-500 outline-none"
                 required
               />
-              <p className="text-xs text-gray-500 mt-1">Unit: {formData.unit}</p>
+              <p className="text-xs text-gray-700 mt-1">Unit: {formData.unit}</p>
             </div>
 
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-2">Notes (Optional)</label>
+              <label className="block text-sm font-medium text-gray-800 mb-2">Notes (Optional)</label>
               <textarea
                 value={formData.notes}
                 onChange={(e) => setFormData({ ...formData, notes: e.target.value })}
@@ -96,9 +96,9 @@ export default function ManualReadingModal({
             </div>
 
             <div className="flex gap-3 pt-4">
-              <Button 
-                type="button" 
-                variant="outline" 
+              <Button
+                type="button"
+                variant="outline"
                 className="flex-1"
                 onClick={onClose}
               >

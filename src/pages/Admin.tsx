@@ -40,9 +40,9 @@ const Admin: React.FC = () => {
   };
 
   return (
-    <div className="space-y-8">
+    <div className="max-w-7xl mx-auto px-4 sm:px-6 space-y-8">
       <div>
-        <h1 className="text-3xl font-bold text-black">Admin Dashboard</h1>
+        <h1 className="hero-title font-bold text-black">Admin Dashboard</h1>
         <p className="text-black mt-1">Organization management</p>
       </div>
 
@@ -50,28 +50,28 @@ const Admin: React.FC = () => {
       <div className="grid grid-cols-2 md:grid-cols-5 gap-4">
         <Card className="p-6 text-center">
           <div className="flex justify-center mb-3"><Users className="w-8 h-8 text-gray-400" /></div>
-          <p className="text-4xl font-bold text-black">100</p>
-          <p className="text-sm text-gray-500 mt-1">Total Users</p>
+          <p className="stat-value font-bold text-black">100</p>
+          <p className="text-sm text-gray-700 mt-1">Total Users</p>
         </Card>
         <Card className="p-6 text-center">
           <div className="flex justify-center mb-3"><Users className="w-8 h-8 text-emerald-500" /></div>
-          <p className="text-4xl font-bold text-black">100</p>
-          <p className="text-sm text-gray-500 mt-1">Active Users</p>
+          <p className="stat-value font-bold text-black">100</p>
+          <p className="text-sm text-gray-700 mt-1">Active Users</p>
         </Card>
         <Card className="p-6 text-center">
           <div className="flex justify-center mb-3"><UserCheck className="w-8 h-8 text-blue-500" /></div>
-          <p className="text-4xl font-bold text-black">14</p>
-          <p className="text-sm text-gray-500 mt-1">Providers</p>
+          <p className="stat-value font-bold text-black">14</p>
+          <p className="text-sm text-gray-700 mt-1">Providers</p>
         </Card>
         <Card className="p-6 text-center">
           <div className="flex justify-center mb-3"><Users className="w-8 h-8 text-purple-500" /></div>
-          <p className="text-4xl font-bold text-black">9</p>
-          <p className="text-sm text-gray-500 mt-1">Phlebotomists</p>
+          <p className="stat-value font-bold text-black">9</p>
+          <p className="text-sm text-gray-700 mt-1">Phlebotomists</p>
         </Card>
         <Card className="p-6 text-center">
           <div className="flex justify-center mb-3"><Users className="w-8 h-8 text-rose-500" /></div>
-          <p className="text-4xl font-bold text-black">68</p>
-          <p className="text-sm text-gray-500 mt-1">Patients</p>
+          <p className="stat-value font-bold text-black">68</p>
+          <p className="text-sm text-gray-700 mt-1">Patients</p>
         </Card>
       </div>
 
@@ -87,11 +87,10 @@ const Admin: React.FC = () => {
           <button
             key={tab.id}
             onClick={() => setActiveTab(tab.id as any)}
-            className={`flex-1 py-4 text-sm font-semibold rounded-2xl mx-1 transition-all ${
-              activeTab === tab.id 
-                ? 'bg-blue-600 text-white shadow' 
-                : 'text-gray-600 hover:bg-gray-100'
-            }`}
+            className={`flex-1 py-4 text-sm font-semibold rounded-2xl mx-1 transition-all ${activeTab === tab.id
+              ? 'bg-blue-600 text-white shadow'
+              : 'text-gray-700 hover:bg-gray-100'
+              }`}
           >
             {tab.label}
           </button>
@@ -104,7 +103,7 @@ const Admin: React.FC = () => {
           <div className="flex justify-between items-start mb-8">
             <div>
               <h2 className="text-2xl font-bold text-black">{orgData.name}</h2>
-              <p className="text-gray-500">Organization Settings</p>
+              <p className="text-gray-700">Organization Settings</p>
             </div>
             <Button onClick={openEditModal}>
               <Edit3 className="w-4 h-4 mr-2" /> Edit
@@ -114,30 +113,30 @@ const Admin: React.FC = () => {
           <div className="grid grid-cols-1 md:grid-cols-2 gap-x-12 gap-y-8">
             <div className="space-y-6">
               <div>
-                <p className="text-xs uppercase tracking-widest text-gray-500">Facility Name</p>
+                <p className="text-xs uppercase tracking-widest text-gray-700">Facility Name</p>
                 <p className="font-semibold text-black mt-1">{orgData.name}</p>
               </div>
               <div>
-                <p className="text-xs uppercase tracking-widest text-gray-500">Registration Number</p>
+                <p className="text-xs uppercase tracking-widest text-gray-700">Registration Number</p>
                 <p className="font-semibold text-black mt-1">{orgData.regNumber}</p>
               </div>
               <div>
-                <p className="text-xs uppercase tracking-widest text-gray-500">NPI Number</p>
+                <p className="text-xs uppercase tracking-widest text-gray-700">NPI Number</p>
                 <p className="font-semibold text-black mt-1">{orgData.npiNumber}</p>
               </div>
             </div>
 
             <div className="space-y-6">
               <div>
-                <p className="text-xs uppercase tracking-widest text-gray-500">Contact</p>
+                <p className="text-xs uppercase tracking-widest text-gray-700">Contact</p>
                 <p className="font-semibold text-black mt-1">{orgData.contact}</p>
               </div>
               <div>
-                <p className="text-xs uppercase tracking-widest text-gray-500">Email</p>
+                <p className="text-xs uppercase tracking-widest text-gray-700">Email</p>
                 <p className="font-semibold text-black mt-1">{orgData.email}</p>
               </div>
               <div>
-                <p className="text-xs uppercase tracking-widest text-gray-500">Address</p>
+                <p className="text-xs uppercase tracking-widest text-gray-700">Address</p>
                 <p className="font-semibold text-black mt-1 whitespace-pre-line">{orgData.address}</p>
               </div>
             </div>
@@ -148,8 +147,8 @@ const Admin: React.FC = () => {
       {/* Other Tabs */}
       {activeTab === 'locations' && <LocationManagement />}
       {activeTab === 'staff' && <Staff />}
-      {activeTab === 'providers' && <div className="p-12 text-center text-gray-500">Providers Management - Coming Soon</div>}
-      {activeTab === 'statuses' && <div className="p-12 text-center text-gray-500">Statuses Management - Coming Soon</div>}
+      {activeTab === 'providers' && <div className="p-12 text-center text-gray-700">Providers Management - Coming Soon</div>}
+      {activeTab === 'statuses' && <div className="p-12 text-center text-gray-700">Statuses Management - Coming Soon</div>}
 
       {/* Edit Organization Modal */}
       <Modal
@@ -171,20 +170,20 @@ const Admin: React.FC = () => {
           <div className="grid grid-cols-2 gap-4">
             <div>
               <label className="block text-sm font-bold mb-2">Registration Number</label>
-              <input 
-                type="text" 
-                value={editForm.regNumber} 
-                onChange={(e) => setEditForm({ ...editForm, regNumber: e.target.value })} 
-                className="w-full px-4 py-3 border border-gray-300 rounded-2xl" 
+              <input
+                type="text"
+                value={editForm.regNumber}
+                onChange={(e) => setEditForm({ ...editForm, regNumber: e.target.value })}
+                className="w-full px-4 py-3 border border-gray-300 rounded-2xl"
               />
             </div>
             <div>
               <label className="block text-sm font-bold mb-2">NPI Number</label>
-              <input 
-                type="text" 
-                value={editForm.npiNumber} 
-                onChange={(e) => setEditForm({ ...editForm, npiNumber: e.target.value })} 
-                className="w-full px-4 py-3 border border-gray-300 rounded-2xl" 
+              <input
+                type="text"
+                value={editForm.npiNumber}
+                onChange={(e) => setEditForm({ ...editForm, npiNumber: e.target.value })}
+                className="w-full px-4 py-3 border border-gray-300 rounded-2xl"
               />
             </div>
           </div>

@@ -15,7 +15,7 @@
         --border: 226 232 240;
 
         --muted: 241 245 249;
-        --muted-foreground: 100 116 139;
+        --muted-foreground: 55 65 81;
 
         --primary: 52 84 209;
         --primary-foreground: 255 255 255;
@@ -65,48 +65,3 @@ select {
 }
 
 /* Remove any !important that was causing the error */
-
-/* Mobile tweaks */
-@media (max-width: 640px) {
-    :root {
-        --radius-card: 8px;
-        --radius-btn: 6px;
-    }
-
-    .card-style {
-        padding: 1rem;
-    }
-
-    header.h-16 {
-        height: 56px;
-    }
-}
-
-/* Responsive table helper */
-.responsive-table {
-    -webkit-overflow-scrolling: touch;
-}
-
-/* Ensure table cells wrap at word boundaries and keep horizontal text */
-table td,
-table th {
-    word-break: normal;
-    overflow-wrap: break-word;
-    white-space: normal;
-    writing-mode: horizontal-tb;
-}
-
-@media (max-width: 640px) {
-
-    table th,
-    table td {
-        padding-left: 0.5rem;
-        padding-right: 0.5rem;
-        font-size: 12px;
-    }
-}
-
-/* Reduce extreme letter-spacing in very small headers */
-thead th {
-    letter-spacing: 0.02em;
-}
