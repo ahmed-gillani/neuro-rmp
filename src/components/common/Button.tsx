@@ -19,8 +19,8 @@ const Button: React.FC<ButtonProps> = ({
 
   const variants = {
     // primary: "bg-[rgb(var(--primary))] text-white hover:bg-opacity-90 shadow-sm",
-    primary: "btn-primary shadow-lg active:scale-[0.985] text-black",
-    secondary: "bg-[rgb(var(--muted))] text-[rgb(var(--foreground))] hover:bg-gray-200",
+    primary: "btn-primary shadow-lg active:scale-[0.985] text-black ",
+    secondary: "bg-[rgb(var(--muted))] text-[rgb(var(--foreground))] hover:bg-blue-200",
     outline: "border border-[rgb(var(--border))] bg-transparent hover:bg-[rgb(var(--muted))] text-[rgb(var(--foreground))]"
   };
 

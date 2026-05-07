@@ -5,168 +5,72 @@ import Card from '../components/common/Card';
 import Button from '../components/common/Button';
 import Badge from '../components/common/Badge';
 import { Plus, Monitor, Trash2, Edit, Search } from 'lucide-react';
-import type { Device } from '../types';
 
 export default function Devices() {
-  const { devices, updateDeviceStatus, addDevice } = useDevicesStore();
-
+  const { devices, updateDeviceStatus } = useDevicesStore();
   const [searchTerm, setSearchTerm] = useState('');
   const [statusFilter, setStatusFilter] = useState<'all' | 'Available' | 'Assigned' | 'In Repair'>('all');
 
-  const filteredDevices = devices
-    .filter(device => {
-      const matchesSearch = device.type.toLowerCase().includes(searchTerm.toLowerCase()) ||
-        device.serialNumber.toLowerCase().includes(searchTerm.toLowerCase());
-
-      const matchesStatus = statusFilter === 'all' || device.status === statusFilter;
-
-      return matchesSearch && matchesStatus;
-    })
-    .sort((a) => (a.status === 'Available' ? -1 : 1));
-
-  const availableCount = devices.filter(d => d.status === 'Available').length;
-
-  const handleStatusChange = (id: string, newStatus: Device['status']) => {
-    updateDeviceStatus(id, newStatus);
-  };
-
   return (
-    <div className="max-w-7xl mx-auto px-4 sm:px-6 space-y-8">
-      {/* Header */}
-      <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
+    <div className="w-full space-y-4 font-sans animate-in fade-in duration-500">
+      <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 px-1">
         <div>
-          <h1 className="hero-title font-bold text-gray-900">Device Inventory</h1>
-          <p className="text-gray-500">Manage all monitoring devices • {availableCount} Available</p>
+          <h1 className="text-lg font-medium text-[#1e293b] tracking-tight">Device Inventory</h1>
+          <p className="text-slate-400 text-[10px] font-medium uppercase tracking-widest leading-none mt-0.5">Asset & Hardware Management</p>
         </div>
-        <Button>
-          <Plus className="w-4 h-4 mr-2" />
-          Add New Device
+        {/* Fixed: Back to Blue */}
+        <Button size="sm" className="h-8 bg-blue-600 hover:bg-blue-700 text-white text-[10px] px-4 font-medium shadow-sm border-none">
+          <Plus size={12} className="mr-1.5" /> Register Device
         </Button>
       </div>
 
-      {/* Filters & Search */}
-      <Card className="p-6">
-        <div className="flex flex-col md:flex-row gap-4">
+      <Card className="p-3 bg-slate-50/50 border-slate-200/60 shadow-none">
+        <div className="flex flex-col md:flex-row gap-3">
           <div className="relative flex-1">
-            <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400" />
+            <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-3.5 h-3.5 text-slate-400" />
             <input
               type="text"
-              placeholder="Search by device type or serial number..."
-              className="w-full pl-12 py-3 border border-gray-300 rounded-2xl focus:border-blue-500 outline-none"
+              placeholder="Search SN or device type..."
+              className="w-full pl-9 pr-4 py-1.5 text-xs bg-white border border-slate-200 rounded-lg outline-none focus:border-blue-400 font-sans"
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
             />
           </div>
 
-          <div className="flex gap-2">
+          <div className="flex bg-white p-1 rounded-lg border border-slate-200 w-fit">
             {['all', 'Available', 'Assigned', 'In Repair'].map((status) => (
               <button
                 key={status}
                 onClick={() => setStatusFilter(status as any)}
-                className={`px-6 py-3 rounded-2xl text-sm font-medium transition-all whitespace-nowrap ${statusFilter === status
-                  ? 'bg-blue-600 text-white'
-                  : 'bg-gray-100 hover:bg-gray-200 text-gray-700'
-                  }`}
+                className={`px-3 py-1 text-[10px] font-medium rounded-md transition-all uppercase tracking-tighter ${
+                  statusFilter === status ? 'bg-blue-600 text-white shadow-sm' : 'text-slate-500 hover:text-slate-800'
+                }`}
               >
-                {status === 'all' ? 'All Devices' : status}
+                {status}
               </button>
             ))}
           </div>
         </div>
       </Card>
 
-      {/* Devices Grid */}
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-        {filteredDevices.map((device) => (
-          <Card key={device.id} className="hover:shadow-lg transition-all duration-200 group">
-            <div className="flex items-start justify-between">
-              <div className="flex items-center gap-4">
-                <div className="w-14 h-14 bg-blue-100 rounded-2xl flex items-center justify-center">
-                  <Monitor className="w-8 h-8 text-blue-600" />
+      <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-3">
+        {devices.filter(d => statusFilter === 'all' || d.status === statusFilter).map((device) => (
+          <Card key={device.id} className="border-slate-100 shadow-none hover:border-blue-200 transition-all p-3 font-sans">
+            <div className="flex items-center justify-between mb-3">
+              <div className="flex items-center gap-2.5">
+                <div className="w-8 h-8 bg-blue-50 text-blue-600 rounded-lg flex items-center justify-center shrink-0">
+                  <Monitor size={16} />
                 </div>
-                <div>
-                  <h4 className="font-semibold text-lg text-gray-900">{device.type}</h4>
-                  <p className="font-mono text-sm text-gray-500">{device.serialNumber}</p>
+                <div className="min-w-0">
+                  <h4 className="text-[11px] font-medium text-[#1e293b] leading-tight uppercase truncate">{device.type}</h4>
+                  <p className="text-[9px] font-medium text-slate-400 font-mono tracking-tighter">{device.serialNumber}</p>
                 </div>
               </div>
-
-              <Badge
-                variant={
-                  device.status === 'Available' ? 'success' :
-                    device.status === 'Assigned' ? 'info' : 'warning'
-                }
-              >
-                {device.status}
-              </Badge>
-            </div>
-
-            {device.patientId && (
-              <div className="mt-6 pt-6 border-t border-gray-100">
-                <p className="text-xs uppercase tracking-widest text-gray-500 mb-1">Assigned To</p>
-                <p className="font-medium text-gray-900">Patient ID: {device.patientId}</p>
-              </div>
-            )}
-
-            {device.lastConnected && (
-              <div className="mt-4 text-xs text-gray-500">
-                Last connected: {new Date(device.lastConnected).toLocaleDateString()}
-              </div>
-            )}
-
-            {/* Action Buttons */}
-            <div className="mt-6 flex gap-3">
-              {device.status === 'Available' && (
-                <Button
-                  variant="outline"
-                  className="flex-1 text-blue-600"
-                  onClick={() => {
-                    // You can open assign modal here later
-                    alert(`Assign ${device.serialNumber} to a patient`);
-                  }}
-                >
-                  Assign to Patient
-                </Button>
-              )}
-
-              {device.status === 'Assigned' && (
-                <Button
-                  variant="outline"
-                  className="flex-1 text-red-600 hover:bg-red-50"
-                  onClick={() => handleStatusChange(device.id, 'Available')}
-                >
-                  Unassign
-                </Button>
-              )}
-
-              <Button
-                variant="outline"
-                size="sm"
-                className="px-4"
-                onClick={() => handleStatusChange(device.id,
-                  device.status === 'In Repair' ? 'Available' : 'In Repair'
-                )}
-              >
-                <Edit className="w-4 h-4" />
-              </Button>
-
-              <Button
-                variant="outline"
-                size="sm"
-                className="px-4 text-red-600 hover:bg-red-50"
-              >
-                <Trash2 className="w-4 h-4" />
-              </Button>
+              <Badge status={device.status === 'Available' ? 'Active' : 'OOR'} className="text-[8px]" />
             </div>
           </Card>
         ))}
       </div>
-
-      {filteredDevices.length === 0 && (
-        <Card className="p-20 text-center">
-          <Monitor className="w-16 h-16 mx-auto text-gray-300 mb-4" />
-          <p className="text-gray-500 text-lg">No devices found</p>
-        </Card>
-      )}
     </div>
   );
 }

@@ -72,7 +72,7 @@ export default function PatientOnboarding() {
   const currentIndex = steps.findIndex(s => s.id === step);
 
   return (
-    <div className="max-w-3xl mx-auto pb-12 px-4 sm:px-6">
+    <div className="max-w-3xl mx-auto pb-6">
       <h1 className="hero-title font-black text-gray-900 mb-2 tracking-tight">Patient Onboarding</h1>
       <p className="text-sm font-bold text-gray-700 uppercase tracking-[0.2em] mb-8">
         Step {currentIndex + 1} of {steps.length}: {steps[currentIndex].label}

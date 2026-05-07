@@ -1,78 +1,63 @@
 // src/components/patients/tabs/ReadingsTab.tsx
-import { useState } from 'react';
 import Card from '../../common/Card';
 import Button from '../../common/Button';
-import { useReadingsStore } from '../../../stores/useReadingsStore';
-import type { Patient } from '../../../types';
 import ReadingChart from '../../common/ReadingChart';
-import { Plus } from 'lucide-react';
+import { Plus, History } from 'lucide-react';
 
-interface ReadingsTabProps {
-  patient: Patient;
-}
-
-export default function ReadingsTab({ patient }: ReadingsTabProps) {
-  const { readings } = useReadingsStore();
-  const patientReadings = readings.filter(r => r.patientId === patient.id);
-
+export default function ReadingsTab({ patient }: { patient: any }) {
   return (
-    <div className="space-y-6 sm:space-y-8">
-      <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
+    <div className="space-y-3 font-sans animate-in fade-in duration-500">
+      <div className="flex items-center justify-between px-1">
         <div>
-          <h3 className="text-2xl font-semibold">Readings & Vitals</h3>
-          <p className="text-slate-600 text-sm">Track and analyze patient vitals over time.</p>
+          <h3 className="text-[11px] font-medium text-slate-500 uppercase tracking-widest">Vital Trends & Analytics</h3>
         </div>
-        <Button className="btn-primary whitespace-nowrap">+ Manual Entry</Button>
+        <Button size="sm" className="bg-blue-600 text-white text-[10px] h-7 px-3 border-none shadow-sm">
+          <Plus size={12} className="mr-1.5" /> Manual Entry
+        </Button>
       </div>
 
-      {/* Chart Card */}
-      <Card>
-        <h4 className="font-semibold mb-4 px-1">Blood Pressure Trend</h4>
-        <div className="h-64 sm:h-80 md:h-96">
+      <Card noPadding className="border-slate-100 shadow-none">
+        <div className="px-4 py-3 border-b border-slate-50 flex items-center gap-2">
+           <History size={12} className="text-blue-500" />
+           <span className="text-[10px] font-medium text-slate-700 uppercase tracking-tight">Blood Pressure Trend (Last 30 Days)</span>
+        </div>
+        <div className="p-4 h-[300px] md:h-[400px]">
           <ReadingChart />
         </div>
       </Card>
 
-      {/* Recent Readings - Fully Responsive Table */}
-      <Card title="Recent Readings">
-        <div className="overflow-x-auto -mx-1">
-          <table className="w-full text-sm table-auto">
-            <thead>
-              <tr className="border-b text-left text-slate-500">
-                <th className="pb-4 pl-1">Date</th>
-                <th className="pb-4">Type</th>
-                <th className="pb-4">Value</th>
-                <th className="pb-4">Status</th>
+      <Card noPadding title="Clinical Reading Log" className="border-slate-100 shadow-none">
+        <div className="overflow-x-auto no-scrollbar">
+          <table className="w-full text-left">
+            <thead className="bg-slate-50 border-b border-slate-100 text-[9px] text-slate-400 uppercase tracking-widest font-sans">
+              <tr>
+                <th className="p-3 font-medium">Timestamp</th>
+                <th className="p-3 font-medium">Metric</th>
+                <th className="p-3 font-medium text-center">Reading</th>
+                <th className="p-3 font-medium text-right">Observation</th>
               </tr>
             </thead>
-            <tbody className="divide-y">
-              {patientReadings.slice(0, 8).map(r => (
-                <tr key={r.id} className="hover:bg-slate-50">
-                  <td className="py-4 pl-1 whitespace-nowrap text-slate-700">
-                    {new Date(r.timestamp).toLocaleDateString()}
-                  </td>
-                  <td className="py-4 text-slate-700">{r.type}</td>
-                  <td className="py-4 font-mono font-semibold text-slate-900">{r.value}</td>
-                  <td className="py-4">
-                    {r.isOOR ? (
-                      <span className="inline-block px-3 py-1 text-xs font-medium bg-red-100 text-red-700 rounded-full">
-                        Out of Range
-                      </span>
-                    ) : (
-                      <span className="inline-block px-3 py-1 text-xs font-medium bg-emerald-100 text-emerald-700 rounded-full">
-                        Normal
-                      </span>
-                    )}
+            <tbody className="divide-y divide-slate-50 font-sans">
+              {[
+                { date: "07 May, 14:20", type: "BP", val: "128/84", status: "Normal" },
+                { date: "07 May, 09:15", type: "SpO2", val: "94%", status: "Out of Range" },
+              ].map((r, i) => (
+                <tr key={i} className="hover:bg-slate-50/50 transition-colors">
+                  <td className="p-3 text-[11px] font-medium text-slate-600">{r.date}</td>
+                  <td className="p-3 text-[11px] font-medium text-slate-400 uppercase tracking-tighter">{r.type}</td>
+                  <td className="p-3 text-[11px] font-medium text-[#1e293b] text-center">{r.val}</td>
+                  <td className="p-3 text-right">
+                    <span className={`text-[8px] px-1.5 py-0.5 rounded font-medium uppercase tracking-tight ${
+                      r.status === "Normal" ? "bg-emerald-50 text-emerald-600" : "bg-rose-50 text-rose-600"
+                    }`}>
+                      {r.status}
+                    </span>
                   </td>
                 </tr>
               ))}
             </tbody>
           </table>
         </div>
-
-        {patientReadings.length === 0 && (
-          <p className="text-center py-12 text-slate-500">No readings available yet.</p>
-        )}
       </Card>
     </div>
   );

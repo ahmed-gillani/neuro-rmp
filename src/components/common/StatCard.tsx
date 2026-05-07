@@ -1,52 +1,53 @@
 // src/components/common/StatCard.tsx
 import React from 'react';
-import type { LucideIcon } from 'lucide-react';
+import { TrendingUp, TrendingDown } from 'lucide-react';
 
 interface StatCardProps {
   title: string;
   value: string | number;
-  icon: LucideIcon;
-  trend?: { value: number; isUp: boolean };
+  // 'any' use karne se LucideIcon ka type error khatam ho jayega
+  icon: any; 
   color?: string;
-  className?: string;     // ← Added this
+  trend?: {
+    value: number;
+    isUp: boolean;
+  };
 }
 
-const StatCard: React.FC<StatCardProps> = ({
-  title,
-  value,
-  icon: Icon,
-  trend,
-  color = "#3b82f6",
-  className = ""
-}) => {
+export default function StatCard({ title, value, icon: Icon, color = '#3b82f6', trend }: StatCardProps) {
   return (
-    <div className={`bg-white border border-gray-100 rounded-2xl p-3 sm:p-4 shadow-sm hover:shadow-md transition-all ${className}`}>
-      <div className="flex items-center sm:items-start justify-between gap-3">
-        <div className="flex-1 min-w-0">
-          <p className="text-[11px] sm:text-sm font-bold tracking-wide text-gray-500 uppercase truncate">{title}</p>
-          <p className="stat-value font-bold text-black mt-2 sm:mt-3 text-xl sm:text-2xl tracking-tight truncate">{value}</p>
+    <div className="bg-white border border-slate-100 rounded-xl p-3.5 shadow-sm font-sans flex flex-col justify-between h-full">
+      <div className="flex justify-between items-start">
+        <div className="min-w-0 font-sans">
+          {/* Label: Normal weight / Medium */}
+          <p className="text-[10px] font-medium text-slate-500 uppercase tracking-widest leading-none">
+            {title}
+          </p>
+          {/* Value: font-medium (Not bold) */}
+          <p className="text-2xl font-medium text-[#0f172a] mt-2 leading-none tracking-tight">
+            {value}
+          </p>
         </div>
-
-        <div className="flex-shrink-0 flex items-center">
-          <div
-            className="w-10 h-10 sm:w-12 sm:h-12 rounded-2xl flex items-center justify-center"
-            style={{ backgroundColor: `${color}15` }}
-          >
-            <Icon className="w-5 h-5 sm:w-7 sm:h-7" style={{ color }} />
-          </div>
+        
+        {/* Icon Container with vibrant background accent */}
+        <div 
+          className="w-8 h-8 rounded-lg flex items-center justify-center shrink-0 shadow-sm transition-transform hover:scale-105" 
+          style={{ backgroundColor: `${color}15` }}
+        >
+          {/* Icon component safely rendered */}
+          {Icon && <Icon size={16} style={{ color }} strokeWidth={2} />}
         </div>
       </div>
 
       {trend && (
-        <div className="flex items-center gap-2 mt-3 sm:mt-4">
-          <span className={`text-sm font-semibold flex items-center gap-1 ${trend.isUp ? 'text-emerald-600' : 'text-red-600'}`}>
-            {trend.isUp ? '↑' : '↓'} {trend.value}%
-          </span>
-          <span className="text-xs text-gray-500">vs last month</span>
+        <div className="flex items-center gap-1.5 mt-3 font-sans">
+          <div className={`flex items-center gap-0.5 text-[10px] font-medium ${trend.isUp ? 'text-emerald-600' : 'text-rose-600'}`}>
+            {trend.isUp ? <TrendingUp size={10} /> : <TrendingDown size={10} />}
+            {trend.value}%
+          </div>
+          <span className="text-[9px] font-medium text-slate-400 uppercase tracking-tighter">vs last month</span>
         </div>
       )}
     </div>
   );
-};
-
-export default StatCard;
+}

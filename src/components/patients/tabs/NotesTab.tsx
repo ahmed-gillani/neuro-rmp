@@ -2,79 +2,54 @@
 import { useState } from 'react';
 import Card from '../../common/Card';
 import Button from '../../common/Button';
-import Badge from '../../common/Badge';
-import { Plus, Edit2, Trash2 } from 'lucide-react';
-import type { Patient } from '../../../types';
+import { Plus, User } from 'lucide-react';
 
-interface Note {
-  id: string;
-  date: string;
-  type: string;
-  description: string;
-  author: string;
-}
-
-export default function NotesTab({ patient }: { patient: Patient }) {
-  const [notes, setNotes] = useState<Note[]>([
-    { id: '1', date: '11/04/2026', type: 'Clinical', description: 'Medication adjusted after BP spike.', author: 'Dr. Sarah Ahmed' },
-    { id: '2', date: '10/04/2026', type: 'Patient Update', description: 'Patient feeling better after dosage change.', author: 'Nurse Ayesha' },
+export default function NotesTab() {
+  const [notes, setNotes] = useState([
+    { id: '1', date: '11/04/2026', type: 'Clinical', text: 'Medication adjusted after BP spike.', author: 'Dr. Sarah Ahmed' },
   ]);
+  const [newNote, setNewNote] = useState("");
 
-  const [newNote, setNewNote] = useState({ type: 'Clinical', description: '' });
-
-  const handleSave = () => {
-    if (!newNote.description.trim()) return;
-    setNotes([{
-      id: Date.now().toString(),
-      date: new Intl.DateTimeFormat('en-GB').format(new Date()),
-      type: newNote.type,
-      description: newNote.description,
-      author: 'Dr. Sarah Ahmed'
-    }, ...notes]);
-    setNewNote({ type: 'Clinical', description: '' });
+  const handleSaveNote = () => {
+    if(!newNote.trim()) return;
+    const entry = { id: Date.now().toString(), date: 'Today', type: 'Clinical', text: newNote, author: 'Dr. Sarah Ahmed' };
+    setNotes([entry, ...notes]);
+    setNewNote("");
   };
 
   return (
-    <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-      {/* New Note */}
-      <Card>
-        <h3 className="text-blue-600 text-xl font-semibold mb-6">Create New Note</h3>
-        <select
-          value={newNote.type}
-          onChange={(e) => setNewNote({ ...newNote, type: e.target.value })}
-          className="w-full border border-slate-200 rounded-2xl p-4 mb-4"
-        >
-          <option>Clinical</option>
-          <option>Patient Update</option>
-          <option>Follow-up</option>
-        </select>
-        <textarea
-          value={newNote.description}
-          onChange={(e) => setNewNote({ ...newNote, description: e.target.value })}
-          className="w-full h-48 border border-slate-200 rounded-3xl p-5 resize-y"
-          placeholder="Write note here..."
-        />
-        <Button onClick={handleSave} className="w-full mt-4 btn-primary">
-          <Plus className="mr-2" /> Save Note
-        </Button>
-      </Card>
+    <div className="grid grid-cols-1 lg:grid-cols-12 gap-3 font-sans animate-in fade-in duration-500">
+      <div className="lg:col-span-5">
+        <Card noPadding title="New Entry" className="border-slate-100">
+          <div className="p-4 space-y-3.5">
+            <textarea 
+              value={newNote}
+              onChange={(e) => setNewNote(e.target.value)}
+              placeholder="Enter clinical observations..." 
+              className="w-full h-32 bg-slate-50 border border-slate-200 rounded-lg p-2.5 text-[11px] font-medium outline-none focus:border-blue-400 resize-none" 
+            />
+            <Button onClick={handleSaveNote} size="sm" className="w-full py-2.5 bg-[#0f172a] text-white text-[11px] font-medium border-none">
+              <Plus size={14} className="mr-1.5" /> Save Note
+            </Button>
+          </div>
+        </Card>
+      </div>
 
-      {/* Notes History */}
-      <Card>
-        <h3 className="text-blue-600 text-xl font-semibold mb-6">Notes History</h3>
-        <div className="space-y-4">
-          {notes.map(note => (
-            <div key={note.id} className="border border-slate-100 p-6 rounded-2xl">
-              <div className="flex justify-between text-xs text-slate-700">
-                <span>{note.date}</span>
-                <span>{note.author}</span>
-              </div>
-              <Badge status="Active" className="mt-3">{note.type}</Badge>
-              <p className="mt-3 text-slate-800">{note.description}</p>
+      <div className="lg:col-span-7 space-y-2">
+        {notes.map(note => (
+          <div key={note.id} className="bg-white border border-slate-100 p-3 rounded-xl shadow-sm">
+            <div className="flex justify-between items-center mb-2">
+              <span className="text-[8px] font-medium px-1.5 py-0.5 bg-blue-50 text-blue-600 rounded uppercase">{note.type}</span>
+              <span className="text-[9px] font-medium text-slate-400">{note.date}</span>
             </div>
-          ))}
-        </div>
-      </Card>
+            <p className="text-[11px] font-medium text-slate-700 leading-relaxed italic">"{note.text}"</p>
+            <div className="mt-2.5 pt-2.5 border-t border-slate-50 flex items-center gap-1.5">
+               <User size={10} className="text-slate-300" />
+               <p className="text-[10px] font-medium text-slate-400 uppercase tracking-tighter">— {note.author}</p>
+            </div>
+          </div>
+        ))}
+      </div>
     </div>
   );
 }

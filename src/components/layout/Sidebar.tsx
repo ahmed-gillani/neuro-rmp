@@ -1,18 +1,6 @@
-// src/components/layout/Sidebar.tsx
-import { useState, useEffect } from 'react';
+// // src/components/layout/Sidebar.tsx
 import { NavLink } from 'react-router-dom';
-import {
-  Home,
-  Users,
-  UserCheck,
-  MessageSquare,
-  Target,
-  Settings,
-  MapPin,
-  Monitor,
-  ChevronLeft,
-  ChevronRight
-} from 'lucide-react';
+import { Home, Users, UserCheck, MessageSquare, Target, Settings, MapPin, Monitor, ChevronLeft, ChevronRight } from 'lucide-react';
 
 const menuItems = [
   { icon: Home, label: 'Dashboard', path: '/' },
@@ -25,111 +13,45 @@ const menuItems = [
   { icon: Settings, label: 'User Settings', path: '/settings' },
 ];
 
-interface SidebarProps {
-  isOpen: boolean;
-  setIsOpen: (v: boolean) => void;
-}
-
-export default function Sidebar({ isOpen, setIsOpen }: SidebarProps) {
-  const [isCollapsed, setIsCollapsed] = useState(false); // Desktop Collapse
-
-  useEffect(() => {
-    function onKey(e: KeyboardEvent) {
-      if (e.key === 'Escape') setIsOpen(false);
-    }
-    window.addEventListener('keydown', onKey);
-    return () => window.removeEventListener('keydown', onKey);
-  }, []);
+export default function Sidebar({ isMobileOpen, setIsMobileOpen, isCollapsed, setIsCollapsed }: any) {
   return (
     <>
-      {/* Mobile overlay (closes sidebar when tapped) */}
-      {isOpen && (
-        <div
-          className="fixed inset-0 bg-black/40 z-60 lg:hidden"
-          onClick={() => setIsOpen(false)}
-          aria-hidden
-        />
+      {/* Mobile Overlay */}
+      {isMobileOpen && (
+        <div className="fixed inset-0 bg-slate-900/60 z-40 lg:hidden backdrop-blur-sm" onClick={() => setIsMobileOpen(false)} />
       )}
 
-      {/* Sidebar Container */}
-      <div
-        className={`fixed inset-y-0 left-0 
-          ${isCollapsed ? 'w-20' : 'w-64'} 
-          bg-[#0f172a] border-r border-white/10 h-full z-[70]
-          transform transition-all duration-300 ${isOpen ? 'translate-x-0' : '-translate-x-full lg:translate-x-0'}`}
-        aria-hidden={!isOpen}
-      >
-        {/* Logo + Collapse Button */}
-        <div className="p-6 border-b border-white/10 flex items-center justify-between">
-          {!isCollapsed && (
-            <h1 className="text-2xl font-black text-white tracking-tight">
-              RPM <span className="text-blue-400">Portal</span>
-            </h1>
-          )}
-
-          {/* Collapse Toggle Button (Desktop Only) */}
-          <button
+      <aside className={`fixed inset-y-0 left-0 z-50 bg-[#0f172a] border-r border-slate-800 transition-all duration-300 ease-in-out
+          ${isCollapsed ? 'w-20' : 'w-64'}
+          ${isMobileOpen ? 'translate-x-0' : '-translate-x-full lg:translate-x-0'}`}>
+        
+        {/* Logo Section */}
+        <div className="h-16 flex items-center justify-between px-4 border-b border-slate-800">
+          {!isCollapsed && <span className="text-xl font-bold text-white px-2">SlotSync <span className="text-blue-500">Pro</span></span>}
+          <button 
             onClick={() => setIsCollapsed(!isCollapsed)}
-            className="hidden lg:flex items-center justify-center w-8 h-8 rounded-xl hover:bg-white/10 text-gray-400 hover:text-white transition-colors"
+            className="hidden lg:flex p-1.5 rounded-lg bg-slate-800 text-slate-400 hover:text-white transition-colors"
           >
-            {isCollapsed ? <ChevronRight size={20} /> : <ChevronLeft size={20} />}
+            {isCollapsed ? <ChevronRight size={18} /> : <ChevronLeft size={18} />}
           </button>
         </div>
 
-        {/* Navigation */}
-        <nav className="mt-6 px-4 space-y-1">
+        <nav className="p-3 space-y-1">
           {menuItems.map((item) => (
             <NavLink
               key={item.path}
               to={item.path}
-              onClick={() => setIsOpen(false)}
-              className={({ isActive }) =>
-                `group flex items-center gap-3 px-5 py-3.5 rounded-2xl text-[14.5px] font-medium transition-all duration-200 ${isActive
-                  ? 'bg-blue-600 text-white shadow-lg shadow-blue-900/30'
-                  : 'text-gray-300 hover:bg-white/5 hover:text-white'
-                }`
-              }
+              className={({ isActive }) => `
+                flex items-center gap-3 px-3 py-2.5 rounded-xl transition-all duration-200
+                ${isActive ? 'bg-blue-600 text-white shadow-lg shadow-blue-900/20' : 'text-slate-400 hover:bg-slate-800 hover:text-slate-100'}
+              `}
             >
-              {({ isActive }) => (
-                <>
-                  <item.icon
-                    className={`w-5 h-5 transition-all flex-shrink-0 ${isActive ? 'text-white' : 'text-gray-400 group-hover:text-gray-200'
-                      }`}
-                  />
-                  {!isCollapsed && <span className="tracking-wide">{item.label}</span>}
-                </>
-              )}
+              <item.icon size={22} className="shrink-0" />
+              {!isCollapsed && <span className="font-medium text-sm">{item.label}</span>}
             </NavLink>
           ))}
         </nav>
-
-        {/* Bottom Status */}
-        {!isCollapsed && (
-          <div className="absolute bottom-6 left-6 right-6">
-            <div className="p-4 bg-white/5 rounded-2xl border border-white/10">
-              <p className="text-[10px] font-black text-gray-400 uppercase tracking-widest">System Status</p>
-              <p className="text-green-400 text-sm font-bold">All Systems Operational</p>
-            </div>
-          </div>
-        )}
-      </div>
-
-      {/* Bottom navigation for mobile when sidebar is not open */}
-      <div className="lg:hidden">
-        <div className="fixed bottom-4 left-4 right-4 mx-auto max-w-md bg-white/95 border border-gray-200 rounded-2xl shadow-lg p-2 flex justify-around items-center z-40">
-          {menuItems.slice(0, 5).map((item) => (
-            <NavLink
-              to={item.path}
-              key={item.path}
-              onClick={() => setIsOpen(false)}
-              className={({ isActive }) => `flex flex-col items-center gap-1 text-xs text-gray-600 ${isActive ? 'text-blue-600' : 'hover:text-gray-900'}`}
-            >
-              <item.icon className="w-5 h-5" />
-              <span className="text-[11px]">{item.label}</span>
-            </NavLink>
-          ))}
-        </div>
-      </div>
+      </aside>
     </>
   );
 }

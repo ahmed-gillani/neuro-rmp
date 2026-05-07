@@ -1,46 +1,38 @@
-// //src/components/layout/Navbar.tsx
-import { Bell, User, Search } from 'lucide-react';
+// src/components/layout/Navbar.tsx
+import { Bell, User, Search, Menu } from 'lucide-react';
 
-interface NavbarProps {
-  onToggleSidebar?: () => void;
-}
-
-export default function Navbar({ onToggleSidebar }: NavbarProps) {
+export default function Navbar({ onToggleSidebar }: { onToggleSidebar: () => void }) {
   return (
-    <header className="h-16 px-4 sm:px-8 flex items-center justify-between border-b border-[rgb(var(--border))] bg-white sticky top-0 z-20 lg:ml-64">
-      <div className="max-w-[1600px] w-full mx-auto flex items-center gap-4 flex-1">
-        <button
-          onClick={onToggleSidebar}
-          className="lg:hidden p-2 bg-[rgb(var(--primary))] text-white rounded-lg mr-2"
-          aria-label="Open menu"
-        >
-          ☰
+    <header className="h-14 border-b bg-white/90 backdrop-blur-md sticky top-0 z-30 px-4 flex items-center justify-between gap-4">
+      <div className="flex items-center gap-3 flex-1 min-w-0">
+        <button onClick={onToggleSidebar} className="lg:hidden p-2 text-slate-600 hover:bg-slate-100 rounded-lg shrink-0">
+          <Menu size={18} />
         </button>
-        <div className="relative max-w-lg w-full hidden md:block">
-          <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400" />
+
+        {/* Fluid Search Bar - No more disappearing */}
+        <div className="relative max-w-md w-full flex-1">
+          <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-3.5 h-3.5 text-slate-400" />
           <input
             type="text"
-            placeholder="Search patients or reports..."
-            className="w-full bg-white border border-gray-200 rounded-[var(--radius-btn)] pl-10 pr-4 py-2 text-sm text-slate-700 placeholder-slate-400 focus:ring-2 focus:ring-[rgb(var(--primary)/0.15)] outline-none shadow-sm transition-all"
+            placeholder="Search..."
+            className="w-full bg-slate-50 border border-slate-200 rounded-lg pl-9 pr-4 py-1.5 text-sm focus:ring-2 focus:ring-blue-500/10 outline-none transition-all border-none sm:border-solid"
           />
         </div>
       </div>
 
-      <div className="flex items-center gap-4">
-        <button className="relative p-2 hover:bg-[rgb(var(--muted))] rounded-lg transition-colors">
-          <Bell className="w-5 h-5 text-[rgb(var(--muted-foreground))]" />
-          <span className="absolute top-1.5 right-1.5 w-2 h-2 bg-red-500 rounded-full border-2 border-white"></span>
+      <div className="flex items-center gap-2 shrink-0">
+        <button className="p-2 text-slate-500 hover:bg-slate-100 rounded-lg relative">
+          <Bell size={18} />
+          <span className="absolute top-2 right-2 w-1.5 h-1.5 bg-red-500 rounded-full border border-white"></span>
         </button>
 
-        <div className="h-8 w-[1px] bg-[rgb(var(--border))] mx-2"></div>
-
-        <div className="flex items-center gap-3">
-          <div className="text-right hidden sm:block">
-            <p className="text-sm font-semibold text-[rgb(var(--text-h))]">Dr. Ahmed</p>
-            <p className="text-xs text-[rgb(var(--muted-foreground))]">Medical Director</p>
+        <div className="flex items-center gap-2 pl-2 border-l border-slate-100">
+          <div className="hidden xs:block text-right">
+            <p className="text-xs font-bold text-slate-900 leading-none">Dr. Ahmed</p>
+            <p className="text-[10px] text-slate-500 mt-1">Admin</p>
           </div>
-          <div className="w-10 h-10 bg-[rgb(var(--primary)/0.1)] rounded-full flex items-center justify-center border border-[rgb(var(--primary)/0.2)]">
-            <User className="w-5 h-5 text-[rgb(var(--primary))]" />
+          <div className="w-8 h-8 bg-slate-900 rounded-lg flex items-center justify-center text-white">
+            <User size={16} />
           </div>
         </div>
       </div>

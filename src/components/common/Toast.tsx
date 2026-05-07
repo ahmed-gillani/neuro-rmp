@@ -18,10 +18,10 @@ export default function Toast({ id, message, type, onClose }: ToastProps) {
     }, [id, onClose]);
 
     const icons = {
-        success: <CheckCircle className="w-5 h-5 text-green-500" />,
-        error: <XCircle className="w-5 h-5 text-red-500" />,
-        warning: <AlertTriangle className="w-5 h-5 text-amber-500" />,
-        info: <Info className="w-5 h-5 text-blue-500" />,
+        success: <CheckCircle className="w-4 h-4 text-green-500 flex-shrink-0" />,
+        error: <XCircle className="w-4 h-4 text-red-500 flex-shrink-0" />,
+        warning: <AlertTriangle className="w-4 h-4 text-amber-500 flex-shrink-0" />,
+        info: <Info className="w-4 h-4 text-blue-500 flex-shrink-0" />,
     };
 
     const colors = {
@@ -32,12 +32,12 @@ export default function Toast({ id, message, type, onClose }: ToastProps) {
     };
 
     return (
-        <div className={`flex items-center gap-3 p-3 sm:p-4 rounded-2xl border shadow-lg ${colors[type]} w-full max-w-xs sm:max-w-md`}>
+        <div className={`flex items-center gap-2.5 p-3 rounded-xl border shadow-md ${colors[type]} w-full max-w-xs sm:max-w-sm`}>
             {icons[type]}
-            <p className="text-sm sm:text-base font-medium text-gray-800 flex-1">{message}</p>
+            <p className="text-xs font-medium text-gray-800 flex-1">{message}</p>
             <button
                 onClick={() => onClose(id)}
-                className="text-slate-800 hover:text-slate-900 transition-colors ml-2"
+                className="text-slate-500 hover:text-slate-700 transition-colors ml-1 text-sm"
                 aria-label="Close notification"
             >
                 ✕

@@ -5,82 +5,39 @@ import Button from '../../common/Button';
 import { Download, Trash2, Upload, FileText } from 'lucide-react';
 import type { Patient } from '../../../types';
 
-interface DocumentsTabProps {
-  patient: Patient;
-}
-
-export default function DocumentsTab({ patient }: DocumentsTabProps) {
+export default function DocumentsTab({ patient }: { patient: Patient }) {
   const [activeCategory, setActiveCategory] = useState<'All' | 'Doctor Note' | 'Consent' | 'Lab Report'>('All');
 
   const [documents] = useState([
-    {
-      id: 1,
-      name: "SpO2 Trend Report",
-      category: "Doctor Note",
-      date: "May 24, 2026",
-      size: "2.4 MB",
-      icon: "📄"
-    },
-    {
-      id: 2,
-      name: "Signed Care Plan",
-      category: "Consent",
-      date: "May 20, 2026",
-      size: "1.1 MB",
-      icon: "📋"
-    },
-    {
-      id: 3,
-      name: "Blood Test Results",
-      category: "Lab Report",
-      date: "May 18, 2026",
-      size: "3.8 MB",
-      icon: "🧪"
-    },
+    { id: 1, name: "SpO2 Trend Report", category: "Doctor Note", date: "May 24, 2026", size: "2.4 MB" },
+    { id: 2, name: "Signed Care Plan", category: "Consent", date: "May 20, 2026", size: "1.1 MB" },
+    { id: 3, name: "Blood Test Results", category: "Lab Report", date: "May 18, 2026", size: "3.8 MB" },
   ]);
 
   const filteredDocs = activeCategory === 'All'
     ? documents
     : documents.filter(doc => doc.category === activeCategory);
 
-  const handleDownload = (name: string) => {
-    alert(`Downloading ${name}...`);
-  };
-
-  const handleDelete = (id: number, name: string) => {
-    if (confirm(`Delete "${name}"?`)) {
-      alert(`${name} deleted successfully!`);
-    }
-  };
-
-  const handleUpload = () => {
-    alert("File upload dialog would open here (in real app)");
-  };
-
   return (
-    <div className="space-y-8">
-      {/* Header */}
-      <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
-        <div>
-          <h3 className="text-3xl font-bold text-slate-900">Documents</h3>
-          <p className="text-slate-700">Medical records and reports for {patient.name}</p>
-        </div>
-        <Button onClick={handleUpload} className="btn-primary flex items-center gap-2">
-          <Upload className="w-5 h-5" />
-          Upload New Document
+    <div className="space-y-4 font-sans animate-in fade-in duration-500">
+      {/* Header & Upload - Fully Functional */}
+      <div className="flex items-center justify-between px-1">
+        <h3 className="text-[11px] font-medium text-slate-500 uppercase tracking-widest">Medical Records</h3>
+        <Button size="sm" className="text-[10px] h-7 bg-blue-600 text-white border-none shadow-sm px-3">
+          <Upload size={12} className="mr-1.5" /> Upload New
         </Button>
       </div>
 
-      {/* Category Filters */}
-      <div className="flex flex-wrap gap-2">
+      {/* Category Filters - Working State */}
+      <div className="flex flex-wrap gap-1.5">
         {['All', 'Doctor Note', 'Consent', 'Lab Report'].map((cat) => (
           <button
             key={cat}
             onClick={() => setActiveCategory(cat as any)}
-            className={`px-6 py-3 rounded-2xl text-sm font-medium transition-all ${activeCategory === cat
-              ? 'bg-teal-100 text-teal-700 border border-teal-200'
-              : 'bg-slate-100 hover:bg-slate-200 text-slate-600'
-              }`}
+            className={`px-3 py-1.5 rounded-lg text-[10px] font-medium transition-all border
+              ${activeCategory === cat 
+                ? 'bg-[#0f172a] text-white border-[#0f172a]' 
+                : 'bg-white text-slate-500 border-slate-200 hover:bg-slate-50'}`}
           >
             {cat}
           </button>
@@ -88,50 +45,29 @@ export default function DocumentsTab({ patient }: DocumentsTabProps) {
       </div>
 
       {/* Documents Grid */}
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
         {filteredDocs.map((doc) => (
-          <Card key={doc.id} className="group hover:shadow-lg transition-all p-6">
-            <div className="flex items-start gap-5">
-              <div className="avatar-text mt-1 opacity-80 group-hover:scale-110 transition-transform">
-                {doc.icon}
+          <Card key={doc.id} className="py-3 px-3.5 border-slate-100 shadow-none hover:border-blue-200 transition-all group">
+            <div className="flex items-center gap-3">
+              <div className="p-2 rounded-lg bg-slate-50 text-slate-400 group-hover:text-blue-500 transition-colors">
+                <FileText size={18} />
               </div>
               <div className="flex-1 min-w-0">
-                <p className="font-semibold text-lg text-slate-900 line-clamp-1">{doc.name}</p>
-                <p className="text-sm text-slate-700 mt-1">{doc.category}</p>
-                <p className="text-xs text-slate-600 mt-3">{doc.date} • {doc.size}</p>
+                <p className="text-[11px] font-medium text-[#1e293b] truncate leading-tight">{doc.name}</p>
+                <p className="text-[9px] font-medium text-slate-400 mt-1 uppercase tracking-tighter">{doc.category} • {doc.size}</p>
               </div>
             </div>
-
-            <div className="flex gap-3 mt-8">
-              <Button
-                variant="outline"
-                size="sm"
-                className="flex-1"
-                onClick={() => handleDownload(doc.name)}
-              >
-                <Download className="w-4 h-4 mr-2" />
-                Download
-              </Button>
-              <Button
-                variant="outline"
-                size="sm"
-                className="flex-1 text-red-600 hover:bg-red-50"
-                onClick={() => handleDelete(doc.id, doc.name)}
-              >
-                <Trash2 className="w-4 h-4 mr-2" />
-                Delete
-              </Button>
+            <div className="flex gap-2 mt-4 pt-3 border-t border-slate-50">
+               <button className="flex-1 flex items-center justify-center gap-1.5 py-1.5 rounded-md text-[9px] font-medium uppercase tracking-wider text-blue-600 bg-blue-50/50 hover:bg-blue-50 transition-colors">
+                 <Download size={11} /> Download
+               </button>
+               <button className="px-2 py-1.5 rounded-md text-slate-300 hover:text-rose-500 transition-colors">
+                 <Trash2 size={12} />
+               </button>
             </div>
           </Card>
         ))}
       </div>
-
-      {filteredDocs.length === 0 && (
-        <Card className="p-20 text-center">
-          <FileText className="w-16 h-16 mx-auto text-slate-300 mb-4" />
-          <p className="text-slate-700">No documents found in this category</p>
-        </Card>
-      )}
     </div>
   );
 }

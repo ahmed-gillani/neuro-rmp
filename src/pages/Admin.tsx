@@ -2,208 +2,107 @@
 import React, { useState } from 'react';
 import Card from '../components/common/Card';
 import Button from '../components/common/Button';
-import Modal from '../components/common/Modal';
-import { Edit3, Users, UserCheck } from 'lucide-react';
+import { Edit2, Users, UserCheck, Activity, ShieldCheck, Mail, Phone, MapPin, Hash } from 'lucide-react';
 import LocationManagement from './Locations';
 import Staff from './Staff';
 
 const Admin: React.FC = () => {
   const [activeTab, setActiveTab] = useState<'organization' | 'locations' | 'staff' | 'providers' | 'statuses'>('organization');
-  const [showEditModal, setShowEditModal] = useState(false);
-
-  // Original RPM Data
-  const [orgData, setOrgData] = useState({
-    name: "HealthCare RPM Network",
-    regNumber: "HCN-2024-001",
-    npiNumber: "1234567890",
-    founded: "2018",
-    type: "Healthcare Provider Organization",
-    accreditation: "Joint Commission Accredited",
-    website: "https://healthcarerpm.com",
-    contact: "+1 (555) 100-2000",
-    email: "admin@healthcarerpm.com",
-    address: "123 Medical Plaza, Suite 400\nSan Francisco, CA"
-  });
-
-  const [editForm, setEditForm] = useState({ ...orgData });
-
-  const openEditModal = () => {
-    setEditForm({ ...orgData });
-    setShowEditModal(true);
-  };
-
-  const handleSaveOrg = () => {
-    setOrgData(editForm);
-    setShowEditModal(false);
-    // You can add toast notification here later
-    alert("Organization details updated successfully!");
-  };
 
   return (
-    <div className="max-w-7xl mx-auto px-4 sm:px-6 space-y-8">
-      <div>
-        <h1 className="hero-title font-bold text-black">Admin Dashboard</h1>
-        <p className="text-black mt-1">Organization management</p>
+    <div className="w-full space-y-4 font-sans animate-in fade-in duration-500">
+      
+      {/* Page Header - Clean & Visible */}
+      <div className="flex flex-col px-1">
+        <h1 className="text-lg font-medium text-[#1e293b] tracking-tight">Admin Dashboard</h1>
+        <p className="text-slate-500 text-[10px] font-medium uppercase tracking-widest leading-none mt-1">Management Console</p>
       </div>
 
-      {/* Stats Row */}
-      <div className="grid grid-cols-2 md:grid-cols-5 gap-4">
-        <Card className="p-6 text-center">
-          <div className="flex justify-center mb-3"><Users className="w-8 h-8 text-gray-400" /></div>
-          <p className="stat-value font-bold text-black">100</p>
-          <p className="text-sm text-gray-700 mt-1">Total Users</p>
-        </Card>
-        <Card className="p-6 text-center">
-          <div className="flex justify-center mb-3"><Users className="w-8 h-8 text-emerald-500" /></div>
-          <p className="stat-value font-bold text-black">100</p>
-          <p className="text-sm text-gray-700 mt-1">Active Users</p>
-        </Card>
-        <Card className="p-6 text-center">
-          <div className="flex justify-center mb-3"><UserCheck className="w-8 h-8 text-blue-500" /></div>
-          <p className="stat-value font-bold text-black">14</p>
-          <p className="text-sm text-gray-700 mt-1">Providers</p>
-        </Card>
-        <Card className="p-6 text-center">
-          <div className="flex justify-center mb-3"><Users className="w-8 h-8 text-purple-500" /></div>
-          <p className="stat-value font-bold text-black">9</p>
-          <p className="text-sm text-gray-700 mt-1">Phlebotomists</p>
-        </Card>
-        <Card className="p-6 text-center">
-          <div className="flex justify-center mb-3"><Users className="w-8 h-8 text-rose-500" /></div>
-          <p className="stat-value font-bold text-black">68</p>
-          <p className="text-sm text-gray-700 mt-1">Patients</p>
-        </Card>
-      </div>
-
-      {/* Tabs */}
-      <div className="flex border-b border-gray-200 overflow-x-auto pb-1 bg-white rounded-3xl p-1 shadow-sm">
+      {/* Stats Grid - Balanced Contrast */}
+      <div className="grid grid-cols-2 md:grid-cols-5 gap-3">
         {[
-          { id: 'organization', label: 'Organization' },
-          { id: 'locations', label: 'Locations' },
-          { id: 'staff', label: 'Staff' },
-          { id: 'providers', label: 'Providers' },
-          { id: 'statuses', label: 'Statuses' },
-        ].map((tab) => (
-          <button
-            key={tab.id}
-            onClick={() => setActiveTab(tab.id as any)}
-            className={`flex-1 py-4 text-sm font-semibold rounded-2xl mx-1 transition-all ${activeTab === tab.id
-              ? 'bg-blue-600 text-white shadow'
-              : 'text-gray-700 hover:bg-gray-100'
-              }`}
-          >
-            {tab.label}
-          </button>
+          { label: 'Total Users', val: '100', icon: Users, color: '#3b82f6' },
+          { label: 'Active', val: '100', icon: Activity, color: '#10b981' },
+          { label: 'Providers', val: '14', icon: UserCheck, color: '#6366f1' },
+          { label: 'Staff', val: '9', icon: ShieldCheck, color: '#a855f7' },
+          { label: 'Patients', val: '68', icon: Users, color: '#f43f5e' },
+        ].map((stat, i) => (
+          <div key={i} className="bg-white border border-slate-100 rounded-xl p-3 shadow-sm flex flex-col justify-between h-full">
+            <div className="flex justify-between items-start">
+              <div className="min-w-0">
+                <p className="text-[9px] font-medium text-slate-500 uppercase tracking-tight truncate leading-none">{stat.label}</p>
+                <p className="text-lg font-medium text-[#1e293b] mt-2 leading-none">{stat.val}</p>
+              </div>
+              <div className="w-7 h-7 rounded-lg flex items-center justify-center shrink-0" style={{ backgroundColor: `${stat.color}15` }}>
+                <stat.icon size={14} style={{ color: stat.color }} />
+              </div>
+            </div>
+          </div>
         ))}
       </div>
 
-      {/* Organization Section */}
-      {activeTab === 'organization' && (
-        <Card className="p-8">
-          <div className="flex justify-between items-start mb-8">
-            <div>
-              <h2 className="text-2xl font-bold text-black">{orgData.name}</h2>
-              <p className="text-gray-700">Organization Settings</p>
-            </div>
-            <Button onClick={openEditModal}>
-              <Edit3 className="w-4 h-4 mr-2" /> Edit
-            </Button>
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-x-12 gap-y-8">
-            <div className="space-y-6">
-              <div>
-                <p className="text-xs uppercase tracking-widest text-gray-700">Facility Name</p>
-                <p className="font-semibold text-black mt-1">{orgData.name}</p>
-              </div>
-              <div>
-                <p className="text-xs uppercase tracking-widest text-gray-700">Registration Number</p>
-                <p className="font-semibold text-black mt-1">{orgData.regNumber}</p>
-              </div>
-              <div>
-                <p className="text-xs uppercase tracking-widest text-gray-700">NPI Number</p>
-                <p className="font-semibold text-black mt-1">{orgData.npiNumber}</p>
-              </div>
-            </div>
-
-            <div className="space-y-6">
-              <div>
-                <p className="text-xs uppercase tracking-widest text-gray-700">Contact</p>
-                <p className="font-semibold text-black mt-1">{orgData.contact}</p>
-              </div>
-              <div>
-                <p className="text-xs uppercase tracking-widest text-gray-700">Email</p>
-                <p className="font-semibold text-black mt-1">{orgData.email}</p>
-              </div>
-              <div>
-                <p className="text-xs uppercase tracking-widest text-gray-700">Address</p>
-                <p className="font-semibold text-black mt-1 whitespace-pre-line">{orgData.address}</p>
-              </div>
-            </div>
-          </div>
-        </Card>
-      )}
-
-      {/* Other Tabs */}
-      {activeTab === 'locations' && <LocationManagement />}
-      {activeTab === 'staff' && <Staff />}
-      {activeTab === 'providers' && <div className="p-12 text-center text-gray-700">Providers Management - Coming Soon</div>}
-      {activeTab === 'statuses' && <div className="p-12 text-center text-gray-700">Statuses Management - Coming Soon</div>}
-
-      {/* Edit Organization Modal */}
-      <Modal
-        isOpen={showEditModal}
-        onClose={() => setShowEditModal(false)}
-        title="Edit Organization Details"
-      >
-        <div className="space-y-5 text-black">
-          <div>
-            <label className="block text-sm font-bold mb-2">Organization Name</label>
-            <input
-              type="text"
-              value={editForm.name}
-              onChange={(e) => setEditForm({ ...editForm, name: e.target.value })}
-              className="w-full px-4 py-3 border border-gray-300 rounded-2xl focus:border-blue-500"
-            />
-          </div>
-
-          <div className="grid grid-cols-2 gap-4">
-            <div>
-              <label className="block text-sm font-bold mb-2">Registration Number</label>
-              <input
-                type="text"
-                value={editForm.regNumber}
-                onChange={(e) => setEditForm({ ...editForm, regNumber: e.target.value })}
-                className="w-full px-4 py-3 border border-gray-300 rounded-2xl"
-              />
-            </div>
-            <div>
-              <label className="block text-sm font-bold mb-2">NPI Number</label>
-              <input
-                type="text"
-                value={editForm.npiNumber}
-                onChange={(e) => setEditForm({ ...editForm, npiNumber: e.target.value })}
-                className="w-full px-4 py-3 border border-gray-300 rounded-2xl"
-              />
-            </div>
-          </div>
-
-          <div>
-            <label className="block text-sm font-bold mb-2">Full Address</label>
-            <textarea
-              value={editForm.address}
-              onChange={(e) => setEditForm({ ...editForm, address: e.target.value })}
-              rows={3}
-              className="w-full px-4 py-3 border border-gray-300 rounded-2xl"
-            />
-          </div>
-
-          <div className="flex justify-end gap-4 pt-6">
-            <Button variant="outline" onClick={() => setShowEditModal(false)}>Cancel</Button>
-            <Button onClick={handleSaveOrg}>Save Changes</Button>
-          </div>
+      {/* Centered Tabs - Medium Weight & Blue Accent */}
+      <div className="flex justify-center w-full pt-1">
+        <div className="flex bg-slate-100/80 p-1 rounded-xl border border-slate-200/40 w-fit overflow-x-auto no-scrollbar flex-nowrap">
+          {['organization', 'locations', 'staff', 'providers', 'statuses'].map((tab) => (
+            <button
+              key={tab}
+              onClick={() => setActiveTab(tab as any)}
+              className={`px-5 py-1.5 text-[10px] font-medium rounded-lg transition-all uppercase tracking-normal whitespace-nowrap ${
+                activeTab === tab 
+                ? 'bg-white text-blue-600 shadow-sm border border-slate-200/40' 
+                : 'text-slate-500 hover:text-slate-800 font-normal'
+              }`}
+            >
+              {tab}
+            </button>
+          ))}
         </div>
-      </Modal>
+      </div>
+
+      {/* Organization Card - Vibrant Restoration */}
+      <div className="mt-2 transition-all duration-300">
+        {activeTab === 'organization' && (
+          <div className="flex justify-start font-sans">
+            <Card noPadding className="w-fit min-w-[450px] max-w-full border-slate-100 shadow-sm overflow-hidden">
+              <div className="p-3.5 border-b border-slate-50 bg-slate-50/30 flex items-center justify-between gap-12 font-sans">
+                <div className="flex items-center gap-3">
+                  {/* Fixed: Icon back to Vibrant Blue */}
+                  <div className="w-9 h-9 bg-blue-600 rounded-lg flex items-center justify-center text-white font-medium text-base shadow-sm">H</div>
+                  <div className="shrink-0">
+                    <h2 className="text-sm font-medium text-[#1e293b] leading-tight tracking-tight">HealthCare RPM Network</h2>
+                    <p className="text-[9px] font-medium text-blue-500 uppercase tracking-widest leading-none mt-1">Main Organization</p>
+                  </div>
+                </div>
+                <Button size="sm" variant="outline" className="h-7 px-3 text-[10px] font-medium border-slate-200 text-slate-600 shrink-0">
+                  <Edit2 size={11} className="mr-1.5" /> Edit Info
+                </Button>
+              </div>
+
+              <div className="p-4 grid grid-cols-1 sm:grid-cols-2 gap-x-10 gap-y-4">
+                {[
+                  { label: 'Facility Name', val: 'HealthCare RPM Network', icon: ShieldCheck },
+                  { label: 'Reg Number', val: 'HCN-2024-001', icon: Hash },
+                  { label: 'Contact', val: '+1 (555) 100-2000', icon: Phone },
+                  { label: 'Email', val: 'admin@healthcarerpm.com', icon: Mail },
+                  { label: 'Address', val: '123 Medical Plaza, San Francisco, CA', icon: MapPin, full: true },
+                ].map((item, i) => (
+                  <div key={i} className={`flex items-start gap-2.5 ${item.full ? 'sm:col-span-2' : ''}`}>
+                    <div className="mt-0.5 text-slate-300 shrink-0"><item.icon size={12} /></div>
+                    <div className="min-w-0">
+                      <p className="text-[9px] font-medium text-slate-500 uppercase tracking-tight mb-0.5 leading-none">{item.label}</p>
+                      <p className="text-[11px] font-normal text-slate-700 leading-snug">{item.val}</p>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </Card>
+          </div>
+        )}
+
+        {activeTab === 'locations' && <LocationManagement />}
+        {activeTab === 'staff' && <Staff />}
+      </div>
     </div>
   );
 };

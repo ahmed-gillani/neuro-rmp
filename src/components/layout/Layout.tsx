@@ -1,35 +1,41 @@
-// // // src/components/layout/Layout.tsx
-import { Outlet } from 'react-router-dom';
-import { useState, useEffect } from 'react';
+// src/components/layout/Layout.tsx
+import { Outlet, useLocation } from 'react-router-dom';
+import { useState } from 'react';
 import Sidebar from './Sidebar';
 import Navbar from './Navbar';
 
 export default function Layout() {
-  const [sidebarOpen, setSidebarOpen] = useState(false);
+  const [isMobileOpen, setIsMobileOpen] = useState(false);
+  const [isCollapsed, setIsCollapsed] = useState(false);
+  const location = useLocation();
 
-  useEffect(() => {
-    // Lock body scroll when mobile sidebar is open
-    document.body.style.overflow = sidebarOpen ? 'hidden' : '';
-    return () => { document.body.style.overflow = ''; };
-  }, [sidebarOpen]);
+  // Check if we are on the Patient Detail/Profile page
+  const isPatientProfile = location.pathname.includes('/patients/') && 
+                          location.pathname !== '/patients';
 
   return (
-    <div className="flex min-h-screen w-full bg-[rgb(var(--background))]">
-      {/* Sidebar */}
-      <div className="flex-shrink-0 z-20">
-        <Sidebar isOpen={sidebarOpen} setIsOpen={setSidebarOpen} />
-      </div>
+    <div className="flex h-screen w-full bg-slate-50 overflow-hidden font-sans">
+      {/* Sidebar - Desktop and Mobile */}
+      <Sidebar
+        isMobileOpen={isMobileOpen}
+        setIsMobileOpen={setIsMobileOpen}
+        isCollapsed={isCollapsed}
+        setIsCollapsed={setIsCollapsed}
+      />
 
       {/* Main Content Area */}
-      <div className="flex-1 flex flex-col min-w-0 h-full">
-        <Navbar onToggleSidebar={() => setSidebarOpen((s) => !s)} />
+      <div className={`flex-1 flex flex-col min-w-0 transition-all duration-300 ease-in-out
+        ${isCollapsed ? 'lg:ml-20' : 'lg:ml-64'}`}>
 
-        <main className="flex-1 overflow-y-auto p-4 sm:p-6 lg:p-8 pb-16 sm:pb-0 lg:ml-64">
-          <div className="max-w-[1600px] mx-auto w-full px-0 sm:px-2 lg:px-0">
-            {/* Page content comes here */}
+        <Navbar onToggleSidebar={() => setIsMobileOpen(!isMobileOpen)} />
+
+        {/* Dynamic Main Tag */}
+        <main className={`flex-1 overflow-y-auto overflow-x-hidden ${isPatientProfile ? 'p-0' : 'p-3 sm:p-4 lg:p-5'}`}>
+          <div className={`${isPatientProfile ? 'w-full max-w-none' : 'w-full max-w-[1600px] mx-auto'}`}>
             <Outlet />
           </div>
         </main>
+        
       </div>
     </div>
   );

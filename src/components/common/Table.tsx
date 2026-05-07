@@ -8,14 +8,14 @@ interface TableProps {
 
 const Table: React.FC<TableProps> = ({ headers, children }) => {
   return (
-    <div className="w-full overflow-x-auto rounded-2xl border border-gray-200 responsive-table">
-      <table className="w-full text-sm table-auto">
+    <div className="w-full overflow-x-auto rounded-xl border border-gray-200">
+      <table className="w-full text-xs table-auto">
         <thead>
           <tr className="bg-gray-50 border-b">
             {headers.map((header, index) => (
               <th
                 key={index}
-                className="px-3 py-2 sm:px-5 sm:py-4 text-left text-xs sm:text-xs font-bold uppercase tracking-widest text-black whitespace-normal"
+                className="px-3 py-2 text-left text-[10px] font-bold uppercase tracking-wider text-gray-600 whitespace-normal"
               >
                 {header}
               </th>

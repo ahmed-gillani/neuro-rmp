@@ -4,7 +4,7 @@ import Card from '../components/common/Card';
 import Button from '../components/common/Button';
 import Badge from '../components/common/Badge';
 import Modal from '../components/common/Modal';
-import { Plus, Edit2, Trash2, Clock, Users } from 'lucide-react';
+import { Plus, Edit2, Trash2, Clock, MapPin, Phone } from 'lucide-react';
 
 interface Location {
   id: number;
@@ -77,7 +77,7 @@ const LocationManagement: React.FC = () => {
   };
 
   const handleDelete = (id: number) => {
-    if (confirm("Delete this location?")) {
+    if (window.confirm("Delete this location?")) {
       setLocations(prev => prev.filter(loc => loc.id !== id));
     }
   };
@@ -117,57 +117,62 @@ const LocationManagement: React.FC = () => {
   };
 
   return (
-    <div className="space-y-6">
-      <div className="flex justify-between items-center">
-        <div>
-          <h1 className="hero-title font-bold text-black">Locations</h1>
-          <p className="text-black mt-1">{locations.length} locations registered</p>
-        </div>
-        <Button onClick={handleAddNew}>
-          <Plus className="w-4 h-4 mr-2" />
-          Add New Location
-        </Button>
-      </div>
-
-      <Card className="p-5">
-        <div className="overflow-x-auto responsive-table">
-          <table className="w-full">
+    <div className="space-y-4 animate-in fade-in duration-500">
+      {/* Header Section */}
+      <div className="flex items-center justify-between bg-white p-3 rounded-xl border border-slate-100 shadow-sm gap-2">
+       <div className="min-w-0"> 
+    {/* Font-bold replaced with font-medium, and tracking adjusted for readability */}
+    <h2 className="text-[12px] font-medium text-[#1e293b] uppercase tracking-wider truncate">
+      Registered Locations
+    </h2>
+    {/* Text-slate-400 replaced with slate-500 for better visibility, and weight set to normal */}
+    <p className="text-[10px] font-normal text-slate-500 uppercase tracking-tight mt-0.5">
+      {locations.length} branches
+    </p>
+  </div>
+  
+  {/* Force button to stay on the same line and not grow */}
+  <Button 
+    size="sm" 
+    onClick={handleAddNew} 
+    className="px-3 py-1.5 w-fit whitespace-nowrap text-[10px] font-bold shrink-0 shadow-none border border-slate-200"
+  >
+    <Plus className="w-3 h-3 mr-1" /> Add New
+  </Button>
+</div>
+      <Card noPadding className="w-full overflow-hidden border-slate-200/60 shadow-sm font-sans">
+        <div className="overflow-x-auto no-scrollbar">
+          <table className="w-full text-left border-collapse min-w-[750px]">
             <thead>
-              <tr className="border-b border-gray-200 text-xs uppercase tracking-widest text-black">
-                <th className="pb-4 text-left">LOCATION NAME</th>
-                <th className="pb-4 text-left">TYPE</th>
-                <th className="pb-4 text-left">ADDRESS</th>
-                <th className="pb-4 text-left">CONTACT</th>
-                <th className="pb-4 text-left">WORKING HOURS</th>
-                <th className="pb-4 text-left">TIMEZONE</th>
-                <th className="pb-4 text-center">STAFF</th>
-                <th className="pb-4 text-center">STATUS</th>
-                <th className="pb-4 text-center">ACTIONS</th>
+              <tr className="bg-slate-50/80 border-b border-slate-100">
+                <th className="px-3 py-2 text-[9px] font-bold text-slate-500 uppercase tracking-widest whitespace-nowrap">Location</th>
+                <th className="px-3 py-2 text-[9px] font-bold text-slate-500 uppercase tracking-widest whitespace-nowrap">Physical Address</th>
+                <th className="px-3 py-2 text-[9px] font-bold text-slate-500 uppercase tracking-widest whitespace-nowrap text-center">Status</th>
+                <th className="px-3 py-2 text-[9px] font-bold text-slate-500 uppercase tracking-widest text-right">Actions</th>
               </tr>
             </thead>
-            <tbody className="divide-y divide-gray-100 text-black">
+            <tbody className="divide-y divide-slate-50">
               {locations.map((loc) => (
-                <tr key={loc.id} className="hover:bg-gray-50 group">
-                  <td className="py-5 font-semibold">{loc.name}</td>
-                  <td className="py-5"><span className="px-3 py-1 bg-gray-100 rounded-full text-xs">{loc.type}</span></td>
-                  <td className="py-5">{loc.address}</td>
-                  <td className="py-5 text-sm">{loc.phone}</td>
-                  <td className="py-5 text-sm flex items-center gap-2"><Clock className="w-4 h-4" /> {loc.workingHours}</td>
-                  <td className="py-5 font-mono text-sm">{loc.timezone}</td>
-                  <td className="py-5 text-center font-medium">{loc.assignedStaff}</td>
-                  <td className="py-5 text-center">
-                    <Badge variant={loc.status === "Active" ? "success" : "warning"}>
+                <tr key={loc.id} className="hover:bg-slate-50/40 transition-colors group">
+                  <td className="px-3 py-2">
+                    <p className="text-[11px] font-bold text-[#1e293b] leading-tight">{loc.name}</p>
+                    <span className="text-[8px] font-bold text-blue-500 uppercase tracking-tighter">{loc.type}</span>
+                  </td>
+                  <td className="px-3 py-2">
+                    <div className="flex items-center gap-1.5">
+                      <MapPin size={12} className="text-slate-300" />
+                      <p className="text-[10px] text-slate-500 leading-tight truncate max-w-[200px]">{loc.address}</p>
+                    </div>
+                  </td>
+                  <td className="px-3 py-2 text-center">
+                    <Badge variant={loc.status === "Active" ? "success" : "warning"} className="text-[8px] px-1.5 py-0 font-bold uppercase">
                       {loc.status}
                     </Badge>
                   </td>
-                  <td className="py-5 text-center">
-                    <div className="flex gap-3 justify-center">
-                      <button onClick={() => handleEdit(loc)} className="text-blue-600 hover:text-blue-700">
-                        <Edit2 size={18} />
-                      </button>
-                      <button onClick={() => handleDelete(loc.id)} className="text-red-600 hover:text-red-700">
-                        <Trash2 size={18} />
-                      </button>
+                  <td className="px-3 py-2 text-right">
+                    <div className="flex gap-1 justify-end opacity-0 group-hover:opacity-100 transition-opacity">
+                      <button onClick={() => handleEdit(loc)} className="p-1 text-blue-500 hover:bg-blue-50 rounded"><Edit2 size={12} /></button>
+                      <button onClick={() => handleDelete(loc.id)} className="p-1 text-red-500 hover:bg-red-50 rounded"><Trash2 size={12} /></button>
                     </div>
                   </td>
                 </tr>
@@ -177,29 +182,29 @@ const LocationManagement: React.FC = () => {
         </div>
       </Card>
 
-      {/* Using your built-in Modal */}
+      {/* Edit/Add Modal */}
       <Modal
         isOpen={showModal}
         onClose={() => setShowModal(false)}
         title={editingLocation ? "Edit Location" : "Add New Location"}
       >
-        <div className="space-y-6 py-2 text-black">
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <div className="space-y-4 py-2 text-slate-900">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             <div>
-              <label className="block text-sm font-bold mb-2">Location Name <span className="text-red-500">*</span></label>
+              <label className="block text-[11px] font-black uppercase text-slate-500 mb-1">Location Name *</label>
               <input
                 type="text"
                 value={formData.name || ''}
                 onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                className="w-full px-4 py-3 border border-gray-300 rounded-2xl focus:border-blue-500"
+                className="w-full px-4 py-2 text-sm border border-slate-200 rounded-xl focus:ring-2 focus:ring-blue-500/10 focus:border-blue-500 outline-none transition-all"
               />
             </div>
             <div>
-              <label className="block text-sm font-bold mb-2">Type</label>
+              <label className="block text-[11px] font-black uppercase text-slate-500 mb-1">Facility Type</label>
               <select
                 value={formData.type || "CLINIC"}
                 onChange={(e) => setFormData({ ...formData, type: e.target.value })}
-                className="w-full px-4 py-3 border border-gray-300 rounded-2xl"
+                className="w-full px-4 py-2 text-sm border border-slate-200 rounded-xl bg-white outline-none"
               >
                 <option value="CLINIC">CLINIC</option>
                 <option value="HOSPITAL">HOSPITAL</option>
@@ -208,59 +213,54 @@ const LocationManagement: React.FC = () => {
           </div>
 
           <div>
-            <label className="block text-sm font-bold mb-2">Full Address <span className="text-red-500">*</span></label>
+            <label className="block text-[11px] font-black uppercase text-slate-500 mb-1">Full Address *</label>
             <input
               type="text"
               value={formData.address || ''}
               onChange={(e) => setFormData({ ...formData, address: e.target.value })}
-              className="w-full px-4 py-3 border border-gray-300 rounded-2xl"
+              className="w-full px-4 py-2 text-sm border border-slate-200 rounded-xl outline-none"
             />
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
             <div>
-              <label className="block text-sm font-bold mb-2">City</label>
-              <input type="text" value={formData.city || ''} onChange={(e) => setFormData({ ...formData, city: e.target.value })} className="w-full px-4 py-3 border border-gray-300 rounded-2xl" />
+              <label className="block text-[11px] font-black uppercase text-slate-500 mb-1">City</label>
+              <input type="text" value={formData.city || ''} onChange={(e) => setFormData({ ...formData, city: e.target.value })} className="w-full px-4 py-2 text-sm border border-slate-200 rounded-xl outline-none" />
             </div>
             <div>
-              <label className="block text-sm font-bold mb-2">State</label>
-              <input type="text" value={formData.state || ''} onChange={(e) => setFormData({ ...formData, state: e.target.value })} className="w-full px-4 py-3 border border-gray-300 rounded-2xl" />
+              <label className="block text-[11px] font-black uppercase text-slate-500 mb-1">State</label>
+              <input type="text" value={formData.state || ''} onChange={(e) => setFormData({ ...formData, state: e.target.value })} className="w-full px-4 py-2 text-sm border border-slate-200 rounded-xl outline-none" />
             </div>
             <div>
-              <label className="block text-sm font-bold mb-2">Timezone</label>
-              <select value={formData.timezone || "Asia/Karachi"} onChange={(e) => setFormData({ ...formData, timezone: e.target.value })} className="w-full px-4 py-3 border border-gray-300 rounded-2xl">
+              <label className="block text-[11px] font-black uppercase text-slate-500 mb-1">Timezone</label>
+              <select value={formData.timezone || "Asia/Karachi"} onChange={(e) => setFormData({ ...formData, timezone: e.target.value })} className="w-full px-4 py-2 text-sm border border-slate-200 rounded-xl bg-white outline-none">
                 <option value="Asia/Karachi">Asia/Karachi</option>
                 <option value="Asia/Dubai">Asia/Dubai</option>
               </select>
             </div>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             <div>
-              <label className="block text-sm font-bold mb-2">Phone <span className="text-red-500">*</span></label>
-              <input type="tel" value={formData.phone || ''} onChange={(e) => setFormData({ ...formData, phone: e.target.value })} className="w-full px-4 py-3 border border-gray-300 rounded-2xl" />
+              <label className="block text-[11px] font-black uppercase text-slate-500 mb-1">Phone *</label>
+              <input type="tel" value={formData.phone || ''} onChange={(e) => setFormData({ ...formData, phone: e.target.value })} className="w-full px-4 py-2 text-sm border border-slate-200 rounded-xl outline-none" />
             </div>
             <div>
-              <label className="block text-sm font-bold mb-2">Fax (Optional)</label>
-              <input type="text" value={formData.fax || ''} onChange={(e) => setFormData({ ...formData, fax: e.target.value })} className="w-full px-4 py-3 border border-gray-300 rounded-2xl" />
+              <label className="block text-[11px] font-black uppercase text-slate-500 mb-1">Working Hours</label>
+              <input
+                type="text"
+                value={formData.workingHours || ''}
+                onChange={(e) => setFormData({ ...formData, workingHours: e.target.value })}
+                className="w-full px-4 py-2 text-sm border border-slate-200 rounded-xl outline-none"
+                placeholder="08:00 AM - 08:00 PM"
+              />
             </div>
           </div>
 
-          <div>
-            <label className="block text-sm font-bold mb-2">Working Hours</label>
-            <input
-              type="text"
-              value={formData.workingHours || ''}
-              onChange={(e) => setFormData({ ...formData, workingHours: e.target.value })}
-              className="w-full px-4 py-3 border border-gray-300 rounded-2xl"
-              placeholder="08:00 AM - 08:00 PM"
-            />
-          </div>
-
-          <div className="flex justify-end gap-4 pt-6">
-            <Button variant="outline" onClick={() => setShowModal(false)}>Cancel</Button>
-            <Button onClick={handleSave}>
-              {editingLocation ? "Update Location" : "Add Location"}
+          <div className="flex justify-end gap-3 pt-4 border-t border-slate-50">
+            <Button variant="outline" onClick={() => setShowModal(false)} className="text-xs">Cancel</Button>
+            <Button onClick={handleSave} className="text-xs px-6">
+              {editingLocation ? "Update Location" : "Save Location"}
             </Button>
           </div>
         </div>

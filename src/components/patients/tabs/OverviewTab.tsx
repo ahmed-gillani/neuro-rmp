@@ -4,73 +4,64 @@ import Badge from '../../common/Badge';
 import { TrendingUp, AlertCircle, User } from 'lucide-react';
 import type { Patient } from '../../../types';
 
-interface OverviewTabProps {
-  patient: Patient;
-}
-
-export default function OverviewTab({ patient }: OverviewTabProps) {
+export default function OverviewTab({ patient }: { patient: Patient }) {
   return (
-    <div className="space-y-6">
-      {/* Vital Signs - Optimized for Mobile */}
-      <div className="grid grid-cols-2 gap-3 sm:gap-4">
+    <div className="space-y-3 font-sans animate-in fade-in duration-500">
+      {/* Vitals - Hug Content Row */}
+      <div className="flex flex-wrap gap-2.5">
         {[
-          { label: 'WEIGHT', value: '153 lbs', change: -2, color: 'text-emerald-600' },
-          { label: 'BLOOD PRESSURE', value: '129/87', change: 3, color: 'text-amber-600' },
-          { label: 'HEART RATE', value: '80 bpm', change: 0, color: 'text-teal-600' },
-          { label: 'SpO₂', value: '94%', change: -1, color: 'text-red-600' },
+          { label: 'Weight', value: '153', unit: 'lbs', change: -2, color: 'text-emerald-600' },
+          { label: 'BP', value: '129/87', unit: 'mmHg', change: 3, color: 'text-amber-600' },
+          { label: 'Heart Rate', value: '80', unit: 'bpm', change: 0, color: 'text-teal-600' },
+          { label: 'SpO2', value: '94', unit: '%', change: -1, color: 'text-rose-600' },
         ].map((v, i) => (
-          <Card key={i} className="text-center p-4 sm:p-6 hover:-translate-y-1 transition-all">
-            <p className="text-[10px] uppercase tracking-widest text-slate-500 font-medium">
-              {v.label}
-            </p>
-            <p className="text-xl sm:text-2xl md:text-3xl font-bold mt-2 text-slate-900">
-              {v.value}
-            </p>
-            <div className={`flex items-center justify-center gap-1 mt-2 text-xs font-medium ${v.color}`}>
-              <TrendingUp className={`w-3.5 h-3.5 ${v.change < 0 ? 'rotate-180' : ''}`} />
+          <div key={i} className="bg-white border border-slate-200 rounded-xl py-2 px-3.5 shadow-sm min-w-[130px] flex-1 sm:flex-none">
+            <p className="text-[9px] font-medium uppercase tracking-widest text-slate-500 mb-0.5">{v.label}</p>
+            <div className="flex items-baseline gap-1">
+              <span className="text-lg font-medium text-[#1e293b] leading-tight">{v.value}</span>
+              <span className="text-[9px] text-slate-400 uppercase">{v.unit}</span>
+            </div>
+            <div className={`flex items-center gap-1 mt-0.5 text-[9px] font-medium ${v.color}`}>
+              <TrendingUp size={10} className={v.change < 0 ? 'rotate-180' : ''} />
               {v.change > 0 ? '+' : ''}{v.change}%
             </div>
-          </Card>
+          </div>
         ))}
       </div>
 
-      <div className="grid grid-cols-1 lg:grid-cols-12 gap-6">
-        {/* Critical Alerts */}
+      <div className="grid grid-cols-1 lg:grid-cols-12 gap-3">
+        {/* Critical Alerts - Functional Count */}
         <div className="lg:col-span-7">
-          <Card>
-            <div className="p-5 border-b flex items-center justify-between bg-red-50">
-              <h3 className="font-semibold flex items-center gap-2 text-red-700 text-base">
-                <AlertCircle className="w-5 h-5" /> Critical Alerts
+          <Card noPadding className="border-rose-100 shadow-none">
+            <div className="px-3 py-2 border-b border-rose-50 bg-rose-50/30 flex items-center justify-between">
+              <h3 className="text-[10px] font-medium text-rose-700 uppercase tracking-tight flex items-center gap-1.5">
+                <AlertCircle size={12} /> Active Notifications
               </h3>
-              <Badge status="OOR">2 Active</Badge>
+              <Badge status="OOR" className="text-[8px] px-1.5 py-0 font-medium">2 Active</Badge>
             </div>
-            <div className="p-5 space-y-4 text-sm">
-              <div className="bg-white border border-red-100 p-4 rounded-2xl">
-                Blood pressure above critical threshold — 145/92 mmHg (2 min ago)
-              </div>
-              <div className="bg-white border border-red-100 p-4 rounded-2xl">
-                SpO₂ dropped below 95% — 93% (30 min ago)
-              </div>
+            <div className="p-2.5 space-y-1.5">
+              {[
+                "BP above critical threshold — 145/92 mmHg (2m ago)",
+                "SpO2 dropped below 95% — 93% (30m ago)"
+              ].map((alert, i) => (
+                <div key={i} className="bg-white border border-rose-50 p-2 rounded-lg text-[10px] text-rose-800 leading-snug">
+                  {alert}
+                </div>
+              ))}
             </div>
           </Card>
         </div>
 
-        {/* Patient Summary */}
+        {/* Clinical Summary */}
         <div className="lg:col-span-5">
-          <Card className="h-full">
-            <div className="p-6">
-              <div className="flex items-start gap-4 mb-6">
-                <div className="w-11 h-11 bg-teal-100 rounded-2xl flex items-center justify-center flex-shrink-0">
-                  <User className="w-6 h-6 text-teal-600" />
-                </div>
-                <div>
-                  <h3 className="font-semibold text-lg text-blue-600">Patient Summary</h3>
-                  <p className="text-xs text-slate-500">Last updated 2 days ago</p>
-                </div>
-              </div>
-              <p className="text-slate-600 leading-relaxed text-[14.5px]">
-                This is a patient with a history of Type 2 Diabetes Mellitus and cardiovascular concerns. 
-                They are enrolled in both remote patient monitoring (RPM) and chronic care management (CCM).
+          <Card noPadding className="border-slate-100 shadow-none h-full">
+            <div className="px-3 py-2 border-b border-slate-50 bg-slate-50/30">
+              <h3 className="text-[10px] font-medium text-[#1e293b] uppercase tracking-tight font-sans">Patient Profile Summary</h3>
+            </div>
+            <div className="p-3">
+              <p className="text-[11px] font-normal text-slate-600 leading-relaxed italic">
+                {patient.name} has a history of Type 2 Diabetes and cardiovascular concerns. 
+                Currently enrolled in RPM & CCM for proactive hypertension management.
               </p>
             </div>
           </Card>

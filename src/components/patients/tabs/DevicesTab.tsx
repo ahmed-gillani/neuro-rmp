@@ -5,140 +5,80 @@ import Button from '../../common/Button';
 import Badge from '../../common/Badge';
 import { useDevicesStore } from '../../../stores/useDevicesStore';
 import type { Patient } from '../../../types';
-import { Plus, Monitor, Unlink } from 'lucide-react';
+import { Plus, Monitor, Unlink, X } from 'lucide-react';
 
-interface DevicesTabProps {
-  patient: Patient;
-}
-
-export default function DevicesTab({ patient }: DevicesTabProps) {
+export default function DevicesTab({ patient }: { patient: Patient }) {
   const { devices, assignDevice, updateDeviceStatus } = useDevicesStore();
-  
   const [isAssignModalOpen, setIsAssignModalOpen] = useState(false);
 
   const patientDevices = devices.filter(d => d.patientId === patient.id);
   const availableDevices = devices.filter(d => !d.patientId || d.status === 'Available');
 
-  const handleAssignDevice = (deviceId: string) => {
-    assignDevice(deviceId, patient.id);
-    setIsAssignModalOpen(false);
-  };
-
   return (
-    <div className="space-y-8">
-      {/* Header */}
-      <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
-        <div>
-          <h3 className="text-3xl font-bold text-slate-900">Assigned Devices</h3>
-          <p className="text-slate-600 mt-1">Remote Patient Monitoring Hardware</p>
-        </div>
-        
+    <div className="space-y-4 font-sans animate-in fade-in duration-500">
+      <div className="flex items-center justify-between px-1">
+        <h3 className="text-[11px] font-medium text-slate-500 uppercase tracking-widest">Hardware Inventory</h3>
         <Button 
           onClick={() => setIsAssignModalOpen(true)} 
-          className="btn-primary flex items-center gap-2"
+          size="sm" 
           disabled={availableDevices.length === 0}
+          className="text-[10px] h-7 bg-blue-600 text-white border-none shadow-sm px-3 font-medium"
         >
-          <Plus className="w-5 h-5" />
-          Assign New Device
+          <Plus size={12} className="mr-1.5" /> Assign New Device
         </Button>
       </div>
 
-      {/* Devices List */}
-      <Card>
-        {patientDevices.length > 0 ? (
-          <div className="space-y-4">
-            {patientDevices.map((device) => (
-              <div 
-                key={device.id} 
-                className="device-card flex flex-col md:flex-row md:items-center justify-between p-6 border border-slate-100 rounded-2xl hover:border-teal-200 transition-all group"
-              >
-                <div className="flex items-center gap-5">
-                  <div className="w-14 h-14 bg-teal-100 rounded-2xl flex items-center justify-center flex-shrink-0">
-                    <Monitor className="w-8 h-8 text-teal-600" />
-                  </div>
-                  <div>
-                    <p className="font-semibold text-lg text-slate-900">{device.type}</p>
-                    <p className="font-mono text-sm text-slate-500">{device.serialNumber}</p>
-                    {device.lastConnected && (
-                      <p className="text-xs text-slate-400 mt-1">
-                        Last connected: {new Date(device.lastConnected).toLocaleDateString()}
-                      </p>
-                    )}
-                  </div>
-                </div>
-
-                <div className="flex items-center gap-4 mt-6 md:mt-0">
-                  <Badge status={device.status} />
-                  
-                  <Button 
-                    variant="outline" 
-                    size="sm"
-                    onClick={() => updateDeviceStatus(device.id, 'Available')}
-                    className="text-red-600 hover:bg-red-50 flex items-center gap-2"
-                  >
-                    <Unlink className="w-4 h-4" />
-                    Unlink
-                  </Button>
-                </div>
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3">
+        {patientDevices.map((device) => (
+          <Card key={device.id} className="py-3 px-4 border-slate-100 shadow-none hover:border-blue-100 transition-all">
+            <div className="flex items-center gap-3">
+              <div className="p-2.5 rounded-lg bg-slate-50 text-blue-500 shadow-inner"><Monitor size={18} /></div>
+              <div className="flex-1 min-w-0 font-sans">
+                <p className="text-[11px] font-medium text-slate-900 leading-tight">{device.type}</p>
+                <p className="text-[9px] font-medium text-slate-400 mt-1 tracking-tighter uppercase">{device.serialNumber}</p>
               </div>
-            ))}
-          </div>
-        ) : (
-          <div className="py-20 text-center">
-            <Monitor className="w-16 h-16 mx-auto text-slate-300 mb-6" />
-            <h4 className="text-xl font-semibold text-slate-700">No Devices Assigned</h4>
-            <p className="text-slate-500 mt-2">Assign a device to start remote monitoring for this patient</p>
-            <Button 
-              onClick={() => setIsAssignModalOpen(true)} 
-              className="mt-6 btn-primary"
-            >
-              Assign First Device
-            </Button>
-          </div>
-        )}
-      </Card>
+              <button 
+                onClick={() => updateDeviceStatus(device.id, 'Available')}
+                className="text-slate-300 hover:text-rose-500 p-1.5 transition-colors"
+              >
+                <Unlink size={13} />
+              </button>
+            </div>
+            <div className="flex items-center justify-between mt-4 pt-3 border-t border-slate-50">
+              <Badge status={device.status} className="text-[8px]" />
+              {device.lastConnected && (
+                <span className="text-[9px] font-medium text-slate-400 font-sans">
+                  Last: {new Date(device.lastConnected).toLocaleDateString()}
+                </span>
+              )}
+            </div>
+          </Card>
+        ))}
+      </div>
 
-      {/* Assign Device Modal */}
       {isAssignModalOpen && (
-        <div className="fixed inset-0 bg-black/70 flex items-center justify-center z-50 p-4">
-          <div className="bg-white rounded-3xl w-full max-w-lg overflow-hidden">
-            <div className="p-8">
-              <h3 className="text-2xl font-bold text-slate-900">Assign Device</h3>
-              <p className="text-slate-600 mt-1">Select available device for {patient.name}</p>
-
-              <div className="mt-8 space-y-3 max-h-[420px] overflow-y-auto pr-2">
-                {availableDevices.length > 0 ? (
-                  availableDevices.map((device) => (
-                    <div 
-                      key={device.id}
-                      onClick={() => handleAssignDevice(device.id)}
-                      className="border border-slate-200 hover:border-teal-400 hover:bg-teal-50 p-5 rounded-2xl cursor-pointer transition-all flex justify-between items-center group"
-                    >
-                      <div>
-                        <p className="font-semibold text-slate-900">{device.type}</p>
-                        <p className="font-mono text-sm text-slate-500">{device.serialNumber}</p>
-                      </div>
-                      <div className="text-teal-600 font-medium group-hover:translate-x-1 transition-transform">
-                        Assign →
-                      </div>
-                    </div>
-                  ))
-                ) : (
-                  <p className="text-center py-12 text-slate-500">No available devices at the moment.</p>
-                )}
-              </div>
+        <div className="fixed inset-0 bg-slate-900/40 backdrop-blur-sm z-50 flex items-center justify-center p-4">
+          <Card className="w-full max-w-sm shadow-2xl animate-in zoom-in-95 duration-200">
+            <div className="flex justify-between items-center mb-4 border-b pb-3">
+              <h4 className="text-sm font-medium text-slate-900 uppercase tracking-tight">Available Inventory</h4>
+              <button onClick={() => setIsAssignModalOpen(false)} className="text-slate-400 hover:text-slate-600 transition-colors"><X size={16} /></button>
             </div>
-
-            <div className="border-t p-4">
-              <Button 
-                variant="outline" 
-                className="w-full py-6 text-base"
-                onClick={() => setIsAssignModalOpen(false)}
-              >
-                Cancel
-              </Button>
+            <div className="space-y-2 max-h-[300px] overflow-y-auto no-scrollbar py-2">
+              {availableDevices.map(device => (
+                <div 
+                  key={device.id}
+                  onClick={() => { assignDevice(device.id, patient.id); setIsAssignModalOpen(false); }}
+                  className="flex justify-between items-center p-3 border border-slate-100 rounded-xl hover:bg-slate-50 cursor-pointer transition-all"
+                >
+                  <div className="font-sans">
+                    <p className="text-[11px] font-medium text-slate-800">{device.type}</p>
+                    <p className="text-[9px] text-slate-400 font-mono">{device.serialNumber}</p>
+                  </div>
+                  <span className="text-[10px] text-blue-600 font-medium uppercase">Assign →</span>
+                </div>
+              ))}
             </div>
-          </div>
+          </Card>
         </div>
       )}
     </div>

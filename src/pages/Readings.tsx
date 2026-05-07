@@ -8,7 +8,7 @@ export default function Readings() {
   const { readings } = useReadingsStore();
 
   return (
-    <div className="space-y-8">
+    <div className="space-y-5">
       <div className="flex justify-between">
         <h1 className="hero-title font-bold">Patient Readings</h1>
         <Button onClick={() => {/* Open manual entry modal */ }}>
