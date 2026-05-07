@@ -7,7 +7,7 @@ import PatientOnboarding from './pages/PatientOnboarding';
 import CarePlan from './pages/CarePlan';
 import Communication from './pages/Communication';
 import UserSettings from './pages/OrganizationSettings';
-import LocationManagement from './pages/Locations'; 
+import LocationManagement from './pages/Locations';
 import Devices from './pages/Devices';
 import Admin from './pages/Admin';
 import PatientProfile from './pages/PatientProfile';
@@ -20,7 +20,7 @@ function App() {
           <Route element={<Layout />}> {/* Layout wraps all pages */}
             <Route path="/communication" element={<Communication />} />
             <Route path="/patients" element={<Patients />} />
-<Route path="/patients/:id" element={<PatientProfile />} />
+            <Route path="/patients/:id" element={<PatientProfile />} />
             <Route path="/devices" element={<Devices />} />
             <Route path="/admin" element={<Admin />} />
             <Route path="/locations" element={<LocationManagement />} />
