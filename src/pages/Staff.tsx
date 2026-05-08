@@ -37,9 +37,9 @@ export default function Staff() {
           <h1 className="text-xl font-medium text-[#0f172a] tracking-tight leading-none">Staff Management</h1>
           <p className="text-slate-500 text-[11px] font-medium uppercase tracking-wider mt-1.5">Team Performance & Load</p>
         </div>
-        <Button 
-          onClick={() => setIsAddModalOpen(true)} 
-          size="sm" 
+        <Button
+          onClick={() => setIsAddModalOpen(true)}
+          size="sm"
           className="h-9 bg-blue-600 hover:bg-blue-700 text-white border-none shadow-sm px-4 font-medium transition-all"
         >
           <Plus size={14} className="mr-2" /> Add Staff Member
@@ -60,7 +60,7 @@ export default function Staff() {
               </div>
               <div>
                 <p className="text-lg font-medium text-[#1e293b] leading-none tracking-tight">{stat.val}</p>
-                <p className="text-[10px] font-medium text-slate-500 uppercase tracking-widest mt-1.5">{stat.label}</p>
+                <p className="text-[12px] font-medium text-slate-500 uppercase tracking-widest mt-1.5">{stat.label}</p>
               </div>
             </div>
           </Card>
@@ -79,9 +79,9 @@ export default function Staff() {
             onChange={(e) => setSearchTerm(e.target.value)}
           />
         </div>
-        
+
         <div className="flex items-center gap-2 w-full sm:w-auto">
-          <button className="flex-1 sm:flex-none flex items-center justify-center gap-2 px-4 py-2 bg-slate-50 border border-slate-200 rounded-xl text-[10px] font-medium text-slate-600 uppercase tracking-wider hover:bg-slate-100 transition-colors">
+          <button className="flex-1 sm:flex-none flex items-center justify-center gap-2 px-4 py-2 bg-slate-50 border border-slate-200 rounded-xl text-[12px] font-medium text-slate-600 uppercase tracking-wider hover:bg-slate-100 transition-colors">
             <Filter size={12} /> All Roles
           </button>
         </div>
@@ -97,7 +97,7 @@ export default function Staff() {
               </div>
               <div className="flex-1 min-w-0 font-sans">
                 <p className="text-[13px] font-medium text-slate-900 truncate leading-none">{member.name}</p>
-                <p className="text-[10px] font-medium text-slate-500 uppercase tracking-tight mt-1">{member.role}</p>
+                <p className="text-[12px] font-medium text-slate-500 uppercase tracking-tight mt-1">{member.role}</p>
               </div>
               <Badge status="Active" className="text-[8px] h-fit" />
             </div>
@@ -118,8 +118,8 @@ export default function Staff() {
             </div>
 
             <div className="p-2 bg-white flex gap-2 border-t border-slate-50">
-              <button className="flex-1 py-2 text-[10px] font-medium uppercase text-slate-600 hover:bg-slate-50 rounded-md transition-colors" onClick={() => openEditModal(member)}>Edit</button>
-              <button className="flex-1 py-2 text-[10px] font-medium uppercase text-blue-600 hover:bg-blue-50 rounded-md transition-colors" onClick={() => { setSelectedStaff(member); setIsPermissionsModalOpen(true); }}>Permissions</button>
+              <button className="flex-1 py-2 text-[12px] font-medium uppercase text-slate-600 hover:bg-slate-50 rounded-md transition-colors" onClick={() => openEditModal(member)}>Edit</button>
+              <button className="flex-1 py-2 text-[12px] font-medium uppercase text-blue-600 hover:bg-blue-50 rounded-md transition-colors" onClick={() => { setSelectedStaff(member); setIsPermissionsModalOpen(true); }}>Permissions</button>
             </div>
           </Card>
         ))}

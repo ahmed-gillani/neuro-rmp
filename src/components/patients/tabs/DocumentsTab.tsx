@@ -22,8 +22,8 @@ export default function DocumentsTab({ patient }: { patient: Patient }) {
     <div className="space-y-4 font-sans animate-in fade-in duration-500">
       {/* Header & Upload - Fully Functional */}
       <div className="flex items-center justify-between px-1">
-        <h3 className="text-[11px] font-medium text-slate-500 uppercase tracking-widest">Medical Records</h3>
-        <Button size="sm" className="text-[10px] h-7 bg-blue-600 text-white border-none shadow-sm px-3">
+        <h3 className="text-[13px] font-medium text-slate-500 uppercase tracking-widest">Medical Records</h3>
+        <Button size="sm" className="text-[13px] h-7 bg-blue-600 text-white border-none shadow-sm px-3">
           <Upload size={12} className="mr-1.5" /> Upload New
         </Button>
       </div>
@@ -34,10 +34,10 @@ export default function DocumentsTab({ patient }: { patient: Patient }) {
           <button
             key={cat}
             onClick={() => setActiveCategory(cat as any)}
-            className={`px-3 py-1.5 rounded-lg text-[10px] font-medium transition-all border
-              ${activeCategory === cat 
-                ? 'bg-[#0f172a] text-white border-[#0f172a]' 
-                : 'bg-white text-slate-500 border-slate-200 hover:bg-slate-50'}`}
+            className={`px-3 py-1.5 rounded-lg text-[12px] font-medium transition-all border
+              ${activeCategory === cat
+                ? 'bg-[#0f172a] text-white border-[#0f172a]'
+                : 'bg-white text-slate-800 border-slate-200 hover:bg-slate-50'}`}
           >
             {cat}
           </button>
@@ -53,17 +53,17 @@ export default function DocumentsTab({ patient }: { patient: Patient }) {
                 <FileText size={18} />
               </div>
               <div className="flex-1 min-w-0">
-                <p className="text-[11px] font-medium text-[#1e293b] truncate leading-tight">{doc.name}</p>
-                <p className="text-[9px] font-medium text-slate-400 mt-1 uppercase tracking-tighter">{doc.category} • {doc.size}</p>
+                <p className="text-[12px] font-medium text-[#1e293b] truncate leading-tight">{doc.name}</p>
+                <p className="text-[10px] font-medium text-slate-800 mt-1 uppercase tracking-tighter">{doc.category} • {doc.size}</p>
               </div>
             </div>
             <div className="flex gap-2 mt-4 pt-3 border-t border-slate-50">
-               <button className="flex-1 flex items-center justify-center gap-1.5 py-1.5 rounded-md text-[9px] font-medium uppercase tracking-wider text-blue-600 bg-blue-50/50 hover:bg-blue-50 transition-colors">
-                 <Download size={11} /> Download
-               </button>
-               <button className="px-2 py-1.5 rounded-md text-slate-300 hover:text-rose-500 transition-colors">
-                 <Trash2 size={12} />
-               </button>
+              <button className="flex-1 flex items-center justify-center gap-1.5 py-1.5 rounded-md text-[9px] font-medium uppercase tracking-wider text-blue-600 bg-blue-50/50 hover:bg-blue-50 transition-colors">
+                <Download size={11} /> Download
+              </button>
+              <button className="px-2 py-1.5 rounded-md text-slate-300 hover:text-rose-500 transition-colors">
+                <Trash2 size={12} />
+              </button>
             </div>
           </Card>
         ))}

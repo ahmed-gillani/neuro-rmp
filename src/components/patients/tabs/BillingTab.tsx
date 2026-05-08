@@ -18,7 +18,7 @@ export default function BillingTab() {
               <stat.icon size={16} />
             </div>
             <div className="min-w-0">
-              <p className="text-[10px] font-medium text-slate-500 uppercase tracking-tight mb-0.5 truncate leading-none">
+              <p className="text-[12px] font-medium text-slate-500 uppercase tracking-tight mb-0.5 truncate leading-none">
                 {stat.label}
               </p>
               <p className="text-lg font-medium text-slate-900 leading-none">{stat.val}</p>
@@ -36,10 +36,10 @@ export default function BillingTab() {
           <table className="w-full text-left">
             <thead>
               <tr className="bg-slate-50/50 border-b border-slate-100">
-                <th className="px-4 py-2 text-[10px] font-medium text-slate-500 uppercase tracking-widest">ICD-10</th>
-                <th className="px-4 py-2 text-[10px] font-medium text-slate-500 uppercase tracking-widest">Date</th>
-                <th className="px-4 py-2 text-[10px] font-medium text-slate-500 uppercase tracking-widest text-center">Amount</th>
-                <th className="px-4 py-2 text-[10px] font-medium text-slate-500 uppercase tracking-widest text-right">Status</th>
+                <th className="px-4 py-2 text-[12px] font-medium text-slate-500 uppercase tracking-widest">ICD-10</th>
+                <th className="px-4 py-2 text-[12px] font-medium text-slate-500 uppercase tracking-widest">Date</th>
+                <th className="px-4 py-2 text-[12px] font-medium text-slate-500 uppercase tracking-widest text-center">Amount</th>
+                <th className="px-4 py-2 text-[12px] font-medium text-slate-500 uppercase tracking-widest text-right">Status</th>
               </tr>
             </thead>
             <tbody className="divide-y divide-slate-50">
@@ -52,10 +52,9 @@ export default function BillingTab() {
                   <td className="px-4 py-2.5 text-[11px] text-slate-500">{row.date}</td>
                   <td className="px-4 py-2.5 text-[11px] font-medium text-slate-900 text-center">{row.amount}</td>
                   <td className="px-4 py-2.5 text-right">
-                    <span className={`text-[9px] px-2 py-0.5 rounded font-medium uppercase tracking-tight ${
-                      row.status === "Paid" ? "bg-emerald-50 text-emerald-700" : "bg-amber-50 text-amber-700"
-                    }`}>
-                       {row.status}
+                    <span className={`text-[9px] px-2 py-0.5 rounded font-medium uppercase tracking-tight ${row.status === "Paid" ? "bg-emerald-50 text-emerald-700" : "bg-amber-50 text-amber-700"
+                      }`}>
+                      {row.status}
                     </span>
                   </td>
                 </tr>

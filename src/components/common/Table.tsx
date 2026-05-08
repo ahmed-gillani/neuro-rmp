@@ -15,7 +15,7 @@ const Table: React.FC<TableProps> = ({ headers, children }) => {
             {headers.map((header, index) => (
               <th
                 key={index}
-                className="px-3 py-2 text-left text-[10px] font-bold uppercase tracking-wider text-gray-600 whitespace-normal"
+                className="px-3 py-2 text-left text-[12px] font-bold uppercase tracking-wider text-gray-600 whitespace-normal"
               >
                 {header}
               </th>

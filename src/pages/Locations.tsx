@@ -120,57 +120,57 @@ const LocationManagement: React.FC = () => {
     <div className="space-y-4 animate-in fade-in duration-500">
       {/* Header Section */}
       <div className="flex items-center justify-between bg-white p-3 rounded-xl border border-slate-100 shadow-sm gap-2">
-       <div className="min-w-0"> 
-    {/* Font-bold replaced with font-medium, and tracking adjusted for readability */}
-    <h2 className="text-[12px] font-medium text-[#1e293b] uppercase tracking-wider truncate">
-      Registered Locations
-    </h2>
-    {/* Text-slate-400 replaced with slate-500 for better visibility, and weight set to normal */}
-    <p className="text-[10px] font-normal text-slate-500 uppercase tracking-tight mt-0.5">
-      {locations.length} branches
-    </p>
-  </div>
-  
-  {/* Force button to stay on the same line and not grow */}
-  <Button 
-    size="sm" 
-    onClick={handleAddNew} 
-    className="px-3 py-1.5 w-fit whitespace-nowrap text-[10px] font-bold shrink-0 shadow-none border border-slate-200"
-  >
-    <Plus className="w-3 h-3 mr-1" /> Add New
-  </Button>
-</div>
+        <div className="min-w-0">
+          {/* Font-bold replaced with font-medium, and tracking adjusted for readability */}
+          <h2 className="text-[12px] font-medium text-[#1e293b] uppercase tracking-wider truncate">
+            Registered Locations
+          </h2>
+          {/* Text-slate-400 replaced with slate-500 for better visibility, and weight set to normal */}
+          <p className="text-[12px] font-normal text-slate-500 uppercase tracking-tight mt-0.5">
+            {locations.length} branches
+          </p>
+        </div>
+
+        {/* Force button to stay on the same line and not grow */}
+        <Button
+          size="sm"
+          onClick={handleAddNew}
+          className="px-3 py-1.5 w-fit whitespace-nowrap text-[12px] font-bold shrink-0 shadow-none border border-slate-200"
+        >
+          <Plus className="w-3 h-3 mr-1" /> Add New
+        </Button>
+      </div>
       <Card noPadding className="w-full overflow-hidden border-slate-200/60 shadow-sm font-sans">
         <div className="overflow-x-auto no-scrollbar">
           <table className="w-full text-left border-collapse min-w-[750px]">
             <thead>
               <tr className="bg-slate-50/80 border-b border-slate-100">
-                <th className="px-3 py-2 text-[9px] font-bold text-slate-500 uppercase tracking-widest whitespace-nowrap">Location</th>
-                <th className="px-3 py-2 text-[9px] font-bold text-slate-500 uppercase tracking-widest whitespace-nowrap">Physical Address</th>
-                <th className="px-3 py-2 text-[9px] font-bold text-slate-500 uppercase tracking-widest whitespace-nowrap text-center">Status</th>
-                <th className="px-3 py-2 text-[9px] font-bold text-slate-500 uppercase tracking-widest text-right">Actions</th>
+                <th className="px-3 py-2 text-[11px] font-bold text-slate-500 uppercase tracking-widest whitespace-nowrap">Location</th>
+                <th className="px-3 py-2 text-[11px] font-bold text-slate-500 uppercase tracking-widest whitespace-nowrap">Physical Address</th>
+                <th className="px-3 py-2 text-[11px] font-bold text-slate-500 uppercase tracking-widest whitespace-nowrap text-center">Status</th>
+                <th className="px-3 py-2 text-[11px] font-bold text-slate-500 uppercase tracking-widest text-right">Actions</th>
               </tr>
             </thead>
             <tbody className="divide-y divide-slate-50">
               {locations.map((loc) => (
                 <tr key={loc.id} className="hover:bg-slate-50/40 transition-colors group">
                   <td className="px-3 py-2">
-                    <p className="text-[11px] font-bold text-[#1e293b] leading-tight">{loc.name}</p>
-                    <span className="text-[8px] font-bold text-blue-500 uppercase tracking-tighter">{loc.type}</span>
+                    <p className="text-[13px] font-bold text-[#1e293b] leading-tight">{loc.name}</p>
+                    <span className="text-[10px] font-bold text-blue-500 uppercase tracking-tighter">{loc.type}</span>
                   </td>
                   <td className="px-3 py-2">
                     <div className="flex items-center gap-1.5">
                       <MapPin size={12} className="text-slate-300" />
-                      <p className="text-[10px] text-slate-500 leading-tight truncate max-w-[200px]">{loc.address}</p>
+                      <p className="text-[13px] text-slate-500 leading-tight truncate max-w-[200px]">{loc.address}</p>
                     </div>
                   </td>
                   <td className="px-3 py-2 text-center">
-                    <Badge variant={loc.status === "Active" ? "success" : "warning"} className="text-[8px] px-1.5 py-0 font-bold uppercase">
+                    <Badge variant={loc.status === "Active" ? "success" : "warning"} className="text-[10px] px-1.5 py-0 font-bold uppercase">
                       {loc.status}
                     </Badge>
                   </td>
                   <td className="px-3 py-2 text-right">
-                    <div className="flex gap-1 justify-end opacity-0 group-hover:opacity-100 transition-opacity">
+                    <div className="flex gap-1 justify-end  group-hover:opacity-100 transition-opacity">
                       <button onClick={() => handleEdit(loc)} className="p-1 text-blue-500 hover:bg-blue-50 rounded"><Edit2 size={12} /></button>
                       <button onClick={() => handleDelete(loc.id)} className="p-1 text-red-500 hover:bg-red-50 rounded"><Trash2 size={12} /></button>
                     </div>

@@ -17,12 +17,12 @@ export default function DevicesTab({ patient }: { patient: Patient }) {
   return (
     <div className="space-y-4 font-sans animate-in fade-in duration-500">
       <div className="flex items-center justify-between px-1">
-        <h3 className="text-[11px] font-medium text-slate-500 uppercase tracking-widest">Hardware Inventory</h3>
-        <Button 
-          onClick={() => setIsAssignModalOpen(true)} 
-          size="sm" 
+        <h3 className="text-[12px] font-medium text-slate-500 uppercase tracking-widest">Hardware Inventory</h3>
+        <Button
+          onClick={() => setIsAssignModalOpen(true)}
+          size="sm"
           disabled={availableDevices.length === 0}
-          className="text-[10px] h-7 bg-blue-600 text-white border-none shadow-sm px-3 font-medium"
+          className="text-[12px] h-7 bg-blue-600 text-white border-none shadow-sm px-3 font-medium"
         >
           <Plus size={12} className="mr-1.5" /> Assign New Device
         </Button>
@@ -34,20 +34,20 @@ export default function DevicesTab({ patient }: { patient: Patient }) {
             <div className="flex items-center gap-3">
               <div className="p-2.5 rounded-lg bg-slate-50 text-blue-500 shadow-inner"><Monitor size={18} /></div>
               <div className="flex-1 min-w-0 font-sans">
-                <p className="text-[11px] font-medium text-slate-900 leading-tight">{device.type}</p>
-                <p className="text-[9px] font-medium text-slate-400 mt-1 tracking-tighter uppercase">{device.serialNumber}</p>
+                <p className="text-[13px] font-medium text-slate-900 leading-tight">{device.type}</p>
+                <p className="text-[11px] font-medium text-slate-800 mt-1 tracking-tighter uppercase">{device.serialNumber}</p>
               </div>
-              <button 
+              <button
                 onClick={() => updateDeviceStatus(device.id, 'Available')}
-                className="text-slate-300 hover:text-rose-500 p-1.5 transition-colors"
+                className="text-slate-800 hover:text-rose-500 p-1.5 transition-colors"
               >
                 <Unlink size={13} />
               </button>
             </div>
             <div className="flex items-center justify-between mt-4 pt-3 border-t border-slate-50">
-              <Badge status={device.status} className="text-[8px]" />
+              <Badge status={device.status} className="text-[11px] text-slate-800" />
               {device.lastConnected && (
-                <span className="text-[9px] font-medium text-slate-400 font-sans">
+                <span className="text-[10px] font-medium text-slate-800 font-sans">
                   Last: {new Date(device.lastConnected).toLocaleDateString()}
                 </span>
               )}
@@ -65,16 +65,16 @@ export default function DevicesTab({ patient }: { patient: Patient }) {
             </div>
             <div className="space-y-2 max-h-[300px] overflow-y-auto no-scrollbar py-2">
               {availableDevices.map(device => (
-                <div 
+                <div
                   key={device.id}
                   onClick={() => { assignDevice(device.id, patient.id); setIsAssignModalOpen(false); }}
                   className="flex justify-between items-center p-3 border border-slate-100 rounded-xl hover:bg-slate-50 cursor-pointer transition-all"
                 >
                   <div className="font-sans">
-                    <p className="text-[11px] font-medium text-slate-800">{device.type}</p>
-                    <p className="text-[9px] text-slate-400 font-mono">{device.serialNumber}</p>
+                    <p className="text-[12px] font-medium text-slate-800">{device.type}</p>
+                    <p className="text-[10px] text-slate-800 font-mono">{device.serialNumber}</p>
                   </div>
-                  <span className="text-[10px] text-blue-600 font-medium uppercase">Assign →</span>
+                  <span className="text-[12px] text-blue-600 font-medium uppercase">Assign →</span>
                 </div>
               ))}
             </div>

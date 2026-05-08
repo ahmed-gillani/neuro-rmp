@@ -4,7 +4,7 @@ import type { Patient, Reading, Device, User, StatCardData } from '../types';
 export const mockPatients: Patient[] = [
   {
     id: "pat_001",
-    name: "Muhammad Ahmed",
+    name: "Ahmed Ali",
     dob: "1968-05-12",
     gender: "Male",
     status: "OOR",

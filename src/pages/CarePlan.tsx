@@ -29,12 +29,12 @@ export default function CarePlan() {
 
   const addGoal = () => {
     if (!newGoal.title.trim()) return;
-    setGoals([...goals, { 
-      id: Date.now().toString(), 
-      title: newGoal.title, 
-      target: newGoal.target || "No target set", 
-      progress: 0, 
-      status: 'On Track' 
+    setGoals([...goals, {
+      id: Date.now().toString(),
+      title: newGoal.title,
+      target: newGoal.target || "No target set",
+      progress: 0,
+      status: 'On Track'
     }]);
     setNewGoal({ title: '', target: '' });
   };
@@ -61,9 +61,8 @@ export default function CarePlan() {
                 <button
                   key={tab}
                   onClick={() => setActiveTab(tab as any)}
-                  className={`flex-1 py-3 font-medium text-[11px] uppercase tracking-wider border-b-2 transition-all ${
-                    activeTab === tab ? 'border-blue-600 text-blue-600 bg-white' : 'border-transparent text-slate-400 hover:text-slate-800'
-                  }`}
+                  className={`flex-1 py-3 font-medium text-[11px] uppercase tracking-wider border-b-2 transition-all ${activeTab === tab ? 'border-blue-600 text-blue-600 bg-white' : 'border-transparent text-slate-400 hover:text-slate-800'
+                    }`}
                 >
                   {tab === 'current' ? 'Current Plan' : tab}
                 </button>
@@ -72,20 +71,20 @@ export default function CarePlan() {
 
             <div className="p-5">
               {activeTab === 'current' && (
-                <CurrentPlanTab 
-                  isEditing={isEditing} 
-                  carePlan={carePlan} 
-                  setCarePlan={(u: any) => setCarePlan({...carePlan, ...u})} 
+                <CurrentPlanTab
+                  isEditing={isEditing}
+                  carePlan={carePlan}
+                  setCarePlan={(u: any) => setCarePlan({ ...carePlan, ...u })}
                 />
               )}
               {activeTab === 'goals' && (
-                <GoalsTab 
-                  goals={goals} 
-                  isEditing={isEditing} 
-                  newGoal={newGoal} 
-                  setNewGoal={setNewGoal} 
-                  addGoal={addGoal} 
-                  deleteGoal={deleteGoal} 
+                <GoalsTab
+                  goals={goals}
+                  isEditing={isEditing}
+                  newGoal={newGoal}
+                  setNewGoal={setNewGoal}
+                  addGoal={addGoal}
+                  deleteGoal={deleteGoal}
                 />
               )}
               {activeTab === 'history' && <HistoryTab />}
@@ -123,20 +122,20 @@ export default function CarePlan() {
 
             {/* AI Toggle */}
             <div className="flex bg-slate-100/80 rounded-lg p-1 mb-6">
-              <button onClick={() => setAiMode('chatbot')} className={`flex-1 py-1.5 text-[10px] font-medium rounded-md uppercase transition-all ${aiMode === 'chatbot' ? 'bg-white text-blue-600 shadow-sm' : 'text-slate-500'}`}>Chatbot</button>
-              <button onClick={() => setAiMode('document')} className={`flex-1 py-1.5 text-[10px] font-medium rounded-md uppercase transition-all ${aiMode === 'document' ? 'bg-white text-blue-600 shadow-sm' : 'text-slate-500'}`}>Document</button>
+              <button onClick={() => setAiMode('chatbot')} className={`flex-1 py-1.5 text-[12px] font-medium rounded-md uppercase transition-all ${aiMode === 'chatbot' ? 'bg-white text-blue-600 shadow-sm' : 'text-slate-500'}`}>Chatbot</button>
+              <button onClick={() => setAiMode('document')} className={`flex-1 py-1.5 text-[12px] font-medium rounded-md uppercase transition-all ${aiMode === 'document' ? 'bg-white text-blue-600 shadow-sm' : 'text-slate-500'}`}>Document</button>
             </div>
 
             <div className="h-64 border border-slate-100 rounded-xl bg-slate-50/50 flex flex-col items-center justify-center text-center p-6 transition-all font-sans">
-               <p className="text-[11px] font-medium text-slate-800 uppercase tracking-widest">{aiMode === 'chatbot' ? '💬 Direct Consultation' : '📄 Health Data Analysis'}</p>
-               <p className="text-[10px] text-slate-500 mt-2 max-w-[200px] leading-relaxed">
-                 {aiMode === 'chatbot' 
-                   ? 'Ask questions about clinical guidelines or patient goal optimization.' 
-                   : 'Upload medical history or health reports to generate a data-driven plan.'}
-               </p>
-               <Button size="sm" className="mt-6 h-9 bg-[#0f172a] text-white text-[11px] px-8 font-medium border-none shadow-sm hover:bg-slate-800">
-                 Initialize AI
-               </Button>
+              <p className="text-[11px] font-medium text-slate-800 uppercase tracking-widest">{aiMode === 'chatbot' ? '💬 Direct Consultation' : '📄 Health Data Analysis'}</p>
+              <p className="text-[12px] text-slate-500 mt-2 max-w-[200px] leading-relaxed">
+                {aiMode === 'chatbot'
+                  ? 'Ask questions about clinical guidelines or patient goal optimization.'
+                  : 'Upload medical history or health reports to generate a data-driven plan.'}
+              </p>
+              <Button size="sm" className="mt-6 h-9 bg-[#0f172a] text-white text-[11px] px-8 font-medium border-none shadow-sm hover:bg-slate-800">
+                Initialize AI
+              </Button>
             </div>
           </Card>
         </div>

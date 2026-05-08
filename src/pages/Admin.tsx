@@ -11,11 +11,11 @@ const Admin: React.FC = () => {
 
   return (
     <div className="w-full space-y-4 font-sans animate-in fade-in duration-500">
-      
+
       {/* Page Header - Clean & Visible */}
       <div className="flex flex-col px-1">
         <h1 className="text-lg font-medium text-[#1e293b] tracking-tight">Admin Dashboard</h1>
-        <p className="text-slate-500 text-[10px] font-medium uppercase tracking-widest leading-none mt-1">Management Console</p>
+        <p className="text-slate-500 text-[13px] font-medium uppercase tracking-widest leading-none mt-1">Management Console</p>
       </div>
 
       {/* Stats Grid - Balanced Contrast */}
@@ -30,8 +30,8 @@ const Admin: React.FC = () => {
           <div key={i} className="bg-white border border-slate-100 rounded-xl p-3 shadow-sm flex flex-col justify-between h-full">
             <div className="flex justify-between items-start">
               <div className="min-w-0">
-                <p className="text-[9px] font-medium text-slate-500 uppercase tracking-tight truncate leading-none">{stat.label}</p>
-                <p className="text-lg font-medium text-[#1e293b] mt-2 leading-none">{stat.val}</p>
+                <p className="text-[11px] font-medium text-slate-500 uppercase tracking-tight truncate leading-none">{stat.label}</p>
+                <p className="text-xl font-medium text-[#1e293b] mt-2 leading-none">{stat.val}</p>
               </div>
               <div className="w-7 h-7 rounded-lg flex items-center justify-center shrink-0" style={{ backgroundColor: `${stat.color}15` }}>
                 <stat.icon size={14} style={{ color: stat.color }} />
@@ -48,11 +48,10 @@ const Admin: React.FC = () => {
             <button
               key={tab}
               onClick={() => setActiveTab(tab as any)}
-              className={`px-5 py-1.5 text-[10px] font-medium rounded-lg transition-all uppercase tracking-normal whitespace-nowrap ${
-                activeTab === tab 
-                ? 'bg-white text-blue-600 shadow-sm border border-slate-200/40' 
-                : 'text-slate-500 hover:text-slate-800 font-normal'
-              }`}
+              className={`px-5 py-1.5 text-[12px] font-medium rounded-lg transition-all uppercase tracking-normal whitespace-nowrap ${activeTab === tab
+                  ? 'bg-white text-blue-600 shadow-sm border border-slate-200/40'
+                  : 'text-slate-500 hover:text-slate-800 font-normal'
+                }`}
             >
               {tab}
             </button>
@@ -71,10 +70,10 @@ const Admin: React.FC = () => {
                   <div className="w-9 h-9 bg-blue-600 rounded-lg flex items-center justify-center text-white font-medium text-base shadow-sm">H</div>
                   <div className="shrink-0">
                     <h2 className="text-sm font-medium text-[#1e293b] leading-tight tracking-tight">HealthCare RPM Network</h2>
-                    <p className="text-[9px] font-medium text-blue-500 uppercase tracking-widest leading-none mt-1">Main Organization</p>
+                    <p className="text-[12px] font-medium text-blue-500 uppercase tracking-widest leading-none mt-1">Main Organization</p>
                   </div>
                 </div>
-                <Button size="sm" variant="outline" className="h-7 px-3 text-[10px] font-medium border-slate-200 text-slate-600 shrink-0">
+                <Button size="sm" variant="outline" className="h-8 px-3 text-[14px] font-medium border-slate-200 text-slate-600 shrink-0">
                   <Edit2 size={11} className="mr-1.5" /> Edit Info
                 </Button>
               </div>
@@ -90,8 +89,8 @@ const Admin: React.FC = () => {
                   <div key={i} className={`flex items-start gap-2.5 ${item.full ? 'sm:col-span-2' : ''}`}>
                     <div className="mt-0.5 text-slate-300 shrink-0"><item.icon size={12} /></div>
                     <div className="min-w-0">
-                      <p className="text-[9px] font-medium text-slate-500 uppercase tracking-tight mb-0.5 leading-none">{item.label}</p>
-                      <p className="text-[11px] font-normal text-slate-700 leading-snug">{item.val}</p>
+                      <p className="text-[12px] font-medium text-slate-500 uppercase tracking-tight mb-0.5 leading-none">{item.label}</p>
+                      <p className="text-[13px] font-normal text-slate-700 leading-snug">{item.val}</p>
                     </div>
                   </div>
                 ))}

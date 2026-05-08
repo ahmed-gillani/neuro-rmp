@@ -20,14 +20,14 @@ export default function Patients() {
   return (
     /* Globally forcing font-sans on the entire container */
     <div className="w-full space-y-4 font-sans animate-in fade-in duration-500 selection:bg-blue-100">
-      
+
       {/* Header with Compact Responsive Button */}
       <div className="flex items-center justify-between bg-white p-2.5 rounded-xl border border-slate-100 shadow-sm gap-2">
         <div className="min-w-0">
-          <h1 className="text-sm sm:text-lg font-bold text-[#1e293b] tracking-tight truncate leading-tight">
+          <h1 className="text-base sm:text-xl font-bold text-[#1e293b] tracking-tight truncate leading-tight">
             Patients
           </h1>
-          <p className="text-slate-400 text-[8px] sm:text-[10px] font-bold uppercase tracking-tighter">
+          <p className="text-slate-400 text-[12px] sm:text-[12px] font-bold uppercase tracking-tighter">
             {patients.length} active records
           </p>
         </div>
@@ -37,10 +37,10 @@ export default function Patients() {
           // Minimalist and responsive button
           className="bg-blue-600 hover:bg-blue-700 text-white rounded-lg shadow-none border-none 
                      px-2 py-1 sm:px-4 sm:py-1.5 
-                     text-[8px] sm:text-[11px] 
+                     text-[10px] sm:text-[11px] 
                      w-fit shrink-0 font-bold flex items-center gap-1 transition-all"
         >
-          <Plus className="w-2.5 h-2.5 sm:w-4 sm:h-4" /> 
+          <Plus className="w-2 h-2 sm:w-4 sm:h-4" />
           <span className="whitespace-nowrap uppercase tracking-tighter sm:tracking-normal">
             New Patient
           </span>
@@ -65,9 +65,9 @@ export default function Patients() {
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-3">
         {filteredPatients.map((patient) => (
           <div key={patient.id} className="font-sans">
-            <PatientCard 
-              patient={patient} 
-              onView={() => navigate(`/patients/${patient.id}`)} 
+            <PatientCard
+              patient={patient}
+              onView={() => navigate(`/patients/${patient.id}`)}
             />
           </div>
         ))}
@@ -75,7 +75,7 @@ export default function Patients() {
 
       {filteredPatients.length === 0 && (
         <div className="text-center py-12 font-sans">
-          <p className="text-[10px] font-bold text-slate-400 uppercase tracking-widest italic">
+          <p className="text-[12px] font-bold text-slate-400 uppercase tracking-widest italic">
             No matching records found
           </p>
         </div>

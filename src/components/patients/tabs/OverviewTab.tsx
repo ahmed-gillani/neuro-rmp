@@ -16,10 +16,10 @@ export default function OverviewTab({ patient }: { patient: Patient }) {
           { label: 'SpO2', value: '94', unit: '%', change: -1, color: 'text-rose-600' },
         ].map((v, i) => (
           <div key={i} className="bg-white border border-slate-200 rounded-xl py-2 px-3.5 shadow-sm min-w-[130px] flex-1 sm:flex-none">
-            <p className="text-[9px] font-medium uppercase tracking-widest text-slate-500 mb-0.5">{v.label}</p>
+            <p className="text-[11px] font-medium uppercase tracking-widest text-slate-500 mb-0.5">{v.label}</p>
             <div className="flex items-baseline gap-1">
               <span className="text-lg font-medium text-[#1e293b] leading-tight">{v.value}</span>
-              <span className="text-[9px] text-slate-400 uppercase">{v.unit}</span>
+              <span className="text-[11px] text-slate-400 uppercase">{v.unit}</span>
             </div>
             <div className={`flex items-center gap-1 mt-0.5 text-[9px] font-medium ${v.color}`}>
               <TrendingUp size={10} className={v.change < 0 ? 'rotate-180' : ''} />
@@ -34,7 +34,7 @@ export default function OverviewTab({ patient }: { patient: Patient }) {
         <div className="lg:col-span-7">
           <Card noPadding className="border-rose-100 shadow-none">
             <div className="px-3 py-2 border-b border-rose-50 bg-rose-50/30 flex items-center justify-between">
-              <h3 className="text-[10px] font-medium text-rose-700 uppercase tracking-tight flex items-center gap-1.5">
+              <h3 className="text-[12px] font-medium text-rose-700 uppercase tracking-tight flex items-center gap-1.5">
                 <AlertCircle size={12} /> Active Notifications
               </h3>
               <Badge status="OOR" className="text-[8px] px-1.5 py-0 font-medium">2 Active</Badge>
@@ -44,7 +44,7 @@ export default function OverviewTab({ patient }: { patient: Patient }) {
                 "BP above critical threshold — 145/92 mmHg (2m ago)",
                 "SpO2 dropped below 95% — 93% (30m ago)"
               ].map((alert, i) => (
-                <div key={i} className="bg-white border border-rose-50 p-2 rounded-lg text-[10px] text-rose-800 leading-snug">
+                <div key={i} className="bg-white border border-rose-50 p-2 rounded-lg text-[12px] text-rose-800 leading-snug">
                   {alert}
                 </div>
               ))}
@@ -56,11 +56,11 @@ export default function OverviewTab({ patient }: { patient: Patient }) {
         <div className="lg:col-span-5">
           <Card noPadding className="border-slate-100 shadow-none h-full">
             <div className="px-3 py-2 border-b border-slate-50 bg-slate-50/30">
-              <h3 className="text-[10px] font-medium text-[#1e293b] uppercase tracking-tight font-sans">Patient Profile Summary</h3>
+              <h3 className="text-[12px] font-medium text-[#1e293b] uppercase tracking-tight font-sans">Patient Profile Summary</h3>
             </div>
             <div className="p-3">
-              <p className="text-[11px] font-normal text-slate-600 leading-relaxed italic">
-                {patient.name} has a history of Type 2 Diabetes and cardiovascular concerns. 
+              <p className="text-[13px] font-normal text-slate-600 leading-relaxed italic">
+                {patient.name} has a history of Type 2 Diabetes and cardiovascular concerns.
                 Currently enrolled in RPM & CCM for proactive hypertension management.
               </p>
             </div>

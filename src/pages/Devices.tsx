@@ -16,10 +16,10 @@ export default function Devices() {
       <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 px-1">
         <div>
           <h1 className="text-lg font-medium text-[#1e293b] tracking-tight">Device Inventory</h1>
-          <p className="text-slate-400 text-[10px] font-medium uppercase tracking-widest leading-none mt-0.5">Asset & Hardware Management</p>
+          <p className="text-slate-400 text-[12px] font-medium uppercase tracking-widest leading-none mt-0.5">Asset & Hardware Management</p>
         </div>
         {/* Fixed: Back to Blue */}
-        <Button size="sm" className="h-8 bg-blue-600 hover:bg-blue-700 text-white text-[10px] px-4 font-medium shadow-sm border-none">
+        <Button size="sm" className="h-8 bg-blue-600 hover:bg-blue-700 text-white text-[12px] px-4 font-medium shadow-sm border-none">
           <Plus size={12} className="mr-1.5" /> Register Device
         </Button>
       </div>
@@ -42,9 +42,8 @@ export default function Devices() {
               <button
                 key={status}
                 onClick={() => setStatusFilter(status as any)}
-                className={`px-3 py-1 text-[10px] font-medium rounded-md transition-all uppercase tracking-tighter ${
-                  statusFilter === status ? 'bg-blue-600 text-white shadow-sm' : 'text-slate-500 hover:text-slate-800'
-                }`}
+                className={`px-3 py-1 text-[12px] font-medium rounded-md transition-all uppercase tracking-tighter ${statusFilter === status ? 'bg-blue-600 text-white shadow-sm' : 'text-slate-500 hover:text-slate-800'
+                  }`}
               >
                 {status}
               </button>

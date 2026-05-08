@@ -29,7 +29,7 @@ export default function Navbar({ onToggleSidebar }: { onToggleSidebar: () => voi
         <div className="flex items-center gap-2 pl-2 border-l border-slate-100">
           <div className="hidden xs:block text-right">
             <p className="text-xs font-bold text-slate-900 leading-none">Dr. Ahmed</p>
-            <p className="text-[10px] text-slate-500 mt-1">Admin</p>
+            <p className="text-[12px] text-slate-500 mt-1">Admin</p>
           </div>
           <div className="w-8 h-8 bg-slate-900 rounded-lg flex items-center justify-center text-white">
             <User size={16} />

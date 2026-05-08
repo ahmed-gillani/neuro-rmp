@@ -11,11 +11,11 @@ export default function GoalsTab({ goals, isEditing, newGoal, setNewGoal, addGoa
         <Card className="border-dashed border-2 border-blue-100 bg-blue-50/20 p-4">
           <div className="grid grid-cols-1 md:grid-cols-3 gap-3 items-end">
             <div className="space-y-1.5">
-              <label className="text-[10px] font-medium text-slate-500 uppercase tracking-tighter">Goal Title</label>
+              <label className="text-[12px] font-medium text-slate-500 uppercase tracking-tighter">Goal Title</label>
               <input type="text" className="w-full p-2.5 rounded-lg border border-slate-200 text-xs font-medium outline-none focus:border-blue-400" placeholder="e.g. Daily SpO2" value={newGoal.title} onChange={(e) => setNewGoal({ ...newGoal, title: e.target.value })} />
             </div>
             <div className="space-y-1.5">
-              <label className="text-[10px] font-medium text-slate-500 uppercase tracking-tighter">Target Metric</label>
+              <label className="text-[12px] font-medium text-slate-500 uppercase tracking-tighter">Target Metric</label>
               <input type="text" className="w-full p-2.5 rounded-lg border border-slate-200 text-xs font-medium outline-none focus:border-blue-400" placeholder="e.g. > 96%" value={newGoal.target} onChange={(e) => setNewGoal({ ...newGoal, target: e.target.value })} />
             </div>
             <Button onClick={addGoal} size="sm" className="h-10 bg-blue-600 text-white font-medium border-none shadow-sm text-xs"><Plus size={14} className="mr-1.5" /> Add Goal</Button>
@@ -36,7 +36,7 @@ export default function GoalsTab({ goals, isEditing, newGoal, setNewGoal, addGoa
               </div>
 
               <div className="w-full md:w-48 font-sans">
-                <div className="flex justify-between text-[10px] mb-1.5 font-medium text-slate-500">
+                <div className="flex justify-between text-[12px] mb-1.5 font-medium text-slate-500">
                   <span>Adherence</span>
                   <span className="text-slate-900">{goal.progress}%</span>
                 </div>

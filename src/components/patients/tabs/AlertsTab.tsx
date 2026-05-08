@@ -32,7 +32,7 @@ export default function AlertsTab({ patient }: { patient: Patient }) {
             <button
               key={filter}
               onClick={() => setActiveFilter(filter as any)}
-              className={`px-3 py-1.5 rounded-lg text-[10px] font-medium transition-all border
+              className={`px-3 py-1.5 rounded-lg text-[12px] font-medium transition-all border
                 ${activeFilter === filter ? 'bg-rose-600 text-white border-rose-600 shadow-sm' : 'bg-white text-slate-500 border-slate-200 hover:bg-slate-50'}`}
             >
               {filter}
@@ -46,7 +46,7 @@ export default function AlertsTab({ patient }: { patient: Patient }) {
             placeholder="Search alerts..."
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
-            className="w-full pl-8 pr-4 py-1.5 bg-white border border-slate-200 rounded-lg text-xs outline-none focus:border-blue-500 font-sans"
+            className="w-full pl-8 pr-4 py-1.5 bg-white border border-slate-200 rounded-lg text-sm outline-none focus:border-blue-500 font-sans"
           />
         </div>
       </div>
@@ -59,16 +59,16 @@ export default function AlertsTab({ patient }: { patient: Patient }) {
                 {alert.severity === 'CRITICAL' ? <AlertCircle size={18} /> : <AlertTriangle size={18} />}
               </div>
               <div className="flex-1 min-w-0">
-                <p className="text-[11px] font-medium text-slate-900 leading-tight">{alert.message}</p>
-                <p className="text-[10px] text-slate-500 mt-1 uppercase font-sans tracking-tight">{alert.time}</p>
+                <p className="text-[13px] font-medium text-slate-900 leading-tight">{alert.message}</p>
+                <p className="text-[13px] text-slate-500 mt-1 uppercase font-sans tracking-tight">{alert.time}</p>
               </div>
               <div className="flex items-center gap-2">
                 <Badge status="OOR" className="text-[8px] font-medium" />
-                <Button 
-                  variant="outline" 
-                  size="sm" 
+                <Button
+                  variant="outline"
+                  size="sm"
                   onClick={() => markAsReviewed(alert.id)}
-                  className="text-[10px] h-7 border-slate-200 text-rose-600 hover:bg-rose-50 font-medium"
+                  className="text-[12px] h-7 border-slate-200 text-rose-600 hover:bg-rose-50 font-medium"
                 >
                   Mark Read
                 </Button>

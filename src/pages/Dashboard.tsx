@@ -7,7 +7,7 @@ import ReadingChart from '../components/common/ReadingChart';
 
 const Dashboard: React.FC = () => {
   return (
-    <div className="space-y-4 font-sans animate-in fade-in duration-500"> 
+    <div className="space-y-4 font-sans animate-in fade-in duration-500">
       <div className="px-1">
         {/* font-bold ko font-medium kiya gaya hai visibility ke liye */}
         <h1 className="text-xl font-medium text-[#0f172a] tracking-tight leading-none">System Overview</h1>
@@ -25,7 +25,7 @@ const Dashboard: React.FC = () => {
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-4">
         {/* Chart Section */}
         <Card title="Patient Health Trends" className="lg:col-span-8 border-slate-100 shadow-none">
-          <div className="h-[300px] w-full -ml-4"> 
+          <div className="h-[300px] w-full -ml-4">
             <ReadingChart />
           </div>
         </Card>
@@ -43,9 +43,9 @@ const Dashboard: React.FC = () => {
                 <div className={`w-1 h-6 rounded-full bg-${item.color}-500 shrink-0`} />
                 <div className="flex-1 min-w-0 font-sans">
                   <p className="text-[12px] font-medium text-[#1e293b] truncate leading-tight group-hover:text-blue-600">{item.patient}</p>
-                  <p className="text-[10px] font-medium text-slate-500 truncate mt-0.5">{item.action}</p>
+                  <p className="text-[12px] font-medium text-slate-500 truncate mt-0.5">{item.action}</p>
                 </div>
-                <span className="text-[10px] font-medium text-slate-400 shrink-0">{item.time}</span>
+                <span className="text-[12px] font-medium text-slate-400 shrink-0">{item.time}</span>
               </div>
             ))}
           </div>

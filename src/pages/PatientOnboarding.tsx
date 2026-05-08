@@ -104,7 +104,7 @@ export default function PatientOnboarding() {
                   onChange={(e) => updateField('name', e.target.value)}
                   placeholder="e.g. Ahmed Ali"
                 />
-                {errors.name && <p className="text-[10px] text-red-500 font-black uppercase tracking-tight">{errors.name}</p>}
+                {errors.name && <p className="text-[12px] text-red-500 font-black uppercase tracking-tight">{errors.name}</p>}
               </div>
 
               <div className="space-y-2">
@@ -115,7 +115,7 @@ export default function PatientOnboarding() {
                   value={formData.phone || ''}
                   onChange={(e) => updateField('phone', e.target.value)}
                 />
-                {errors.phone && <p className="text-[10px] text-red-500 font-black uppercase tracking-tight">{errors.phone}</p>}
+                {errors.phone && <p className="text-[12px] text-red-500 font-black uppercase tracking-tight">{errors.phone}</p>}
               </div>
             </div>
           </div>
