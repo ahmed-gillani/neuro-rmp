@@ -31,7 +31,7 @@ const [formData, setFormData] = useState({
     <Modal isOpen={isOpen} onClose={onClose} title="Edit Staff Member">
       <form onSubmit={handleSubmit} className="space-y-6">
         <div>
-          <label className="block text-sm font-medium mb-2">Full Name</label>
+          <label className="block text-sm text-slate-800 font-medium mb-2">Full Name</label>
           <input
             type="text"
             className="w-full px-4 py-3 border border-gray-300 rounded-xl"
@@ -41,7 +41,7 @@ const [formData, setFormData] = useState({
         </div>
 
         <div>
-          <label className="block text-sm font-medium mb-2">Email</label>
+          <label className="block text-sm text-slate-800 font-medium mb-2">Email</label>
           <input
             type="email"
             className="w-full px-4 py-3 border border-gray-300 rounded-xl"
@@ -51,7 +51,7 @@ const [formData, setFormData] = useState({
         </div>
 
         <div>
-          <label className="block text-sm font-medium mb-2">Role</label>
+          <label className="block text-sm text-slate-800 font-medium mb-2">Role</label>
           <select
             className="w-full px-4 py-3 border border-gray-300 rounded-xl"
             value={formData.role}

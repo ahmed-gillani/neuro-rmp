@@ -63,7 +63,7 @@ export default function AlertsTab({ patient }: { patient: Patient }) {
                 <p className="text-[13px] text-slate-500 mt-1 uppercase font-sans tracking-tight">{alert.time}</p>
               </div>
               <div className="flex items-center gap-2">
-                <Badge status="OOR" className="text-[8px] font-medium" />
+                <Badge status="OOR" className="text-[8px] text-slate-600 font-medium" />
                 <Button
                   variant="outline"
                   size="sm"

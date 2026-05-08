@@ -22,15 +22,15 @@ export default function AddStaffModal({ isOpen, onClose, onAdd }: { isOpen: bool
       <form onSubmit={handleSubmit} className="space-y-4 font-sans py-2">
         <div className="grid grid-cols-1 gap-4">
           <div>
-            <label className="text-[11px] font-medium text-slate-500 uppercase tracking-wider ml-1">Full Name</label>
+            <label className="text-[11px] font-medium text-slate-800 uppercase tracking-wider ml-1">Full Name</label>
             <input required type="text" placeholder="John Doe" className="w-full mt-1.5 px-4 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-xs font-medium outline-none focus:border-blue-400" value={formData.name || ''} onChange={(e) => setFormData({ ...formData, name: e.target.value })} />
           </div>
           <div>
-            <label className="text-[11px] font-medium text-slate-500 uppercase tracking-wider ml-1">Email Address</label>
+            <label className="text-[11px] font-medium text-slate-800 uppercase tracking-wider ml-1">Email Address</label>
             <input required type="email" placeholder="john@healthcare.com" className="w-full mt-1.5 px-4 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-xs font-medium outline-none focus:border-blue-400" value={formData.email || ''} onChange={(e) => setFormData({ ...formData, email: e.target.value })} />
           </div>
           <div>
-            <label className="text-[11px] font-medium text-slate-500 uppercase tracking-wider ml-1">Assigned Role</label>
+            <label className="text-[11px] font-medium text-slate-800 uppercase tracking-wider ml-1">Assigned Role</label>
             <select className="w-full mt-1.5 px-4 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-xs font-medium outline-none focus:border-blue-400" value={formData.role} onChange={(e) => setFormData({ ...formData, role: e.target.value as any })}>
               <option value="Doctor">Doctor</option><option value="Nurse">Nurse</option><option value="Admin">Admin</option>
             </select>

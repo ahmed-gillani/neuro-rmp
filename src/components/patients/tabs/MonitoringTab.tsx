@@ -85,7 +85,7 @@ export default function MonitoringTab({ patient }: MonitoringTabProps) {
             <div className="grid grid-cols-3 gap-2">
               {(['hours', 'minutes', 'seconds'] as const).map((field) => (
                 <div key={field}>
-                  <p className="text-[12px] font-medium text-slate-400 uppercase mb-1 text-center">{field}</p>
+                  <p className="text-[12px] font-medium text-slate-600 uppercase mb-1 text-center">{field}</p>
                   <input
                     type="number"
                     value={monitoringTime[field]}
@@ -97,7 +97,7 @@ export default function MonitoringTab({ patient }: MonitoringTabProps) {
             </div>
 
             <div className="space-y-1">
-              <p className="text-[12px] font-medium text-slate-400 uppercase tracking-wider">Date</p>
+              <p className="text-[12px] font-medium text-slate-600 uppercase tracking-wider">Date</p>
               <input
                 type="date"
                 value={selectedDate}
@@ -107,7 +107,7 @@ export default function MonitoringTab({ patient }: MonitoringTabProps) {
             </div>
 
             <div className="space-y-1">
-              <p className="text-[12px] font-medium text-slate-400 uppercase tracking-wider">Clinical Notes</p>
+              <p className="text-[12px] font-medium text-slate-600 uppercase tracking-wider">Clinical Notes</p>
               <textarea
                 value={customNote}
                 onChange={(e) => setCustomNote(e.target.value)}
@@ -129,11 +129,11 @@ export default function MonitoringTab({ patient }: MonitoringTabProps) {
           <div className="overflow-x-auto">
             <table className="w-full text-left">
               <thead>
-                <tr className="bg-slate-50/50 border-b border-slate-100 text-[12px] text-slate-400 uppercase tracking-widest font-sans">
-                  <th className="p-3 font-medium">Date</th>
-                  <th className="p-3 font-medium">Time</th>
-                  <th className="p-3 font-medium">Note</th>
-                  <th className="p-3 text-right">Action</th>
+                <tr className="bg-slate-50/50 border-b border-slate-500 text-[12px] text-slate-400 uppercase tracking-widest font-sans">
+                  <th className="p-3 font-medium text-slate-600">Date</th>
+                  <th className="p-3 font-medium text-slate-600">Time</th>
+                  <th className="p-3 font-medium text-slate-600">Note</th>
+                  <th className="p-3 text-right text-slate-600">Action</th>
                 </tr>
               </thead>
               <tbody className="divide-y divide-slate-50">
@@ -144,8 +144,8 @@ export default function MonitoringTab({ patient }: MonitoringTabProps) {
                     <td className="p-3 text-[12px] font-medium text-slate-500 italic truncate max-w-[200px]">{entry.note}</td>
                     <td className="p-3 text-right">
                       <div className="flex justify-end gap-2">
-                        <button onClick={() => handleEdit(entry)} className="text-slate-300 hover:text-blue-500"><Edit2 size={12} /></button>
-                        <button onClick={() => handleDelete(entry.id)} className="text-slate-300 hover:text-rose-500"><Trash2 size={12} /></button>
+                        <button onClick={() => handleEdit(entry)} className="text-slate-500 hover:text-blue-500"><Edit2 size={12} /></button>
+                        <button onClick={() => handleDelete(entry.id)} className="text-slate-500 hover:text-rose-500"><Trash2 size={12} /></button>
                       </div>
                     </td>
                   </tr>
@@ -166,7 +166,7 @@ export default function MonitoringTab({ patient }: MonitoringTabProps) {
             </div>
             <div className="space-y-4 font-sans">
               <div>
-                <label className="text-[12px] font-medium text-slate-400 uppercase">Duration</label>
+                <label className="text-[12px] font-medium text-slate-800 uppercase">Duration</label>
                 <input
                   type="text"
                   value={editingEntry.time}
@@ -175,7 +175,7 @@ export default function MonitoringTab({ patient }: MonitoringTabProps) {
                 />
               </div>
               <div>
-                <label className="text-[12px] font-medium text-slate-400 uppercase">Note</label>
+                <label className="text-[12px] font-medium text-slate-800 uppercase">Note</label>
                 <textarea
                   value={editingEntry.note}
                   onChange={e => setEditingEntry({ ...editingEntry, note: e.target.value })}

@@ -29,7 +29,7 @@ export default function Modal({ isOpen, onClose, title, children }: ModalProps) 
               <h3 className="text-sm font-semibold text-black truncate">{title}</h3>
               <button
                 onClick={onClose}
-                className="p-1.5 rounded-md hover:bg-gray-100 transition"
+                className="p-1.5 rounded-md hover:bg-slate-400 transition"
                 aria-label="Close modal"
               >
                 <X className="w-4 h-4 text-black" />

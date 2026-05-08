@@ -18,8 +18,8 @@ export default function OverviewTab({ patient }: { patient: Patient }) {
           <div key={i} className="bg-white border border-slate-200 rounded-xl py-2 px-3.5 shadow-sm min-w-[130px] flex-1 sm:flex-none">
             <p className="text-[11px] font-medium uppercase tracking-widest text-slate-500 mb-0.5">{v.label}</p>
             <div className="flex items-baseline gap-1">
-              <span className="text-lg font-medium text-[#1e293b] leading-tight">{v.value}</span>
-              <span className="text-[11px] text-slate-400 uppercase">{v.unit}</span>
+              <span className="text-lg font-medium text-[#1e293b] text-slate-600 leading-tight">{v.value}</span>
+              <span className="text-[11px] text-slate-600 uppercase">{v.unit}</span>
             </div>
             <div className={`flex items-center gap-1 mt-0.5 text-[9px] font-medium ${v.color}`}>
               <TrendingUp size={10} className={v.change < 0 ? 'rotate-180' : ''} />
