@@ -14,7 +14,7 @@ const Admin: React.FC = () => {
 
       {/* Page Header - Clean & Visible */}
       <div className="flex flex-col px-1">
-        <h1 className="text-lg font-medium text-[#1e293b] tracking-tight">Admin Dashboard</h1>
+        <h1 className="text-[15px] font-medium text-[#1e293b] uppercase tracking-widest leading-none">Admin Dashboard</h1>
         <p className="text-slate-500 text-[13px] font-medium uppercase tracking-widest leading-none mt-1">Management Console</p>
       </div>
 
@@ -69,7 +69,7 @@ const Admin: React.FC = () => {
                   {/* Fixed: Icon back to Vibrant Blue */}
                   <div className="w-9 h-9 bg-blue-600 rounded-lg flex items-center justify-center text-white font-medium text-base shadow-sm">H</div>
                   <div className="shrink-0">
-                    <h2 className="text-sm font-medium text-[#1e293b] leading-tight tracking-tight">HealthCare RPM Network</h2>
+                    <h2 className="text-[13px] font-medium text-[#1e293b] uppercase tracking-widest leading-none">HealthCare RPM Network</h2>
                     <p className="text-[12px] font-medium text-blue-500 uppercase tracking-widest leading-none mt-1">Main Organization</p>
                   </div>
                 </div>

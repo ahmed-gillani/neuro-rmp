@@ -47,7 +47,7 @@ export default function CarePlan() {
     <div className="w-full space-y-4 font-sans animate-in fade-in duration-500">
       {/* Header - Darker Slates for Visibility */}
       <div className="px-1">
-        <h1 className="text-xl font-medium text-[#0f172a] tracking-tight">Care Plan Builder</h1>
+        <h1 className="text-[15px] font-medium text-[#1e293b] uppercase tracking-widest leading-none">Care Plan Builder</h1>
         <p className="text-slate-500 text-[11px] font-medium uppercase tracking-wider mt-0.5">Generate strategy with clinical AI</p>
       </div>
 

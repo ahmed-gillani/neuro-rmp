@@ -18,8 +18,8 @@ export default function Communication() {
     <div className="w-full space-y-4 font-sans animate-in fade-in duration-500">
       <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 px-1">
         <div>
-          <h1 className="text-lg font-medium text-[#1e293b] tracking-tight">Patient Communication</h1>
-          <p className="text-slate-400 text-[12px] font-medium uppercase tracking-widest leading-none mt-0.5">Engagement & Support History</p>
+          <h1 className="text-[15px] font-medium text-[#1e293b] uppercase tracking-widest leading-none">Patient Communication</h1>
+          <p className="text-slate-500 text-[12px] font-medium uppercase tracking-widest leading-none mt-0.5">Engagement & Support History</p>
         </div>
         <div className="flex gap-2">
           <Button size="sm" className="h-8 bg-blue-600 text-white text-[12px] px-4 font-medium"><Send size={12} className="mr-1.5" /> New SMS</Button>

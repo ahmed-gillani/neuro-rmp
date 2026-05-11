@@ -24,10 +24,10 @@ export default function Patients() {
       {/* Header with Compact Responsive Button */}
       <div className="flex items-center justify-between bg-white p-2.5 rounded-xl border border-slate-100 shadow-sm gap-2">
         <div className="min-w-0">
-          <h1 className="text-base sm:text-xl font-bold text-[#1e293b] tracking-tight truncate leading-tight">
+          <h1 className="text-[16px] font-medium text-[#1e293b] uppercase tracking-widest leading-none">
             Patients
           </h1>
-          <p className="text-slate-400 text-[12px] sm:text-[12px] font-bold uppercase tracking-tighter">
+          <p className="text-slate-400 text-[12px] sm:text-[12px] font-bold text-[#1e293b] uppercase tracking-tighter">
             {patients.length} active records
           </p>
         </div>

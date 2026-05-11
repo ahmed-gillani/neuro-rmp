@@ -34,7 +34,7 @@ export default function Staff() {
       {/* Header Section */}
       <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 px-1">
         <div>
-          <h1 className="text-xl font-medium text-[#0f172a] tracking-tight leading-none">Staff Management</h1>
+          <h1 className="text-[15px] font-medium text-[#1e293b] uppercase tracking-widest leading-none">Staff Management</h1>
           <p className="text-slate-500 text-[11px] font-medium uppercase tracking-wider mt-1.5">Team Performance & Load</p>
         </div>
         <Button

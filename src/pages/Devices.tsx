@@ -15,7 +15,7 @@ export default function Devices() {
     <div className="w-full space-y-4 font-sans animate-in fade-in duration-500">
       <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 px-1">
         <div>
-          <h1 className="text-lg font-medium text-[#1e293b] tracking-tight">Device Inventory</h1>
+          <h1 className="text-[15px] font-medium text-[#1e293b] uppercase tracking-widest leading-none">Device Inventory</h1>
           <p className="text-slate-400 text-[12px] font-medium uppercase tracking-widest leading-none mt-0.5">Asset & Hardware Management</p>
         </div>
         {/* Fixed: Back to Blue */}

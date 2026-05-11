@@ -10,7 +10,7 @@ const Dashboard: React.FC = () => {
     <div className="space-y-4 font-sans animate-in fade-in duration-500">
       <div className="px-1">
         {/* font-bold ko font-medium kiya gaya hai visibility ke liye */}
-        <h1 className="text-xl font-medium text-[#0f172a] tracking-tight leading-none">System Overview</h1>
+        <h1 className="text-[15px] font-medium text-[#1e293b] uppercase tracking-widest leading-none">System Overview</h1>
         <p className="text-slate-500 text-[11px] font-medium uppercase tracking-wider mt-1.5">Live monitoring status</p>
       </div>
 
