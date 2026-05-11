@@ -27,7 +27,7 @@ export default function Sidebar({ isMobileOpen, setIsMobileOpen, isCollapsed, se
         
         {/* Logo Section */}
         <div className="h-16 flex items-center justify-between px-4 border-b border-slate-800">
-          {!isCollapsed && <span className="text-xl font-bold text-white px-2">SlotSync <span className="text-blue-500">Pro</span></span>}
+          {!isCollapsed && <span className="text-xl font-bold text-white px-2">Neuro  <span className="text-blue-500">RPM</span></span>}
           <button 
             onClick={() => setIsCollapsed(!isCollapsed)}
             className="hidden lg:flex p-1.5 rounded-lg bg-slate-800 text-slate-400 hover:text-white transition-colors"
