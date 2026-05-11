@@ -62,7 +62,7 @@ export default function Devices() {
                 </div>
                 <div className="min-w-0">
                   <h4 className="text-[11px] font-medium text-[#1e293b] leading-tight uppercase truncate">{device.type}</h4>
-                  <p className="text-[9px] font-medium text-slate-400 font-mono tracking-tighter">{device.serialNumber}</p>
+                  <p className="text-[9px] font-medium text-slate-700 font-mono tracking-tighter">{device.serialNumber}</p>
                 </div>
               </div>
               <Badge status={device.status === 'Available' ? 'Active' : 'OOR'} className="text-[8px]" />
