@@ -87,7 +87,7 @@ const Admin: React.FC = () => {
                   { label: 'Address', val: '123 Medical Plaza, San Francisco, CA', icon: MapPin, full: true },
                 ].map((item, i) => (
                   <div key={i} className={`flex items-start gap-2.5 ${item.full ? 'sm:col-span-2' : ''}`}>
-                    <div className="mt-0.5 text-slate-300 shrink-0"><item.icon size={12} /></div>
+                    <div className="mt-0.5 text-slate-700 shrink-0"><item.icon size={12} /></div>
                     <div className="min-w-0">
                       <p className="text-[12px] font-medium text-slate-500 uppercase tracking-tight mb-0.5 leading-none">{item.label}</p>
                       <p className="text-[13px] font-normal text-slate-700 leading-snug">{item.val}</p>
