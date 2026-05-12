@@ -1,3 +1,4 @@
+//src/components/devices/DeviceCard.tsx
 import React from 'react';
 import { Monitor, ChevronRight, Link2, RotateCcw, Wifi, WifiOff, AlertTriangle } from 'lucide-react';
 import Card from '../common/Card';
