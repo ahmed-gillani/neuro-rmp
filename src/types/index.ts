@@ -1,5 +1,5 @@
 // src/types/index.ts
-
+export * from './devices';
 export interface User {
   id: string;
   name: string;
@@ -36,14 +36,7 @@ export interface Reading {
   notes?: string;
 }
 
-export interface Device {
-  id: string;
-  patientId?: string;
-  type: string;
-  serialNumber: string;
-  status: 'Assigned' | 'Available' | 'In Repair' | 'Retired';
-  lastConnected?: string;
-}
+
 
 export interface StatCardData {
   title: string;

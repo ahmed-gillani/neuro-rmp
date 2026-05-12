@@ -5,11 +5,15 @@ interface CardProps {
   className?: string;
   title?: string;
   noPadding?: boolean;
+  onClick?: () => void;
 }
 
-const Card: React.FC<CardProps> = ({ children, className = "", title, noPadding = false }) => {
+const Card: React.FC<CardProps> = ({ children, className = "", title, noPadding = false, onClick }) => {
   return (
-    <div className={`w-full bg-white border border-slate-200/60 rounded-xl shadow-[0_2px_4px_rgba(0,0,0,0.02)] overflow-hidden flex flex-col ${className}`}>
+    <div 
+      onClick={onClick}
+      className={`w-full bg-white border border-slate-200/60 rounded-xl shadow-[0_2px_4px_rgba(0,0,0,0.02)] overflow-hidden flex flex-col ${className}`}
+    >
       {title && (
         <div className="px-4 py-3 border-b border-slate-100 flex items-center justify-between bg-white">
           <h3 className="text-[15px] font-bold text-slate-800 uppercase tracking-wide">{title}</h3>        </div>

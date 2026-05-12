@@ -65,3 +65,13 @@ select {
 }
 
 /* Remove any !important that was causing the error */
+@layer utilities {
+    /* Isse sirf un tabs ka scrollbar gayab hoga jahan hum 'no-scrollbar' use karenge */
+    .no-scrollbar::-webkit-scrollbar {
+        display: none;
+    }
+    .no-scrollbar {
+        -ms-overflow-style: none;
+        scrollbar-width: none;
+    }
+}

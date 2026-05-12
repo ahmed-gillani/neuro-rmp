@@ -1,5 +1,6 @@
 // src/data/mockData.ts
-import type { Patient, Reading, Device, User, StatCardData } from '../types';
+import type { Patient, Reading, User, StatCardData } from '../types';
+export { mockDevices } from './mockDevices';
 
 export const mockPatients: Patient[] = [
   {
@@ -61,38 +62,6 @@ export const mockReadings: Reading[] = [
   },
 ];
 
-export const mockDevices: Device[] = [
-  {
-    id: "dev_001",
-    patientId: "pat_001",
-    type: "Blood Pressure Monitor",
-    serialNumber: "TENOVI-BP-78492",
-    status: "Assigned",
-    lastConnected: "2026-04-28T09:10:00"
-  },
-  {
-    id: "dev_002",
-    patientId: "pat_002",
-    type: "Glucose Meter",
-    serialNumber: "WITH-GLU-33421",
-    status: "Assigned",
-    lastConnected: "2026-04-29T07:45:00"
-  },
-  {
-    id: "dev_003",
-    patientId: undefined,
-    type: "SpO2 Monitor",
-    serialNumber: "TENOVI-OX-11234",
-    status: "Available",
-  },
-  {
-    id: "dev_004",
-    patientId: undefined,
-    type: "Weight Scale",
-    serialNumber: "WITH-WT-55678",
-    status: "In Repair",
-  },
-];
 
 export const mockStaff: User[] = [
   {
