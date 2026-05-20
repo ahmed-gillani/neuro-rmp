@@ -1,55 +1,85 @@
 // src/components/patients/tabs/NotesTab.tsx
 import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import Card from '../../common/Card';
 import Button from '../../common/Button';
-import { Plus, User } from 'lucide-react';
+import { Plus, ExternalLink, Calendar } from 'lucide-react';
+import type { Patient } from '../../../types';
+import { mockClinicalNotes } from '../../../data/mockClinicalNotes';
+import NoteEditorModal from '../../clinicalNotes/NoteEditorModal';
 
-export default function NotesTab() {
-  const [notes, setNotes] = useState([
-    { id: '1', date: '11/04/2026', type: 'Clinical', text: 'Medication adjusted after BP spike.', author: 'Dr. Sarah Ahmed' },
-  ]);
-  const [newNote, setNewNote] = useState("");
+export default function NotesTab({ patient }: { patient: Patient }) {
+  const navigate = useNavigate();
+  const patientNotes = mockClinicalNotes.filter(n => n.patientId === patient.id);
+  
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
-  const handleSaveNote = () => {
-    if (!newNote.trim()) return;
-    const entry = { id: Date.now().toString(), date: 'Today', type: 'Clinical', text: newNote, author: 'Dr. Sarah Ahmed' };
-    setNotes([entry, ...notes]);
-    setNewNote("");
+  const openNote = (note: any) => {
+    navigate(`/notes/${note.id}`, {
+      state: { from: 'patient-notes-tab', patientId: patient.id }
+    });
   };
 
   return (
-    <div className="grid grid-cols-1 lg:grid-cols-12 gap-3 font-sans animate-in fade-in duration-500">
-      <div className="lg:col-span-5">
-        <Card noPadding title="New Entry" className="border-slate-100">
-          <div className="p-4 space-y-3.5">
-            <textarea
-              value={newNote}
-              onChange={(e) => setNewNote(e.target.value)}
-              placeholder="Enter clinical observations..."
-              className="w-full h-32 bg-slate-50 border border-slate-200 rounded-lg p-2.5 text-[12px] font-medium outline-none focus:border-blue-400 resize-none"
-            />
-            <Button onClick={handleSaveNote} size="sm" className="w-full py-2.5 bg-[#0f172a] text-white text-[12px] font-medium border-none">
-              <Plus size={14} className="mr-1.5" /> Save Note
-            </Button>
-          </div>
-        </Card>
+    <div className="space-y-4">
+      <div className="flex justify-between items-center">
+        <h3 className="text-lg font-semibold flex items-center gap-2 text-slate-900">
+          <Calendar size={18} /> Clinical Notes
+        </h3>
+        
+        <div className="flex gap-2">
+          <Button 
+            variant="outline" 
+            size="sm"
+            onClick={() => navigate('/notes')}
+          >
+            <ExternalLink size={16} className="mr-2" /> All Notes
+          </Button>
+          
+          <Button onClick={() => setIsModalOpen(true)} size="sm">
+            <Plus size={16} className="mr-2" /> New Note
+          </Button>
+        </div>
       </div>
 
-      <div className="lg:col-span-7 space-y-2">
-        {notes.map(note => (
-          <div key={note.id} className="bg-white border border-slate-100 p-3 rounded-xl shadow-sm">
-            <div className="flex justify-between items-center mb-2">
-              <span className="text-[10px] font-medium px-1.5 py-0.5 bg-blue-50 text-blue-600 rounded uppercase">{note.type}</span>
-              <span className="text-[10px] font-medium text-slate-400">{note.date}</span>
-            </div>
-            <p className="text-[12px] font-medium text-slate-700 leading-relaxed italic">"{note.text}"</p>
-            <div className="mt-2.5 pt-2.5 border-t border-slate-50 flex items-center gap-1.5">
-              <User size={10} className="text-slate-300" />
-              <p className="text-[12px] font-medium text-slate-400 uppercase tracking-tighter">— {note.author}</p>
-            </div>
-          </div>
-        ))}
-      </div>
+      {patientNotes.length === 0 ? (
+        <Card className="p-10 text-center text-slate-500">
+          No clinical notes yet for this patient.
+        </Card>
+      ) : (
+        <div className="space-y-3">
+          {patientNotes.map((note) => (
+            <Card
+              key={note.id}
+              className="p-4 hover:border-blue-200 cursor-pointer transition-all"
+              onClick={() => openNote(note)}
+            >
+              <div className="flex justify-between items-start">
+                <div>
+                  <p className="font-medium">{note.title}</p>
+                  <p className="text-xs text-slate-500 mt-1">
+                    {note.type} • {new Date(note.createdAt).toLocaleDateString()}
+                  </p>
+                </div>
+                {note.isAiDraft && (
+                  <span className="text-[10px] bg-violet-100 text-violet-700 px-2 py-1 rounded">AI Draft</span>
+                )}
+              </div>
+            </Card>
+          ))}
+        </div>
+      )}
+
+      {/* Modal */}
+      <NoteEditorModal
+        isOpen={isModalOpen}
+        onClose={() => setIsModalOpen(false)}
+        onSave={(newNote) => {
+          console.log('New Note Created:', newNote);
+          // You can add to local state here later
+        }}
+        patientId={patient.id}
+      />
     </div>
   );
 }

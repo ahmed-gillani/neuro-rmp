@@ -1,5 +1,5 @@
 // src/pages/PatientProfile.tsx
-import { useParams, useNavigate } from 'react-router-dom';
+import { useParams, useNavigate, useLocation } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import { mockPatients } from '../data/mockData';
 import type { Patient } from '../types';
@@ -8,8 +8,17 @@ import PatientDetailView from '../components/patients/PatientDetailView';
 export default function PatientProfile() {
   const { id } = useParams<{ id: string }>();
   const navigate = useNavigate();
+  const location = useLocation();
+
   const [patient, setPatient] = useState<Patient | null>(null);
   const [activeTab, setActiveTab] = useState('overview');
+
+  // Get initial tab from navigation state (if coming from NotesTab)
+  useEffect(() => {
+    if (location.state?.activeTab) {
+      setActiveTab(location.state.activeTab);
+    }
+  }, [location.state]);
 
   useEffect(() => {
     const found = mockPatients.find(p => p.id === id);
@@ -28,10 +37,12 @@ export default function PatientProfile() {
     );
   }
 
-  return <PatientDetailView 
-    patient={patient} 
-    activeTab={activeTab} 
-    setActiveTab={setActiveTab} 
-    onBack={() => navigate('/patients')} 
-  />;
+  return (
+    <PatientDetailView 
+      patient={patient} 
+      activeTab={activeTab} 
+      setActiveTab={setActiveTab} 
+      onBack={() => navigate('/patients')} 
+    />
+  );
 }

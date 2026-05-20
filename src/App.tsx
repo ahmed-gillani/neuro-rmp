@@ -11,6 +11,7 @@ import LocationManagement from './pages/Locations';
 import Devices from './pages/Devices';
 import Admin from './pages/Admin';
 import PatientProfile from './pages/PatientProfile';
+import ClinicalNotes from './pages/ClinicalNotes';
 
 function App() {
   return (
@@ -30,6 +31,7 @@ function App() {
             <Route path="/careplan" element={<CarePlan />} />
             <Route path="/onboarding" element={<PatientOnboarding />} />
             <Route path="/patients" element={<Patients />} />
+            <Route path="/notes" element={<ClinicalNotes />} />
           </Route>
         </Routes>
       </Router>
